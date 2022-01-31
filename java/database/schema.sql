@@ -1,6 +1,11 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS cards;
+DROP TABLE IF EXISTS decks;
+DROP TABLE IF EXISTS card_deck;
+DROP TABLE IF EXISTS tags;
+DROP TABLE IF EXISTS card_tag;
 DROP SEQUENCE IF EXISTS seq_user_id;
 
 CREATE SEQUENCE seq_user_id
@@ -57,8 +62,8 @@ CREATE TABLE card_tag (
 	card_id int NOT NULL,
 	tag_id int NOT NULL,
 	CONSTRAINT PK_card_tag PRIMARY KEY(card_id, tag_id),
-	CONSTRAINT FK_card_tag_card PRIMARY KEY (card_id) REFERENCES cards(card_id),
-	CONSTRAINT FK_card_tag_tag PRIMARY KEY (tag_id) REFERENCES tags(tag_id)
+	CONSTRAINT FK_card_tag_card FOREIGN KEY (card_id) REFERENCES cards(card_id),
+	CONSTRAINT FK_card_tag_tag FOREIGN KEY (tag_id) REFERENCES tags(tag_id)
 );
 
 COMMIT TRANSACTION;
