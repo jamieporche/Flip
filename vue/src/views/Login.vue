@@ -103,6 +103,7 @@ div#login-container {
   margin: 50px 0px 0px 0px;
 }
 div#login {
+  border-radius: 20px;
   border: none;
   margin: auto;
   width: 60%;
@@ -112,6 +113,7 @@ div#login {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  
 }
 #password-container {
   display: flex;
@@ -121,6 +123,7 @@ div#login {
 input {
   padding: 1.4vh;
   border: none;
+  border-radius: 10px;
 }
 #register {
   align-self: end;
@@ -140,5 +143,6 @@ button {
   background-color: rgb(49, 92, 49);
   font-size: 2.5vh;
   border: none;
+  border-radius: 10px;
 }
 </style>

@@ -120,6 +120,7 @@ div#register-container {
   margin: 50px 0px 0px 0px;
 }
 div#register {
+  border-radius: 20px;
   border: none;
   margin: auto;
   width: 60%;
