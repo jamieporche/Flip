@@ -8,4 +8,7 @@ public class Card {
     private String backOfCard;
     private int userId;
 
+    // private int tagId; ?
+    // private String tagName; ?
+
 }
