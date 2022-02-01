@@ -8,10 +8,12 @@
         View Your Decks</router-link
       >
     </nav>
-    <input type="text" name="search" placeholder="Search cards by tag" />
-    <article>
-      <div id="card-container"></div>
-    </article>
+    <div id="main">
+      <input type="text" name="search" placeholder="Search cards by tag" />
+      <article>
+        <div id="card-container"></div>
+      </article>
+    </div>
   </div>
 </template>
 
@@ -23,12 +25,11 @@ export default {
 
 <style scoped>
 nav {
-  height: 100%;
+  height: 80%;
   width: 20%;
   position: fixed;
-  z-index: 1;
   left: 0;
-  top: 0;
+  top: 16.3vh;
   padding-top: 20px;
   padding-bottom: 20px;
   overflow-x: hidden;
@@ -64,8 +65,14 @@ nav {
   margin-top: 9vh;
   height: 100%;
 }
+#main {
+  top: 16.3vh;
+  position: relative;
+  height: 100vh;
+  z-index: -1;
+}
 input[type="text"] {
-  width: 50%;
+  width: 30%;
   position: absolute;
   right: 0;
   box-sizing: border-box;
