@@ -83,13 +83,7 @@ export default {
 };
 </script>
 
-<style scope>
-body {
-  background: url("../assets/pexels-fauxels-3184464.jpg");
-  background-size: 100vw;
-  background-repeat: no-repeat;
-  margin: 0px;
-}
+<style scoped>
 h1 {
   text-align: center;
   font-size: 7vh;
@@ -103,8 +97,8 @@ div#login-container {
   margin: 50px 0px 0px 0px;
 }
 div#login {
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);
   border-radius: 20px;
-  border: none;
   margin: auto;
   width: 60%;
   background-image: linear-gradient(to bottom, rgb(240, 240, 230), #9c9c9c);
@@ -113,7 +107,6 @@ div#login {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  
 }
 #password-container {
   display: flex;
