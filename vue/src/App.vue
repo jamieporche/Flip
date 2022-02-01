@@ -10,13 +10,15 @@
       >
     </div>
     <router-view />
+    <footer-component class="footer"/>
   </div>
 </template>
 
 <script>
+import FooterComponent from "./components/FooterComponent.vue";
 import HeaderComponent from "./components/HeaderComponent.vue";
 export default {
-  components: { HeaderComponent },
+  components: { HeaderComponent, FooterComponent },
 };
 </script>
 
@@ -27,6 +29,12 @@ export default {
 .header {
   position: fixed;
   top: 0px;
+  width: 100vw;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0px;
   width: 100vw;
 }
 body {
