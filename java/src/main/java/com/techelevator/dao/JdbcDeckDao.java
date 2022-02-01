@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-package com.techelevator.dao;public class JdbcDeckDao {
-=======
 package com.techelevator.dao;
 
 import com.techelevator.model.Deck;
@@ -34,5 +31,4 @@ public class JdbcDeckDao implements DeckDao {
         return deck;
     }
 
->>>>>>> Stashed changes
 }

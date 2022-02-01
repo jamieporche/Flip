@@ -1,17 +1,11 @@
 package com.techelevator.model;
 
-<<<<<<< Updated upstream
-public class Decks {
-=======
 public class Deck {
->>>>>>> Stashed changes
     private int deckId;
     private String deckName;
     private int userId;
     private boolean isPublic;
 
-<<<<<<< Updated upstream
-=======
     public Deck() {}
 
     public Deck(int deckId, String deckName) {
@@ -50,5 +44,4 @@ public class Deck {
     public void setPublic(boolean aPublic) {
         isPublic = aPublic;
     }
->>>>>>> Stashed changes
 }
