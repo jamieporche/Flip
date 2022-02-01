@@ -43,6 +43,7 @@ public class JdbcCardDao implements CardDao {
         card.setCardId(rowSet.getInt("card_id"));
         card.setFrontOfCard(rowSet.getString("front"));
         card.setBackOfCard(rowSet.getString("back"));
+        card.setUsername(rowSet.getString("username"));
         return card;
     }
 }

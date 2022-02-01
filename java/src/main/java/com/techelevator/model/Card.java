@@ -8,6 +8,7 @@ public class Card {
     private String frontOfCard;
     private String backOfCard;
     private int userId;
+    private String username;
 
     // private int tagId; ?
     // private String tagName; ?
@@ -45,5 +46,13 @@ public class Card {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
