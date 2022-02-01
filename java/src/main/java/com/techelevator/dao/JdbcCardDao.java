@@ -18,18 +18,28 @@ public class JdbcCardDao implements CardDao {
 
     @Override
     public Card getCardByCardId(int cardId) {
-        String sql = "SELECT * FROM cards WHERE card_id = ?";
+        Card card = new Card();
+        String sql = " SELECT cards.card_id, cards.front, cards.back, users.username\n" +
+                " FROM cards\n" +
+                "  JOIN users ON  cards.user_id = users.user_id\n" +
+                "  WHERE cards.card_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, cardId);
         if (results.next()) {
-            return mapRowToCard(results);
-        } else {
-            throw new RuntimeException("cardId " + cardId + " was not found.");
+            card = mapRowToCard(results);
         }
+            return card;
+
+//        } else {
+//            throw new RuntimeException("cardId " + cardId + " was not found.");
+//        }
     }
 
-    @Override
+    @Override                      // will have to modify again with tags
     public List<Card> getListOfCardsByUserId(int userId) {
-        String sql = "SELECT * FROM cards WHERE user_id = ?";
+        String sql = " SELECT cards.card_id, cards.front, cards.back, users.username\n" +
+                " FROM cards\n" +
+                "  JOIN users ON  cards.user_id = users.user_id\n" +
+                "  WHERE cards.user_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         List<Card> cardList = new ArrayList<>();
         while (results.next()) {
@@ -50,7 +60,7 @@ public class JdbcCardDao implements CardDao {
         card.setCardId(rowSet.getInt("card_id"));
         card.setFrontOfCard(rowSet.getString("front"));
         card.setBackOfCard(rowSet.getString("back"));
-//        card.setUsername(rowSet.getString("username"));
+        card.setUsername(rowSet.getString("username"));
         return card;
     }
 }
