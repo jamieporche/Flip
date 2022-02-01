@@ -98,13 +98,7 @@ export default {
 };
 </script>
 
-<style scope>
-body {
-  background: url("../assets/pexels-fauxels-3184464.jpg");
-  background-size: 100vw;
-  background-repeat: no-repeat;
-  margin: 0px;
-}
+<style scoped>
 h1 {
   text-align: center;
   font-size: 7vh;
@@ -120,6 +114,7 @@ div#register-container {
   margin: 50px 0px 0px 0px;
 }
 div#register {
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);
   border-radius: 20px;
   border: none;
   margin: auto;

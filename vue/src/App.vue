@@ -16,4 +16,10 @@
 #app {
   margin: 0px;
 }
+body {
+  background: url("./assets/pexels-fauxels-3184464.jpg");
+  background-size: 100vw;
+  background-repeat: no-repeat;
+  margin: 0px;
+}
 </style>
