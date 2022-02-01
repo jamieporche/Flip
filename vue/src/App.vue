@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+      <header-component/>
     <div id="nav">
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
       <router-link
@@ -11,7 +12,13 @@
     <router-view />
   </div>
 </template>
-
+<script>
+import HeaderComponent from './components/HeaderComponent.vue'
+export default {
+  components: { HeaderComponent },
+  
+}
+</script>
 <style scope>
 #app {
   margin: 0px;
