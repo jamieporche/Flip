@@ -20,7 +20,7 @@ public class CardController {
     CardDao cardDao;
 
     @RequestMapping(path = "/users/{userId}/cards/", method = RequestMethod.GET)
-    public List<Card> getCardsList (@PathVariable("userId") int userId) {
+    public List<Card> getCardsList (@PathVariable int userId) {
         return cardDao.getListOfCardsByUserId(userId);
     }
 
