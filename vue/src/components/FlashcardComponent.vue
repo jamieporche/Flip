@@ -1,6 +1,6 @@
 <template>
   <div class="scene">
-    <div id="flashcard" v-on:click.stop="flip">
+    <div class="flashcard" v-on:click.stop="flip($event)">
       <div class="card__face card__face--front">Question: {{ this.front }}</div>
       <div class="card__face card__face--back">Answer: {{ this.back }}</div>
     </div>
@@ -12,9 +12,8 @@ export default {
   name: "flashcard-component",
   props: ["front", "back"],
   methods: {
-    flip() {
-      const flashcard = document.getElementById("flashcard");
-      flashcard.classList.toggle("is-flipped");
+    flip(event) {
+      event.target.parentElement.classList.toggle("is-flipped");
     },
   },
 };
@@ -22,11 +21,11 @@ export default {
 
 <style scoped>
 .scene {
-  width: 200px;
-  height: 260px;
+  width: 100%;
+  height: 100%;
   perspective: 600px;
 }
-#flashcard {
+.flashcard {
   width: 100%;
   height: 100%;
   position: relative;
@@ -42,10 +41,18 @@ export default {
 .card__face--front {
   background: white;
   border: solid 1px black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .card__face--back {
   background: white;
   border: solid 1px black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transform: rotateY(180deg);
 }
 .is-flipped {

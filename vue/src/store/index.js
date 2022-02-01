@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import cardService from '../services/CardService.js'
 
 Vue.use(Vuex)
 
@@ -19,7 +20,39 @@ if(currentToken != null) {
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    cards: [
+      {
+        frontOfCard: "Front 1",
+        backOfCard: "Back 1",
+        tags: "JavaScript, Java, Algorithms"
+      },
+      {
+        frontOfCard: "Front 2",
+        backOfCard: "Back 2",
+        tags: "JavaScript, Java, Algorithms"
+      },
+      {
+        frontOfCard: "Front 3",
+        backOfCard: "Back 3",
+        tags: "JavaScript, Java, Algorithms"
+      },
+      {
+        frontOfCard: "Front 4",
+        backOfCard: "Back 4",
+        tags: "JavaScript, Java, Algorithms"
+      },
+      {
+        frontOfCard: "Front 5",
+        backOfCard: "Back 5",
+        tags: "JavaScript, Java, Algorithms"
+      },
+      {
+        frontOfCard: "Front 6",
+        backOfCard: "Back 6",
+        tags: "JavaScript, Java, Algorithms"
+      }
+    ]
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -37,6 +70,18 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    SET_CARDS(state, cards) {
+      state.cards = cards;
+    }
+  },
+  actions: {
+    LOAD_USERS_CARDS(context, userId) {
+      cardService.getCardsByUser(userId).then(
+        (response) => {
+          const cards = response.data;
+          context.commit('SET_CARDS', cards);
+        });
     }
   }
 })
