@@ -42,9 +42,8 @@ export default {
   width: 100vw;
 }
 body {
-  background: url("./assets/pexels-fauxels-3184464.jpg");
+  background: #a66f5b url("./assets/pexels-fauxels-3184464.jpg") 0 0 no-repeat;
   background-size: 100vw;
-  background-repeat: no-repeat;
   margin: 0px;
 }
 </style>

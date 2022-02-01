@@ -12,7 +12,22 @@
       <input type="text" name="search" placeholder="Search cards by tag" />
       <article>
         <div id="card-container">
-          <flashcard-component />
+          <div
+            id="card"
+            v-for="card in this.$store.state.cards"
+            v-bind:key="card.id"
+          >
+            <flashcard-component
+              :front="card.frontOfCard"
+              :back="card.backOfCard"
+              class="flashcard-component"
+            />
+            <p>tags: {{ card.tags }}</p>
+            <div id="card-buttons">
+              <button>Edit</button>
+              <button>Add to Deck</button>
+            </div>
+          </div>
         </div>
       </article>
     </div>
@@ -30,7 +45,9 @@ export default {
       cards: [],
     };
   },
-  created() {},
+  created() {
+    // this.$store.dispatch("LOAD_USERS_CARDS", this.$store.state.user.id);
+  },
 };
 </script>
 
@@ -50,6 +67,13 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+}
+button {
+  border: none;
+  color: white;
+  background-color: rgb(49, 92, 49);
+  padding: 1.5vh 5vh;
+  border-radius: 20px;
 }
 .nav-button {
   background-color: #a66f5b;
@@ -74,7 +98,11 @@ nav {
   border: solid #b4b0ad 1px;
   margin: 3vh;
   margin-top: 9vh;
+  padding-top: 4vh;
   height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 #main {
   top: 16.3vh;
@@ -94,5 +122,13 @@ input[type="text"] {
   background-repeat: no-repeat;
   padding: 12px 20px 12px 40px;
   margin: 1vh 3vh 2vh 0vh;
+}
+.flashcard-component {
+  height: 24vh;
+  width: 40vh;
+}
+#card-buttons {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
