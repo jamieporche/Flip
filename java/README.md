@@ -24,11 +24,11 @@ Each SQL script has a specific purpose as described below:
 
 ### Database users
 
-The database superuser—meaning `postgres`—must only be used for database administration. It must not be used by applications. As such, two database users are created for the capstone application to use as described below:
+The database superuserâ€"meaning `postgres`â€"must only be used for database administration. It must not be used by applications. As such, two database users are created for the capstone application to use as described below:
 
 | Username | Description |
 | -------- | ----------- |
-| `final_capstone_owner` | This user is the schema owner. It has full access—meaning granted all privileges—to all database objects within the `capstone` schema and also has privileges to create new schema objects. This user can be used to connect to the database from PGAdmin for administrative purposes. |
+| `final_capstone_owner` | This user is the schema owner. It has full accessâ€"meaning granted all privilegesâ€"to all database objects within the `capstone` schema and also has privileges to create new schema objects. This user can be used to connect to the database from PGAdmin for administrative purposes. |
 | `final_capstone_appuser` | The application uses this user to make connections to the database. This user is granted `SELECT`, `INSERT`, `UPDATE`, and `DELETE` privileges for all database tables and can `SELECT` from all sequences. The application datasource has been configured to connect using this user. |
 
 
