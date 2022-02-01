@@ -38,6 +38,13 @@ public class JdbcCardDao implements CardDao {
         return cardList;
     }
 
+    @Override
+    public List<Card> getListOfCardsByTags(String[] tags) {
+        String sql = "SELECT * FROM cards "
+                + "JOIN ";
+        return null;
+    }
+
     private Card mapRowToCard(SqlRowSet rowSet) {
         Card card = new Card();
         card.setCardId(rowSet.getInt("card_id"));
