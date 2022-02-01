@@ -1,7 +1,5 @@
 package com.techelevator.model;
 
-import java.util.UUID;
-
 public class Card {
 
     private int cardId;
@@ -9,11 +7,20 @@ public class Card {
     private String backOfCard;
     private int userId;
     private String username;
+    private String[] tags;
 
     // private int tagId; ?
     // private String tagName; ?
 
     public Card() {
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
     }
 
     public int getCardId() {

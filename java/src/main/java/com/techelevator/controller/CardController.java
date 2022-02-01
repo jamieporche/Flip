@@ -16,9 +16,14 @@ public class CardController {
     @Autowired
     CardDao cardDao;
 
-    @RequestMapping(path = "/users/{userId}/cards", method = RequestMethod.GET)
-    public List<Card> getCardsList (@PathVariable("userId") int userId) {
+    @RequestMapping(path = "/users/{userId}/cards/", method = RequestMethod.GET)
+    public List<Card> getCardsList (@PathVariable int userId) {
         return cardDao.getListOfCardsByUserId(userId);
+    }
+
+    @RequestMapping(path = "/cards/{cardId}/", method = RequestMethod.GET)
+    public Card getCard(@PathVariable int cardId) {
+        return cardDao.getCardByCardId(cardId);
     }
 
 }

@@ -8,5 +8,6 @@ public interface CardDao {
 
     public Card getCardByCardId(int cardId);
     public List<Card> getListOfCardsByUserId(int userId);
+    public List<Card> getListOfCardsByTags(String[] tags);
 
 }
