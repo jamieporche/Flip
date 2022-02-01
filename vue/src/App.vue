@@ -9,7 +9,7 @@
         >Logout</router-link
       >
     </div>
-    <router-view />
+    <router-view class="router-view" />
   </div>
 </template>
 
@@ -28,6 +28,10 @@ export default {
   position: fixed;
   top: 0px;
   width: 100vw;
+  z-index: 2;
+}
+.router-view {
+  z-index: 1;
 }
 body {
   background: url("./assets/pexels-fauxels-3184464.jpg");
