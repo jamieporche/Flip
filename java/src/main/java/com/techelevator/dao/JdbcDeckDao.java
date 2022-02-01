@@ -14,7 +14,7 @@ public class JdbcDeckDao implements DeckDao {
     }
 
     @Override
-    public Deck getDeckById(int deckId) {
+    public Deck getDeckByDeckId(int deckId) {
         String sql = "SELECT * FROM decks WHERE deck_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, deckId);
         if (results.next()) {

@@ -11,15 +11,26 @@
     <div id="main">
       <input type="text" name="search" placeholder="Search cards by tag" />
       <article>
-        <div id="card-container"></div>
+        <div id="card-container">
+          <flashcard-component />
+        </div>
       </article>
     </div>
   </div>
 </template>
 
 <script>
+import FlashcardComponent from "../components/FlashcardComponent.vue";
+
 export default {
+  components: { FlashcardComponent },
   name: "home",
+  data() {
+    return {
+      cards: [],
+    };
+  },
+  created() {},
 };
 </script>
 
@@ -69,7 +80,6 @@ nav {
   top: 16.3vh;
   position: relative;
   height: 100vh;
-  z-index: -1;
 }
 input[type="text"] {
   width: 30%;

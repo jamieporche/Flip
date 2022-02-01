@@ -95,6 +95,9 @@ div#login-container {
   width: 100%;
   height: 100%;
   margin: 50px 0px 0px 0px;
+  top: 16.3vh;
+  position: relative;
+  height: 100vh;
 }
 div#login {
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);

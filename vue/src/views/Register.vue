@@ -107,11 +107,12 @@ label {
   font-size: 2.5vh;
 }
 div#register-container {
-  display: flex;
-  justify-content: center;
   width: 100%;
   height: 100%;
   margin: 50px 0px 0px 0px;
+  top: 16.3vh;
+  position: relative;
+  height: 100vh;
 }
 div#register {
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);
