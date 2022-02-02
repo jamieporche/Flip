@@ -58,11 +58,10 @@ public class JdbcCardDao implements CardDao {
 
     @Override         // 4C. this will update an existing card
     public Card updateCard(Card card) {
-        String sql = "UPDATE cards SET front = '?', back = '?' , user_id = '?', card_tags = '?' WHERE card_id = ?";
+        String sql = "UPDATE cards SET front = ?, back = ? , user_id = ?, card_tags = ? WHERE card_id = ?";
         jdbcTemplate.update(sql, card.getFrontOfCard(), card.getBackOfCard(), card.getUserId(), card.getTags(), card.getCardId());
         return card;
-    }        // this is not working yet. Will need to fix, Also noticing that when a card does update
-            //  through DB Vis I did get it to work, but card was given a new   cardID, this will be a problem with Decks
+    }
 
 
     // Helper Method for mapping/building card objects

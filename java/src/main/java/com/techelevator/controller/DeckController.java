@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @PreAuthorize("isAuthenticated()")
 @CrossOrigin
@@ -21,6 +23,10 @@ public class DeckController {
     }
 
 
-
+    // 2D. this pulls all the decks that the user has made
+    @RequestMapping(path= "/users/deck/{userId}" , method = RequestMethod.GET)
+    public List<Deck> getDecksByUserId(@PathVariable int userId){
+        return deckDao.getDecksByUserId(userId);
+    }
 
 }

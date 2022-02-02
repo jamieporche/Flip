@@ -43,11 +43,15 @@ public class JdbcDeckDao implements DeckDao {
     }
 
 
+    @Override           // 2D. this pulls all the decks that the user has made
+    public List<Deck> getDecksByUserId(int userId) {
+        List<Deck> deckList = new ArrayList<>();
+
+        return null;
+    }
 
 
-
-
-            // Helper Method for mapping/building decks
+    // Helper Method for mapping/building decks
     private Deck mapRowToDeck(SqlRowSet rowSet) {
         Deck deck = new Deck();
         deck.setDeckId(rowSet.getInt("deck_id"));
@@ -58,7 +62,7 @@ public class JdbcDeckDao implements DeckDao {
         return deck;
     }
 
-            // Helper Method for mapping/building card objects
+            // Helper Method for mapping/building card objects ** this does not return username in this one
     private Card mapRowToCard(SqlRowSet rowSet) {
         Card card = new Card();
         card.setCardId(rowSet.getInt("card_id"));
