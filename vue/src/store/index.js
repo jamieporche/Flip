@@ -57,8 +57,10 @@ export default new Vuex.Store({
     },
     CREATE_NEW_CARD(context, card) {
       cardService.create(card).then(response => {
-        const newCard = response.data;
-        context.commit('ADD_CARD', newCard);
+        if (response.status == 200) {
+          const newCard = response.data;
+          context.commit('ADD_CARD', newCard);
+        }
       });
     },
   }

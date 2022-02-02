@@ -57,6 +57,7 @@ export default {
   justify-content: space-around;
   align-items: center;
   transform: rotateY(180deg);
+  font-size: 1.2vw;
 }
 .is-flipped {
   transform: rotateY(180deg);

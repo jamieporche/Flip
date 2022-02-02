@@ -46,7 +46,9 @@
             />
             <div id="save-buttons">
               <button id="save" v-on:click.prevent="createCard">Save</button>
-              <button id="save-and-new">Save and New</button>
+              <button id="save-and-new" v-on:click.prevent="createCardAndReset">
+                Save and New
+              </button>
             </div>
           </form>
         </div>
@@ -83,6 +85,18 @@ export default {
       };
       this.$store.dispatch("CREATE_NEW_CARD", newCard);
       this.$router.push({ name: "home" });
+    },
+    createCardAndReset() {
+      const newCard = {
+        ...this.newCard,
+      };
+      this.$store.dispatch("CREATE_NEW_CARD", newCard);
+      this.newCard = {
+        frontOfCard: "",
+        backOfCard: "",
+        tags: "",
+        userId: this.$store.state.user.id,
+      };
     },
   },
   computed: {},

@@ -4,7 +4,7 @@
       <p>Logo Here</p>
     </div>
     <div id="app-name">
-      <p>Flashcards</p>
+      <p>StudyBlueGreen</p>
     </div>
     <div id="home">
       <router-link
@@ -43,15 +43,16 @@ p {
   border: solid 2px #b4b0ad;
   background-image: linear-gradient(white, #e4e0dd);
   padding: 0vh 5vh 3vh 5vh;
+  color: #464443;
 }
 #logo {
   font-size: 3vh;
-  color: #252526;
+  color: #464443;
 }
 #app-name {
   padding: 0vh 5vh;
   font-size: 5vh;
-  color: #252526;
+  color: #464443;
 }
 #logout {
   margin-left: auto;

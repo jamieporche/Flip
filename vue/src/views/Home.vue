@@ -59,16 +59,19 @@ export default {
   name: "home",
   data() {
     return {
-      cards: [],
       filter: "",
+      cards: [],
     };
   },
   computed: {
     filteredCards() {
       if (this.filter !== "") {
-        return this.$store.state.cards.filter((card) =>
-          card.tags.toLowerCase().includes(this.filter.toLowerCase())
-        );
+        console.log(this.filter.toLowerCase());
+        return this.$store.state.cards.filter((card) => {
+          if (card.tags !== null) {
+            return card.tags.toLowerCase().includes(this.filter.toLowerCase());
+          }
+        });
       } else {
         return this.$store.state.cards;
       }

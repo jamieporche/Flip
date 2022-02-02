@@ -97,9 +97,11 @@ export default {
 h1 {
   text-align: center;
   font-size: 7vh;
+  color: #464443;
 }
 label {
   font-size: 2.5vh;
+  color: #464443;
 }
 #login-screen {
   display: flex;
