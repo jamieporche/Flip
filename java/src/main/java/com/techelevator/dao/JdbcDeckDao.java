@@ -28,11 +28,12 @@ public class JdbcDeckDao implements DeckDao {
         if (results.next()) {
             deck = mapRowToDeck(results);
         }
-        String sql2 = " SELECT cards.card_id, cards.user_id, cards.front, cards.back, cards.card_tags, users.username\n" +
+        String sql2 = " SELECT cards.card_id, cards.user_id, cards.front, cards.back, cards.card_tags\n" +
                 " FROM cards\n" +
-                "  JOIN users ON  cards.user_id = users.user_id\n" +
-                "  WHERE cards.user_id = ?;";
-        SqlRowSet cardResults = jdbcTemplate.queryForRowSet(sql2, deck.getDeckId());
+                " JOIN card_deck ON card_deck.card_id = cards.card_id\n" +
+                " JOIN decks ON decks.deck_id = card_deck.deck_id\n" +
+                " WHERE decks.deck_id = ?";
+        SqlRowSet cardResults = jdbcTemplate.queryForRowSet(sql2, deckId);
         List<Card> cardList = new ArrayList<>();
         while (cardResults.next()) {
             cardList.add(mapRowToCard(cardResults));
@@ -42,11 +43,15 @@ public class JdbcDeckDao implements DeckDao {
     }
 
 
+    @Override           // 2D. this pulls all the decks that the user has made
+    public List<Deck> getDecksByUserId(int userId) {
+        List<Deck> deckList = new ArrayList<>();
+
+        return null;
+    }
 
 
-
-
-            // Helper Method for mapping/building decks
+    // Helper Method for mapping/building decks
     private Deck mapRowToDeck(SqlRowSet rowSet) {
         Deck deck = new Deck();
         deck.setDeckId(rowSet.getInt("deck_id"));
@@ -57,13 +62,12 @@ public class JdbcDeckDao implements DeckDao {
         return deck;
     }
 
-            // Helper Method for mapping/building card objects
+            // Helper Method for mapping/building card objects ** this does not return username in this one
     private Card mapRowToCard(SqlRowSet rowSet) {
         Card card = new Card();
         card.setCardId(rowSet.getInt("card_id"));
         card.setFrontOfCard(rowSet.getString("front"));
         card.setBackOfCard(rowSet.getString("back"));
-        card.setUsername(rowSet.getString("username"));
         card.setTags(rowSet.getString("card_tags"));
         card.setUserId(rowSet.getInt("user_id"));
         return card;
