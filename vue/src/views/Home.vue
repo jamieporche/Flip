@@ -62,9 +62,13 @@ export default {
   },
   computed: {
     filteredCards() {
-      return this.$store.state.cards.filter((card) =>
-        card.tags.toLowerCase().includes(this.filter.toLowerCase)
-      );
+      if (this.filter !== "") {
+        return this.$store.state.cards.filter((card) =>
+          card.tags.toLowerCase().includes(this.filter.toLowerCase)
+        );
+      } else {
+        return this.$store.state.cards;
+      }
     },
   },
   created() {
