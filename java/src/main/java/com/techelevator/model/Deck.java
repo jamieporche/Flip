@@ -1,16 +1,36 @@
 package com.techelevator.model;
 
+import java.util.List;
+
 public class Deck {
     private int deckId;
     private String deckName;
     private int userId;
     private boolean isPublic;
+    private String userName;
+    private List<Card> cards;
 
     public Deck() {}
 
     public Deck(int deckId, String deckName) {
         this.deckId = deckId;
         this.deckName = deckName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 
     public int getDeckId() {
