@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="view">
     <nav>
       <router-link :to="{ name: 'new-card' }" class="nav-button"
         >Create New Card</router-link
@@ -18,17 +18,20 @@
         />
         <article>
           <div id="card-container">
+            <div id="card-list-empty" v-if="filteredCards.length == 0">
+              <p class="no-cards">There are no cards to show</p>
+            </div>
             <div
-              id="card"
-              v-for="card in this.$store.state.cards"
-              v-bind:key="card.id"
+              class="card"
+              v-for="(card, index) in filteredCards"
+              v-bind:key="index"
             >
               <flashcard-component
                 :front="card.frontOfCard"
                 :back="card.backOfCard"
                 class="flashcard-component"
               />
-              <p>tags: {{ card.tags }}</p>
+              <p><span>Tags:</span> {{ card.tags }}</p>
               <div id="card-buttons">
                 <button>Edit</button>
                 <button>Add to Deck</button>
@@ -64,7 +67,7 @@ export default {
     filteredCards() {
       if (this.filter !== "") {
         return this.$store.state.cards.filter((card) =>
-          card.tags.toLowerCase().includes(this.filter.toLowerCase)
+          card.tags.toLowerCase().includes(this.filter.toLowerCase())
         );
       } else {
         return this.$store.state.cards;
@@ -78,9 +81,12 @@ export default {
 </script>
 
 <style scoped>
-.home {
+.view {
   min-height: 100vh;
   /* display: block; */
+}
+span {
+  font-weight: bold;
 }
 nav {
   height: 80%;
@@ -134,7 +140,6 @@ button {
   justify-self: flex-end;
 }
 #main {
-  top: 18vh;
   margin-top: 18vh;
   min-height: 100vh;
   display: flex;
@@ -170,5 +175,13 @@ input[type="text"] {
 }
 .footer {
   z-index: 3;
+}
+#card-list-empty {
+  height: 70vh;
+  width: 97vw;
+}
+.no-cards {
+  font-size: 10vh;
+  text-align: center;
 }
 </style>

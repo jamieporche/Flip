@@ -46,7 +46,7 @@
             >
           </div>
           <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Create Account
+            Register
           </button>
         </form>
       </div>
@@ -125,7 +125,6 @@ div#register-container {
   width: 100%;
   height: 68vh;
   margin: 22vh 0px 0px 0px;
-  top: 16.3vh;
 }
 div#register {
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);

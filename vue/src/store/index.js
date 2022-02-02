@@ -42,6 +42,9 @@ export default new Vuex.Store({
     },
     SET_CARDS(state, cards) {
       state.cards = cards;
+    },
+    ADD_CARD(state, card) {
+      state.cards.push(card);
     }
   },
   actions: {
@@ -51,6 +54,12 @@ export default new Vuex.Store({
           const cards = response.data;
           context.commit('SET_CARDS', cards);
         });
-    }
+    },
+    CREATE_NEW_CARD(context, card) {
+      cardService.create(card).then(response => {
+        const newCard = response.data;
+        context.commit('ADD_CARD', newCard);
+      });
+    },
   }
 })
