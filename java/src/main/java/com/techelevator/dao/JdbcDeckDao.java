@@ -46,8 +46,17 @@ public class JdbcDeckDao implements DeckDao {
     @Override           // 2D. this pulls all the decks that the user has made
     public List<Deck> getDecksByUserId(int userId) {
         List<Deck> deckList = new ArrayList<>();
-
-        return null;
+        List<Integer> deckIds = new ArrayList<>();
+        String sql = " SELECT deck_id FROM decks WHERE user_id = ?";
+       SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        while (results.next()){
+            deckIds.add(mapIdsToList(results));
+        }
+        for (int i = 1; i <= deckIds.size(); i++){
+            Deck deck = getDeckByDeckId(i);
+            deckList.add(deck);
+        }
+        return deckList;
     }
 
 
@@ -73,4 +82,11 @@ public class JdbcDeckDao implements DeckDao {
         return card;
     }
 
+
+    private int mapIdsToList(SqlRowSet rowSet){
+        int id = 0;
+        id = (rowSet.getInt("deck_id"));
+        return id;
+
+    }
 }
