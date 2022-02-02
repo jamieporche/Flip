@@ -111,6 +111,9 @@ nav {
   border-radius: 20px;
   text-decoration: none;
 }
+.deck-button:hover {
+  background-color: rgb(36, 66, 36);
+}
 .deck-buttons {
   display: flex;
   justify-content: space-between;
@@ -128,6 +131,9 @@ nav {
   cursor: pointer;
   width: 60%;
   justify-self: flex-end;
+}
+.nav-button:hover {
+  background-color: #8a5d4d;
 }
 #main {
   margin-top: 19.5vh;

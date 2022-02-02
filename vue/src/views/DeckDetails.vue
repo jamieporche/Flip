@@ -20,7 +20,15 @@
     <div id="main-body">
       <div id="main">
         <article>
-          <div id="deck-container"></div>
+          <div id="deck-container">
+            <h1 id="deck-name">{{ this.$store.state.deck.deckName }}</h1>
+            <div class="cards"></div>
+            <div class="card-navigation">
+              <img src="../assets/left.png" id="next-card" />
+              <span># / # </span>
+              <img src="../assets/right.png" id="previous-card" />
+            </div>
+          </div>
         </article>
       </div>
       <div class="footer">
@@ -32,6 +40,7 @@
 
 <script>
 import FooterComponent from "../components/FooterComponent.vue";
+import deckService from "../services/DeckService.js";
 
 export default {
   components: {
@@ -40,17 +49,44 @@ export default {
   name: "deck-details",
   data() {
     return {
-      deck: {},
+      deck: this.$store.state.deck,
+      isLoading: true,
+      deckSize: this.$store.state.deck.cards.length,
+      currentCardIndex: 0,
     };
+  },
+  methods: {
+    changeCard() {},
+    retrieveDeck() {
+      deckService
+        .getDeckById(this.$route.params.id)
+        .then((response) => {
+          this.$store.commit("SET_DECK", response.data);
+          this.isLoading = false;
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 404) {
+            alert(
+              "Deck not available. This deck may have been deleted or you have entered an invalid deck ID."
+            );
+            this.$router.push("/");
+          }
+        });
+    },
   },
   computed: {},
   created() {
-    this.$store.dispatch("LOAD_USERS_DECKS", this.$store.state.user.id);
+    this.retrieveDeck();
   },
 };
 </script>
 
 <style scoped>
+h1 {
+  color: #464443;
+  margin: 0vh auto 0vh 3vh;
+  font-size: 4vh;
+}
 .view {
   min-height: 100vh;
 }
@@ -80,11 +116,15 @@ nav {
   margin: 0vh 3vh 0vh auto;
   padding: 4vh 0vh 4vh 0vh;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-content: space-between;
+  flex-direction: column;
+  align-items: center;
   gap: 7vh 0vh;
   overflow: auto;
+}
+.card-navigation {
+  width: 20vh;
+  display: flex;
+  justify-content: space-between;
 }
 .deck {
   width: 60vh;
@@ -114,6 +154,9 @@ nav {
   cursor: pointer;
   width: 60%;
   justify-self: flex-end;
+}
+.nav-button:hover {
+  background-color: #8a5d4d;
 }
 #main {
   margin-top: 19.5vh;

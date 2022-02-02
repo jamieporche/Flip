@@ -33,7 +33,7 @@ export default {
 }
 .deck-link {
   text-decoration: none;
-  color: #252526;
+  color: #464443;
 }
 .deck-name {
   font-size: 3vh;

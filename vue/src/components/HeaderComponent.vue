@@ -60,7 +60,7 @@ p {
 .link {
   text-decoration: none;
   font-size: 2.5vh;
-  color: #252526;
+  color: #464443;
 }
 .link:hover {
   color: #f2ab6d;

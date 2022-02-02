@@ -173,6 +173,9 @@ button {
   width: 60%;
   justify-self: flex-end;
 }
+.nav-button:hover {
+  background-color: #8a5d4d;
+}
 .input {
   width: 100%;
   right: 0;

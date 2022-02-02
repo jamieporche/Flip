@@ -138,6 +138,9 @@ nav {
   border-radius: 20px;
   text-decoration: none;
 }
+.card-button:hover {
+  background-color: rgb(36, 66, 36);
+}
 .nav-button {
   background-color: #a66f5b;
   color: #f7fafc;
@@ -151,6 +154,9 @@ nav {
   cursor: pointer;
   width: 60%;
   justify-self: flex-end;
+}
+.nav-button:hover {
+  background-color: #8a5d4d;
 }
 #main {
   margin-top: 18vh;
