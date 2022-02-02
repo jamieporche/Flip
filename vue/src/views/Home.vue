@@ -105,7 +105,9 @@ nav {
   justify-content: flex-start;
 }
 #card-container {
-  width: 77%;
+  min-height: 60vh;
+  width: 76%;
+  min-width: 76vw;
   border-radius: 20px;
   background-color: #e4e0dd;
   border: solid #b4b0ad 1px;
@@ -141,7 +143,7 @@ button {
 }
 #main {
   margin-top: 18vh;
-  min-height: 100vh;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -150,7 +152,6 @@ button {
 #main-body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 input[type="text"] {
   width: 30%;
@@ -175,10 +176,6 @@ input[type="text"] {
 }
 .footer {
   z-index: 3;
-}
-#card-list-empty {
-  height: 70vh;
-  width: 97vw;
 }
 .no-cards {
   font-size: 10vh;

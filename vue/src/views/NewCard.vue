@@ -72,6 +72,7 @@ export default {
         frontOfCard: "",
         backOfCard: "",
         tags: "",
+        userId: this.$store.state.user.id,
       },
     };
   },

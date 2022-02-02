@@ -6,7 +6,7 @@ export default {
     return axios.get(`/users/${userId}/cards/`);
   },
   create(card) {
-    return axios.post('/users/card/create', card);
+    return axios.post('/users/card/create/', card);
   }
 
 }
