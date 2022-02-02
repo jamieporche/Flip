@@ -28,11 +28,12 @@ public class JdbcDeckDao implements DeckDao {
         if (results.next()) {
             deck = mapRowToDeck(results);
         }
-        String sql2 = " SELECT cards.card_id, cards.user_id, cards.front, cards.back, cards.card_tags, users.username\n" +
+        String sql2 = " SELECT cards.card_id, cards.user_id, cards.front, cards.back, cards.card_tags\n" +
                 " FROM cards\n" +
-                "  JOIN users ON  cards.user_id = users.user_id\n" +
-                "  WHERE cards.user_id = ?;";
-        SqlRowSet cardResults = jdbcTemplate.queryForRowSet(sql2, deck.getDeckId());
+                " JOIN card_deck ON card_deck.card_id = cards.card_id\n" +
+                " JOIN decks ON decks.deck_id = card_deck.deck_id\n" +
+                " WHERE decks.deck_id = ?";
+        SqlRowSet cardResults = jdbcTemplate.queryForRowSet(sql2, deckId);
         List<Card> cardList = new ArrayList<>();
         while (cardResults.next()) {
             cardList.add(mapRowToCard(cardResults));
@@ -63,7 +64,6 @@ public class JdbcDeckDao implements DeckDao {
         card.setCardId(rowSet.getInt("card_id"));
         card.setFrontOfCard(rowSet.getString("front"));
         card.setBackOfCard(rowSet.getString("back"));
-        card.setUsername(rowSet.getString("username"));
         card.setTags(rowSet.getString("card_tags"));
         card.setUserId(rowSet.getInt("user_id"));
         return card;

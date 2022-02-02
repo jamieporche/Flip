@@ -49,8 +49,8 @@ public class JdbcCardDao implements CardDao {
 
     @Override         // 3C. this creates a card
     public Card createCard(Card card) {
-        String sql = "INSERT INTO cards (front, back, user_id, card_tags) VALUES (?, ?, ?, ?)";
-        int id = jdbcTemplate.update(sql, card.getFrontOfCard(), card.getBackOfCard(), card.getUserId(), card.getTags());
+        String sql = "INSERT INTO cards (front, back, user_id, card_tags) VALUES (?, ?, ?, ?) RETURNING card_id  ";
+        int id = jdbcTemplate.queryForObject(sql,Integer.class, card.getFrontOfCard(), card.getBackOfCard(), card.getUserId(), card.getTags());
         Card retrievedCard = getCardByCardId(id);
         return retrievedCard;
     }
