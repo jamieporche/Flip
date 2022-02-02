@@ -61,6 +61,9 @@ p {
   font-size: 2.5vh;
   color: #252526;
 }
+.link:hover {
+  color: #f2ab6d;
+}
 .router-link-active {
   border-bottom: solid #f2ab6d 3px;
 }
