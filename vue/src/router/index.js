@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import NewCard from '../views/NewCard.vue'
 import MyDecks from '../views/MyDecks.vue'
+import EditCard from '../views/EditCard.vue'
 
 Vue.use(Router)
 
@@ -67,6 +68,14 @@ const router = new Router({
       path: "/my-decks",
       name: "my-decks",
       component: MyDecks,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/edit-card/:id",
+      name: "edit-card",
+      component: EditCard,
       meta: {
         requiresAuth: true
       }

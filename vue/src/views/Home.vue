@@ -33,8 +33,16 @@
               />
               <p><span>Tags:</span> {{ card.tags }}</p>
               <div id="card-buttons">
-                <button>Edit</button>
-                <button>Add to Deck</button>
+                <router-link
+                  class="card-button"
+                  :to="{ name: 'edit-card', params: { id: card.cardId } }"
+                  >Edit</router-link
+                >
+                <router-link
+                  class="card-button"
+                  :to="{ name: 'edit-card', params: { id: card.cardId } }"
+                  >Add to Deck</router-link
+                >
               </div>
             </div>
           </div>
@@ -86,7 +94,6 @@ export default {
 <style scoped>
 .view {
   min-height: 100vh;
-  /* display: block; */
 }
 span {
   font-weight: bold;
@@ -123,12 +130,13 @@ nav {
   gap: 7vh 0vh;
   overflow: auto;
 }
-button {
+.card-button {
   border: none;
   color: white;
   background-color: rgb(49, 92, 49);
   padding: 1.5vh 5vh;
   border-radius: 20px;
+  text-decoration: none;
 }
 .nav-button {
   background-color: #a66f5b;

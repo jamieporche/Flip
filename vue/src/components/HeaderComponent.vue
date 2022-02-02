@@ -65,7 +65,7 @@ p {
 .link:hover {
   color: #f2ab6d;
 }
-.router-link-active {
+.router-link-exact-active {
   border-bottom: solid #f2ab6d 3px;
 }
 </style>
