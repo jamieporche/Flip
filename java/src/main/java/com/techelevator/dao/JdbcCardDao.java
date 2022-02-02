@@ -16,20 +16,27 @@ public class JdbcCardDao implements CardDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
+    @Override               // 1C. this gets card by Id
     public Card getCardByCardId(int cardId) {
-        String sql = "SELECT * FROM cards WHERE card_id = ?";
+        Card card = new Card();
+        String sql = " SELECT cards.card_id, cards.user_id, cards.front, cards.back, cards.card_tags, users.username\n" +
+                " FROM cards\n" +
+                "  JOIN users ON  cards.user_id = users.user_id\n" +
+                "  WHERE cards.card_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, cardId);
         if (results.next()) {
-            return mapRowToCard(results);
-        } else {
-            throw new RuntimeException("cardId " + cardId + " was not found.");
+            card = mapRowToCard(results);
         }
+            return card;
     }
 
-    @Override
+
+    @Override         // 2C. this gets list of cards by userId
     public List<Card> getListOfCardsByUserId(int userId) {
-        String sql = "SELECT * FROM cards WHERE user_id = ?";
+        String sql = " SELECT cards.card_id,cards.user_id, cards.front, cards.back, cards.card_tags, users.username\n" +
+                " FROM cards\n" +
+                "  JOIN users ON  cards.user_id = users.user_id\n" +
+                "  WHERE cards.user_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         List<Card> cardList = new ArrayList<>();
         while (results.next()) {
@@ -38,19 +45,35 @@ public class JdbcCardDao implements CardDao {
         return cardList;
     }
 
-    @Override
-    public List<Card> getListOfCardsByTags(String[] tags) {
-        String sql = "SELECT * FROM cards "
-                + "JOIN ";
-        return null;
+
+
+    @Override         // 3C. this creates a card
+    public Card createCard(Card card) {
+        String sql = "INSERT INTO cards (front, back, user_id, card_tags) VALUES (?, ?, ?, ?)";
+        int id = jdbcTemplate.update(sql, card.getFrontOfCard(), card.getBackOfCard(), card.getUserId(), card.getTags());
+        Card retrievedCard = getCardByCardId(id);
+        return retrievedCard;
     }
 
+
+    @Override         // 4C. this will update an existing card
+    public Card updateCard(Card card) {
+        String sql = "UPDATE cards SET front = '?', back = '?' , user_id = '?', card_tags = '?' WHERE card_id = ?";
+        jdbcTemplate.update(sql, card.getFrontOfCard(), card.getBackOfCard(), card.getUserId(), card.getTags(), card.getCardId());
+        return card;
+    }        // this is not working yet. Will need to fix, Also noticing that when a card does update
+            //  through DB Vis I did get it to work, but card was given a new   cardID, this will be a problem with Decks
+
+
+    // Helper Method for mapping/building card objects
     private Card mapRowToCard(SqlRowSet rowSet) {
         Card card = new Card();
         card.setCardId(rowSet.getInt("card_id"));
         card.setFrontOfCard(rowSet.getString("front"));
         card.setBackOfCard(rowSet.getString("back"));
-//        card.setUsername(rowSet.getString("username"));
+        card.setUsername(rowSet.getString("username"));
+        card.setTags(rowSet.getString("card_tags"));
+        card.setUserId(rowSet.getInt("user_id"));
         return card;
     }
 }

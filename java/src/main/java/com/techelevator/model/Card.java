@@ -7,7 +7,7 @@ public class Card {
     private String backOfCard;
     private int userId;
     private String username;
-    private String[] tags;
+    private String tags;
 
     // private int tagId; ?
     // private String tagName; ?
@@ -15,11 +15,11 @@ public class Card {
     public Card() {
     }
 
-    public String[] getTags() {
+    public String getTags() {
         return tags;
     }
 
-    public void setTags(String[] tags) {
+    public void setTags(String tags) {
         this.tags = tags;
     }
 

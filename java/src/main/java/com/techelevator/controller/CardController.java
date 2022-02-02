@@ -17,14 +17,31 @@ public class CardController {
     @Autowired
     CardDao cardDao;
 
+    // 1C. this gets card by Id
+    @RequestMapping(path = "/cards/{cardId}/", method = RequestMethod.GET)
+    public Card getCard(@PathVariable int cardId) {
+        return cardDao.getCardByCardId(cardId);
+    }
+
+    // 2C. this gets list of cards by userId
     @RequestMapping(path = "/users/{userId}/cards/", method = RequestMethod.GET)
     public List<Card> getCardsList (@PathVariable int userId) {
         return cardDao.getListOfCardsByUserId(userId);
     }
 
-    @RequestMapping(path = "/cards/{cardId}/", method = RequestMethod.GET)
-    public Card getCard(@PathVariable int cardId) {
-        return cardDao.getCardByCardId(cardId);
+    // 3C. this creates a card
+    @RequestMapping(path = "/users/card/create/" , method = RequestMethod.POST)
+    public Card createNewCard(@RequestBody Card card){
+        return cardDao.createCard(card);
     }
+
+    // 4C. this will update an existing card
+    @RequestMapping(path = "/cards/update/{cardId}/", method = RequestMethod.PUT)
+    public Card updateCard(@PathVariable int cardId , @RequestBody Card card){
+        return cardDao.updateCard(card);
+    }
+
+
+
 
 }
