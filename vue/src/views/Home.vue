@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="view">
     <nav>
       <router-link :to="{ name: 'new-card' }" class="nav-button"
         >Create New Card</router-link
@@ -18,17 +18,20 @@
         />
         <article>
           <div id="card-container">
+            <div id="card-list-empty" v-if="filteredCards.length == 0">
+              <p class="no-cards">There are no cards to show</p>
+            </div>
             <div
-              id="card"
-              v-for="card in this.$store.state.cards"
-              v-bind:key="card.id"
+              class="card"
+              v-for="(card, index) in filteredCards"
+              v-bind:key="index"
             >
               <flashcard-component
                 :front="card.frontOfCard"
                 :back="card.backOfCard"
                 class="flashcard-component"
               />
-              <p>tags: {{ card.tags }}</p>
+              <p><span>Tags:</span> {{ card.tags }}</p>
               <div id="card-buttons">
                 <button>Edit</button>
                 <button>Add to Deck</button>
@@ -64,7 +67,7 @@ export default {
     filteredCards() {
       if (this.filter !== "") {
         return this.$store.state.cards.filter((card) =>
-          card.tags.toLowerCase().includes(this.filter.toLowerCase)
+          card.tags.toLowerCase().includes(this.filter.toLowerCase())
         );
       } else {
         return this.$store.state.cards;
@@ -78,9 +81,12 @@ export default {
 </script>
 
 <style scoped>
-.home {
+.view {
   min-height: 100vh;
   /* display: block; */
+}
+span {
+  font-weight: bold;
 }
 nav {
   height: 80%;
@@ -99,7 +105,9 @@ nav {
   justify-content: flex-start;
 }
 #card-container {
-  width: 77%;
+  min-height: 60vh;
+  width: 76%;
+  min-width: 76vw;
   border-radius: 20px;
   background-color: #e4e0dd;
   border: solid #b4b0ad 1px;
@@ -134,9 +142,8 @@ button {
   justify-self: flex-end;
 }
 #main {
-  top: 18vh;
   margin-top: 18vh;
-  min-height: 100vh;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -145,7 +152,6 @@ button {
 #main-body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 input[type="text"] {
   width: 30%;
@@ -170,5 +176,9 @@ input[type="text"] {
 }
 .footer {
   z-index: 3;
+}
+.no-cards {
+  font-size: 10vh;
+  text-align: center;
 }
 </style>
