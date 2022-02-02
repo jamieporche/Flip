@@ -2,7 +2,16 @@
   <div class="view">
     <nav>
       <router-link :to="{ name: 'new-card' }" class="nav-button"
-        >Create New Deck</router-link
+        >Study Deck</router-link
+      >
+      <router-link :to="{ name: 'home' }" class="nav-button">
+        Add New Card</router-link
+      >
+      <router-link :to="{ name: 'home' }" class="nav-button">
+        Edit Details</router-link
+      >
+      <router-link :to="{ name: 'my-decks' }" class="nav-button">
+        View Your Decks</router-link
       >
       <router-link :to="{ name: 'home' }" class="nav-button">
         View Your Cards</router-link
@@ -11,28 +20,7 @@
     <div id="main-body">
       <div id="main">
         <article>
-          <div id="deck-container">
-            <div
-              class="deck"
-              v-for="deck in this.$store.state.decks"
-              v-bind:key="deck.id"
-            >
-              <deck-component
-                :name="deck.deckName"
-                :size="deck.cards.length"
-                :createdBy="deck.userName"
-                :id="deck.deckId"
-              />
-              <div class="deck-buttons">
-                <router-link class="deck-button" :to="{ name: 'edit-card' }"
-                  >Edit</router-link
-                >
-                <router-link class="deck-button" :to="{ name: 'edit-card' }"
-                  >Study</router-link
-                >
-              </div>
-            </div>
-          </div>
+          <div id="deck-container"></div>
         </article>
       </div>
       <div class="footer">
@@ -43,18 +31,16 @@
 </template>
 
 <script>
-import DeckComponent from "../components/DeckComponent.vue";
 import FooterComponent from "../components/FooterComponent.vue";
 
 export default {
   components: {
     FooterComponent,
-    DeckComponent,
   },
-  name: "my-decks",
+  name: "deck-details",
   data() {
     return {
-      decks: [],
+      deck: {},
     };
   },
   computed: {},

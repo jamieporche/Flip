@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import cardService from '../services/CardService.js'
+import deckService from '../services/DeckService.js'
 
 Vue.use(Vuex)
 
@@ -21,7 +22,8 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    cards: []
+    cards: [],
+    decks: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -45,7 +47,10 @@ export default new Vuex.Store({
     },
     ADD_CARD(state, card) {
       state.cards.push(card);
-    }
+    },
+    SET_DECKS(state, decks) {
+      state.decks = decks;
+    },
   },
   actions: {
     LOAD_USERS_CARDS(context, userId) {
@@ -63,5 +68,11 @@ export default new Vuex.Store({
         }
       });
     },
+    LOAD_USERS_DECKS(context, userId) {
+      deckService.getDecksByUser(userId).then(response => {
+        const decks = response.data;
+        context.commit('SET_DECKS', decks);
+      })
+    }
   }
 })
