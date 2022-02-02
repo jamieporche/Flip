@@ -35,15 +35,18 @@ export default {
 .card__face {
   position: absolute;
   height: 100%;
-  width: 100%;
+  width: 80%;
   backface-visibility: hidden;
+  text-align: center;
+  font-size: 2.2vh;
+  padding: 0vh 4vh;
 }
 .card__face--front {
   background: white;
   border: solid 1px black;
   border-radius: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 .card__face--back {
@@ -51,7 +54,7 @@ export default {
   border: solid 1px black;
   border-radius: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   transform: rotateY(180deg);
 }

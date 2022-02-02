@@ -21,38 +21,7 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    cards: [
-      {
-        frontOfCard: "Front 1",
-        backOfCard: "Back 1",
-        tags: "JavaScript, Java, Algorithms"
-      },
-      {
-        frontOfCard: "Front 2",
-        backOfCard: "Back 2",
-        tags: "JavaScript, Java, Algorithms"
-      },
-      {
-        frontOfCard: "Front 3",
-        backOfCard: "Back 3",
-        tags: "JavaScript, Java, Algorithms"
-      },
-      {
-        frontOfCard: "Front 4",
-        backOfCard: "Back 4",
-        tags: "JavaScript, Java, Algorithms"
-      },
-      {
-        frontOfCard: "Front 5",
-        backOfCard: "Back 5",
-        tags: "JavaScript, Java, Algorithms"
-      },
-      {
-        frontOfCard: "Front 6",
-        backOfCard: "Back 6",
-        tags: "JavaScript, Java, Algorithms"
-      }
-    ]
+    cards: []
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {

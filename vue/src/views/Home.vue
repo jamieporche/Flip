@@ -8,56 +8,82 @@
         View Your Decks</router-link
       >
     </nav>
-    <div id="main">
-      <input type="text" name="search" placeholder="Search cards by tag" />
-      <article>
-        <div id="card-container">
-          <div
-            id="card"
-            v-for="card in this.$store.state.cards"
-            v-bind:key="card.id"
-          >
-            <flashcard-component
-              :front="card.frontOfCard"
-              :back="card.backOfCard"
-              class="flashcard-component"
-            />
-            <p>tags: {{ card.tags }}</p>
-            <div id="card-buttons">
-              <button>Edit</button>
-              <button>Add to Deck</button>
+    <div id="main-body">
+      <div id="main">
+        <input
+          type="text"
+          name="search"
+          v-model="filter"
+          placeholder="Search cards by tag"
+        />
+        <article>
+          <div id="card-container">
+            <div
+              id="card"
+              v-for="card in this.$store.state.cards"
+              v-bind:key="card.id"
+            >
+              <flashcard-component
+                :front="card.frontOfCard"
+                :back="card.backOfCard"
+                class="flashcard-component"
+              />
+              <p>tags: {{ card.tags }}</p>
+              <div id="card-buttons">
+                <button>Edit</button>
+                <button>Add to Deck</button>
+              </div>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
+      </div>
+      <div class="footer">
+        <footer-component />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import FlashcardComponent from "../components/FlashcardComponent.vue";
+import FooterComponent from "../components/FooterComponent.vue";
 
 export default {
-  components: { FlashcardComponent },
+  components: {
+    FlashcardComponent,
+    FooterComponent,
+  },
   name: "home",
   data() {
     return {
       cards: [],
+      filter: "",
     };
   },
+  computed: {
+    filteredCards() {
+      return this.$store.state.cards.filter((card) =>
+        card.tags.toLowerCase().includes(this.filter.toLowerCase)
+      );
+    },
+  },
   created() {
-    // this.$store.dispatch("LOAD_USERS_CARDS", this.$store.state.user.id);
+    this.$store.dispatch("LOAD_USERS_CARDS", this.$store.state.user.id);
   },
 };
 </script>
 
 <style scoped>
+.home {
+  min-height: 100vh;
+  /* display: block; */
+}
 nav {
   height: 80%;
   width: 20%;
   position: fixed;
   left: 0;
-  top: 16.3vh;
+  top: 16.2vh;
   padding-top: 20px;
   padding-bottom: 20px;
   overflow-x: hidden;
@@ -67,6 +93,20 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+}
+#card-container {
+  width: 77%;
+  border-radius: 20px;
+  background-color: #e4e0dd;
+  border: solid #b4b0ad 1px;
+  margin: 0vh 3vh 0vh auto;
+  padding: 4vh 0vh 4vh 0vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: space-between;
+  gap: 7vh 0vh;
+  overflow: auto;
 }
 button {
   border: none;
@@ -89,29 +129,22 @@ button {
   width: 60%;
   justify-self: flex-end;
 }
-#card-container {
-  width: 77%;
-  position: absolute;
-  right: 0;
-  border-radius: 20px;
-  background-color: #e4e0dd;
-  border: solid #b4b0ad 1px;
-  margin: 3vh;
-  margin-top: 9vh;
-  padding-top: 4vh;
-  height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
 #main {
-  top: 16.3vh;
-  position: relative;
-  height: 100vh;
+  top: 18vh;
+  margin-top: 18vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-bottom: 3vh;
+}
+#main-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 input[type="text"] {
   width: 30%;
-  position: absolute;
   right: 0;
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -130,5 +163,8 @@ input[type="text"] {
 #card-buttons {
   display: flex;
   justify-content: space-between;
+}
+.footer {
+  z-index: 3;
 }
 </style>

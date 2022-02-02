@@ -1,58 +1,69 @@
 <template>
-  <div id="register-container">
-    <div id="register" class="text-center">
-      <form class="form-register" @submit.prevent="register">
-        <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
-        <div class="alert alert-danger" role="alert" v-if="registrationErrors">
-          {{ registrationErrorMsg }}
-        </div>
-        <div id="username-container">
-          <label for="username" class="sr-only">Username</label>
-          <input
-            type="text"
-            id="username"
-            class="form-control"
-            placeholder="Username"
-            v-model="user.username"
-            required
-            autofocus
-          />
-        </div>
-        <div id="password-container">
-          <label for="password" class="sr-only">Password</label>
-          <input
-            type="password"
-            id="password"
-            class="form-control"
-            placeholder="Password"
-            v-model="user.password"
-            required
-          />
-          <input
-            type="password"
-            id="confirmPassword"
-            class="form-control"
-            placeholder="Confirm Password"
-            v-model="user.confirmPassword"
-            required
-          />
-          <router-link :to="{ name: 'login' }" id="login"
-            >Have an account?</router-link
+  <div id="register-screen">
+    <div id="register-container">
+      <div id="register" class="text-center">
+        <form class="form-register" @submit.prevent="register">
+          <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            v-if="registrationErrors"
           >
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
-          Create Account
-        </button>
-      </form>
+            {{ registrationErrorMsg }}
+          </div>
+          <div id="username-container">
+            <label for="username" class="sr-only">Username</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              placeholder="Username"
+              v-model="user.username"
+              required
+              autofocus
+            />
+          </div>
+          <div id="password-container">
+            <label for="password" class="sr-only">Password</label>
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              placeholder="Password"
+              v-model="user.password"
+              required
+            />
+            <input
+              type="password"
+              id="confirmPassword"
+              class="form-control"
+              placeholder="Confirm Password"
+              v-model="user.confirmPassword"
+              required
+            />
+            <router-link :to="{ name: 'login' }" id="login"
+              >Have an account?</router-link
+            >
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">
+            Create Account
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="footer">
+      <footer-component />
     </div>
   </div>
 </template>
 
 <script>
 import authService from "../services/AuthService";
+import FooterComponent from "../components/FooterComponent.vue";
 
 export default {
   name: "register",
+  components: { FooterComponent },
   data() {
     return {
       user: {
@@ -106,13 +117,15 @@ h1 {
 label {
   font-size: 2.5vh;
 }
+#register-screen {
+  display: flex;
+  flex-direction: column;
+}
 div#register-container {
   width: 100%;
-  height: 100%;
-  margin: 50px 0px 0px 0px;
+  height: 68vh;
+  margin: 22vh 0px 0px 0px;
   top: 16.3vh;
-  position: relative;
-  height: 100vh;
 }
 div#register {
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);
@@ -120,7 +133,7 @@ div#register {
   border: none;
   margin: auto;
   width: 60%;
-  background-image: linear-gradient(to bottom, rgb(240, 240, 230), #9c9c9c);
+  background-image: linear-gradient(to bottom, rgb(255, 255, 255), #e4e0dd);
 }
 #username-container {
   display: flex;
@@ -140,6 +153,7 @@ input {
   align-self: end;
   text-decoration: none;
   font-size: 2vh;
+  color: rgb(49, 92, 49);
 }
 form {
   display: flex;

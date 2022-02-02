@@ -1,49 +1,41 @@
 <template>
   <div id="app">
-    <header-component class="header" />
-    <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-      <router-link
-        v-bind:to="{ name: 'logout' }"
-        v-if="$store.state.token != ''"
-        >Logout</router-link
-      >
+    <header>
+      <header-component />
+    </header>
+    <div class="router-view">
+      <router-view />
     </div>
-    <router-view class="router-view" />
-    <footer-component class="footer" />
   </div>
 </template>
 
 <script>
-import FooterComponent from "./components/FooterComponent.vue";
 import HeaderComponent from "./components/HeaderComponent.vue";
 export default {
-  components: { HeaderComponent, FooterComponent },
+  components: {
+    HeaderComponent,
+  },
 };
 </script>
 
 <style>
-#app {
-  margin: 0px;
-}
-.header {
-  position: fixed;
-  top: 0px;
-  width: 100vw;
-  z-index: 2;
-}
-.router-view {
-  z-index: 1;
-}
-
-.footer {
-  position: fixed;
-  bottom: 0px;
-  width: 100vw;
-}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+html,
 body {
   background: #a66f5b url("./assets/pexels-fauxels-3184464.jpg") 0 0 no-repeat;
   background-size: 100vw;
   margin: 0px;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 2;
+}
+.router-view {
+  z-index: 1;
 }
 </style>

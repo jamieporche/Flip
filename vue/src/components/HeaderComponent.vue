@@ -1,18 +1,26 @@
 <template>
-  <div id="container">
-    <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-      <router-link
-        v-bind:to="{ name: 'logout' }"
-        v-if="$store.state.token != ''"
-        >Logout</router-link
-      >
-    </div>
+  <div class="header-container">
     <div id="logo">
       <p>Logo Here</p>
     </div>
     <div id="app-name">
-      <p>FLASH CARD STUDY NAME HERE</p>
+      <p>Flashcards</p>
+    </div>
+    <div id="home">
+      <router-link
+        v-bind:to="{ name: 'home' }"
+        v-if="$store.state.token != ''"
+        class="link"
+        >Home</router-link
+      >
+    </div>
+    <div id="logout">
+      <router-link
+        v-bind:to="{ name: 'logout' }"
+        v-if="$store.state.token != ''"
+        class="link"
+        >Logout</router-link
+      >
     </div>
   </div>
 </template>
@@ -22,20 +30,38 @@ export default {
   name: "header-component",
 };
 </script>
-<style>
-div#container {
-  display: flex;
-  justify-content: space-evenly;
-  border: solid 2px black;
-  background-image: linear-gradient(to bottom, rgb(240, 240, 230), #9c9c9c);
-}
 
-#logo {
-  font-size: 5vh;
+<style scoped>
+p {
+  margin: 0;
+}
+.header-container {
+  height: 13vh;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  align-items: flex-end;
+  border: solid 2px #b4b0ad;
+  background-image: linear-gradient(white, #e4e0dd);
+  padding: 0vh 5vh 3vh 5vh;
+}
+#logo {
+  font-size: 3vh;
+  color: #252526;
 }
 #app-name {
-  display: flex;
+  padding: 0vh 5vh;
+  font-size: 5vh;
+  color: #252526;
+}
+#logout {
+  margin-left: auto;
+}
+.link {
+  text-decoration: none;
+  font-size: 2.5vh;
+  color: #252526;
+}
+.router-link-active {
+  border-bottom: solid #f2ab6d 3px;
 }
 </style>
