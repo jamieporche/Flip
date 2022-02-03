@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Card;
 import com.techelevator.model.Deck;
+import org.apache.coyote.http11.filters.SavedRequestInputFilter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -57,6 +58,25 @@ public class JdbcDeckDao implements DeckDao {
             deckList.add(deck);
         }
         return deckList;
+    }
+
+    @Override       // 3D. this will create a new deck
+    public Deck createNewDeck(Deck deck) {
+        String sql = " INSERT INTO decks (deck_name, user_id) VALUES (?,?) RETURNING deck_id ";
+        int id = jdbcTemplate.queryForObject(sql, Integer.class, deck.getDeckName(), deck.getUserId());
+        Deck retrievedDeck = getDeckByDeckId(id);
+        return retrievedDeck;
+    }
+
+
+    @Override       // 4D. this will change deck ispublic property to true
+    public Deck makeDeckPublic(Deck deck) {
+        return null;
+    }
+
+    @Override       // 5D. this will delete a deck
+    public Deck deleteDeck(int deckId) {
+        return null;
     }
 
 

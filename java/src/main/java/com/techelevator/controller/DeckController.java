@@ -29,4 +29,12 @@ public class DeckController {
         return deckDao.getDecksByUserId(userId);
     }
 
+    // 3D. this will create a new deck
+    @RequestMapping(path = "/users/decks/create/", method = RequestMethod.POST)
+    public Deck createNewDeck(@RequestBody Deck deck){
+        return deckDao.createNewDeck(deck);
+    }
+
+
+
 }
