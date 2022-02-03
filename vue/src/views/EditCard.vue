@@ -67,7 +67,7 @@ export default {
   components: {
     FooterComponent,
   },
-  name: "new-card",
+  name: "edit-card",
   data() {
     return {
       newCard: {

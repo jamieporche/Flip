@@ -26,11 +26,12 @@ export default {
   background-image: linear-gradient(#e4e0dd, white);
   background-image: ("./assets/cool-background(1).png");
   font-size: 1.5vh;
+  color: #464443;
 }
 #about-us {
   font-size: 2.5vh;
   text-decoration: none;
-  color: #252526;
+  color: #464443;
 }
 #about-us:hover {
   color: #f2ab6d;

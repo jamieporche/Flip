@@ -2,7 +2,16 @@
   <div class="view">
     <nav>
       <router-link :to="{ name: 'new-card' }" class="nav-button"
-        >Create New Deck</router-link
+        >Study Deck</router-link
+      >
+      <router-link :to="{ name: 'home' }" class="nav-button">
+        Add New Card</router-link
+      >
+      <router-link :to="{ name: 'home' }" class="nav-button">
+        Edit Details</router-link
+      >
+      <router-link :to="{ name: 'my-decks' }" class="nav-button">
+        View Your Decks</router-link
       >
       <router-link :to="{ name: 'home' }" class="nav-button">
         View Your Cards</router-link
@@ -12,25 +21,12 @@
       <div id="main">
         <article>
           <div id="deck-container">
-            <div
-              class="deck"
-              v-for="deck in this.$store.state.decks"
-              v-bind:key="deck.id"
-            >
-              <deck-component
-                :name="deck.deckName"
-                :size="deck.cards.length"
-                :createdBy="deck.userName"
-                :id="deck.deckId"
-              />
-              <div class="deck-buttons">
-                <router-link class="deck-button" :to="{ name: 'edit-card' }"
-                  >Edit</router-link
-                >
-                <router-link class="deck-button" :to="{ name: 'edit-card' }"
-                  >Study</router-link
-                >
-              </div>
+            <h1 id="deck-name">{{ this.$store.state.deck.deckName }}</h1>
+            <div class="cards"></div>
+            <div class="card-navigation">
+              <img src="../assets/left.png" id="next-card" />
+              <span># / # </span>
+              <img src="../assets/right.png" id="previous-card" />
             </div>
           </div>
         </article>
@@ -43,28 +39,54 @@
 </template>
 
 <script>
-import DeckComponent from "../components/DeckComponent.vue";
 import FooterComponent from "../components/FooterComponent.vue";
+import deckService from "../services/DeckService.js";
 
 export default {
   components: {
     FooterComponent,
-    DeckComponent,
   },
-  name: "my-decks",
+  name: "deck-details",
   data() {
     return {
-      decks: [],
+      deck: this.$store.state.deck,
+      isLoading: true,
+      deckSize: this.$store.state.deck.cards.length,
+      currentCardIndex: 0,
     };
+  },
+  methods: {
+    changeCard() {},
+    retrieveDeck() {
+      deckService
+        .getDeckById(this.$route.params.id)
+        .then((response) => {
+          this.$store.commit("SET_DECK", response.data);
+          this.isLoading = false;
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 404) {
+            alert(
+              "Deck not available. This deck may have been deleted or you have entered an invalid deck ID."
+            );
+            this.$router.push("/");
+          }
+        });
+    },
   },
   computed: {},
   created() {
-    this.$store.dispatch("LOAD_USERS_DECKS", this.$store.state.user.id);
+    this.retrieveDeck();
   },
 };
 </script>
 
 <style scoped>
+h1 {
+  color: #464443;
+  margin: 0vh auto 0vh 3vh;
+  font-size: 4vh;
+}
 .view {
   min-height: 100vh;
 }
@@ -94,11 +116,15 @@ nav {
   margin: 0vh 3vh 0vh auto;
   padding: 4vh 0vh 4vh 0vh;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-content: space-between;
+  flex-direction: column;
+  align-items: center;
   gap: 7vh 0vh;
   overflow: auto;
+}
+.card-navigation {
+  width: 20vh;
+  display: flex;
+  justify-content: space-between;
 }
 .deck {
   width: 60vh;
@@ -110,9 +136,6 @@ nav {
   padding: 1.5vh 5vh;
   border-radius: 20px;
   text-decoration: none;
-}
-.deck-button:hover {
-  background-color: rgb(36, 66, 36);
 }
 .deck-buttons {
   display: flex;

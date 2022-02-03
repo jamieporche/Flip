@@ -2,8 +2,11 @@ import axios from 'axios';
 
 export default {
 
-  getDecksByUser() {
-    return axios.get();
+  getDecksByUser(userId) {
+    return axios.get(`/users/deck/${userId}`);
+  },
+  getDeckById(deckId) {
+    return axios.get(`/deck/${deckId}/`);
   },
 
 }
