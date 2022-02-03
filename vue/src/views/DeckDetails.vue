@@ -21,12 +21,52 @@
       <div id="main">
         <article>
           <div id="deck-container">
-            <h1 id="deck-name">{{ this.$store.state.deck.deckName }}</h1>
-            <div class="cards"></div>
+            <h1>{{ deck.deckName }}</h1>
+            <div class="cards">
+              <flashcard-component
+                :front="
+                  this.$store.state.deck.cards[currentCardIndex].frontOfCard
+                "
+                :back="
+                  this.$store.state.deck.cards[currentCardIndex].backOfCard
+                "
+                class="flashcard-component"
+              />
+            </div>
             <div class="card-navigation">
-              <img src="../assets/left.png" id="next-card" />
-              <span># / # </span>
-              <img src="../assets/right.png" id="previous-card" />
+              <img
+                src="../assets/left.png"
+                id="previous-card"
+                v-on:click="changeCard($event)"
+              />
+              <span>
+                {{ currentCardIndex + 1 }} /
+                {{ this.$store.state.deck.cards.length }}
+              </span>
+              <img
+                src="../assets/right.png"
+                id="next-card"
+                v-on:click="changeCard($event)"
+              />
+            </div>
+            <div id="deck-info">
+              <p id="created-by">
+                Created by <span class="bold">{{ deck.userName }}</span>
+              </p>
+              <p id="public">{{ deck.isPublic ? "Public" : "Not Public" }}</p>
+              <p id="description">{{ deck.description }}</p>
+            </div>
+            <h3>Cards in this Deck</h3>
+            <div class="card-list">
+              <div
+                v-for="card in this.$store.state.deck.cards"
+                v-bind:key="card.id"
+                class="card-list-item"
+              >
+                <p class="front">{{ card.frontOfCard }}</p>
+                <hr />
+                <p class="back">{{ card.backOfCard }}</p>
+              </div>
             </div>
           </div>
         </article>
@@ -39,29 +79,47 @@
 </template>
 
 <script>
+import FlashcardComponent from "../components/FlashcardComponent.vue";
 import FooterComponent from "../components/FooterComponent.vue";
 import deckService from "../services/DeckService.js";
 
 export default {
   components: {
     FooterComponent,
+    FlashcardComponent,
   },
   name: "deck-details",
   data() {
     return {
       deck: this.$store.state.deck,
       isLoading: true,
-      deckSize: this.$store.state.deck.cards.length,
       currentCardIndex: 0,
     };
   },
   methods: {
-    changeCard() {},
+    changeCard(event) {
+      const maxIndex = this.$store.state.deck.cards.length - 1;
+
+      if (event.target.id === "previous-card") {
+        if (this.currentCardIndex > 0) {
+          this.currentCardIndex--;
+        } else {
+          this.currentCardIndex = maxIndex;
+        }
+      } else if (event.target.id === "next-card") {
+        if (this.currentCardIndex < maxIndex) {
+          this.currentCardIndex++;
+        } else {
+          this.currentCardIndex = 0;
+        }
+      }
+    },
     retrieveDeck() {
       deckService
         .getDeckById(this.$route.params.id)
         .then((response) => {
           this.$store.commit("SET_DECK", response.data);
+          this.deck = response.data;
           this.isLoading = false;
         })
         .catch((error) => {
@@ -86,6 +144,11 @@ h1 {
   color: #464443;
   margin: 0vh auto 0vh 3vh;
   font-size: 4vh;
+}
+h3 {
+  margin: 0vh auto 0vh 3vh;
+  color: #464443;
+  font-size: 3vh;
 }
 .view {
   min-height: 100vh;
@@ -118,13 +181,21 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 7vh 0vh;
+  gap: 5vh 0vh;
   overflow: auto;
+}
+#deck-info {
+  margin: 0vh auto 0vh 3vh;
+  font-size: 2.2vh;
 }
 .card-navigation {
   width: 20vh;
   display: flex;
   justify-content: space-between;
+}
+.flashcard-component {
+  height: 24vh;
+  width: 40vh;
 }
 .deck {
   width: 60vh;
@@ -169,6 +240,32 @@ nav {
 #main-body {
   display: flex;
   flex-direction: column;
+}
+.card-list {
+  margin: 0vh auto 0vh 3vh;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+.card-list-item {
+  /* padding: 3vh; */
+  border-radius: 20px;
+  background-color: white;
+  border: solid #b4b0ad 1px;
+  display: flex;
+  justify-content: center;
+}
+.front {
+  width: 30%;
+  padding: 3vh;
+}
+.back {
+  padding: 3vh;
+  width: 65%;
+}
+.bold {
+  font-weight: bold;
 }
 .footer {
   z-index: 3;
