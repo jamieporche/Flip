@@ -11,43 +11,25 @@
     <article>
       <div id="form-background">
         <div id="form-container">
-          <form>
-            <h2>Create a new Card</h2>
-            <label for="frontOfCard">Question</label>
+          <div class="form">
+            <h2>Create a new Deck</h2>
+            <label for="frontOfCard">Deck Name</label>
             <input
               type="text"
-              id="frontOfCard"
-              name="frontOfCard"
-              placeholder="Question"
+              id="deckName"
+              name="deckName"
+              placeholder="Deck Name"
               class="input"
-              v-model="card.frontOfCard"
-              required
-            />
-            <label for="backOfCard">Answer</label>
-            <textarea
-              id="backOfCard"
-              name="backOfCard"
-              rows="5"
-              cols="50"
-              class="input"
-              v-model="card.backOfCard"
-              placeholder="Answer"
-              required
-            ></textarea>
-            <label for="tags">Tags</label>
-            <input
-              type="text"
-              id="tags"
-              name="tags"
-              placeholder="Tags"
-              class="input"
-              v-model="card.tags"
+              v-model="newDeck.deckName"
               required
             />
             <div id="save-buttons">
-              <button id="save" v-on:click.prevent="editCard">Save</button>
+              <button id="save" v-on:click.prevent="createDeck">Save</button>
+              <button id="save-and-new" v-on:click.prevent="createDeckAndReset">
+                Save and New
+              </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </article>
@@ -59,31 +41,47 @@
 
 <script>
 import FooterComponent from "../components/FooterComponent.vue";
-import cardService from "../services/CardService.js";
 
 export default {
   components: {
     FooterComponent,
   },
-  name: "edit-card",
+  name: "new-deck",
   data() {
     return {
-      card: {},
+      newDeck: {
+        deckName: "",
+        userId: this.$store.state.user.id,
+      },
     };
   },
   methods: {
-    editCard() {
-      const editedCard = this.card;
-      this.$store.dispatch("EDIT_CARD", editedCard);
-      this.$router.push({ name: "home" });
+    createDeck() {
+      const newDeck = {
+        ...this.newDeck,
+      };
+
+      this.$store.dispatch("CREATE_NEW_DECK", newDeck);
+
+      this.$router.push({ name: "my-decks" });
+
+      // setTimeout(() => {
+      //   this.$router.push({ name: "my-decks" });
+      // }, 4000);
+    },
+    createDeckAndReset() {
+      const newDeck = {
+        ...this.newDeck,
+      };
+      this.$store.dispatch("CREATE_NEW_DECK", newDeck, false);
+      this.newDeck = {
+        deckName: "",
+        userId: this.$store.state.user.id,
+      };
     },
   },
   computed: {},
-  created() {
-    cardService.getCardById(this.$route.params.id).then((response) => {
-      this.card = response.data;
-    });
-  },
+  created() {},
 };
 </script>
 
@@ -122,10 +120,10 @@ nav {
   margin: 0vh 3vh 3vh auto;
 }
 #form-background {
-  min-height: 68vh;
+  min-height: 70vh;
   margin: 20vh 0px 0px 0px;
 }
-form {
+.form {
   display: flex;
   flex-direction: column;
   padding: 10vh;

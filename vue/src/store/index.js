@@ -23,6 +23,7 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     cards: [],
+    card: {},
     decks: [],
     deck: {
       deckId: '',
@@ -52,15 +53,33 @@ export default new Vuex.Store({
     SET_CARDS(state, cards) {
       state.cards = cards;
     },
+    SET_CARD(state, card) {
+      state.card = card;
+    },
     ADD_CARD(state, card) {
       state.cards.push(card);
     },
     SET_DECKS(state, decks) {
       state.decks = decks;
+      console.log("Last deck: " + state.decks[state.decks.length - 1].deckName)
     },
     SET_DECK(state, deck) {
       state.deck = deck;
-    }
+    },
+    ADD_DECK(state, deck) {
+      // console.log("decks before: " + state.decks);
+      state.decks.push(deck);
+      console.log(deck.deckName);
+      // console.log("decks after: " + state.decks);
+      // return "Deck added";
+    },
+    EDIT_CARD(state, editedCard) {
+      for (let i = 0; i < state.cards.length; i++) {
+        if (state.cards[i].cardId === editedCard.cardId) {
+          state.cards[i] = editedCard;
+        }
+      }
+    }, 
   },
   actions: {
     LOAD_USERS_CARDS(context, userId) {
@@ -79,10 +98,24 @@ export default new Vuex.Store({
       });
     },
     LOAD_USERS_DECKS(context, userId) {
+      console.log("loading users decks");
       deckService.getDecksByUser(userId).then(response => {
         const decks = response.data;
         context.commit('SET_DECKS', decks);
-      })
-    }
+      });
+    },
+    CREATE_NEW_DECK(context, deck) {
+      deckService.create(deck).then(response => {
+          const newDeck = response.data;
+          context.commit('ADD_DECK', newDeck);
+          console.log("Deck created");
+      });
+    },
+    EDIT_CARD(context, card) {
+      cardService.editCard(card).then(response => {
+        const editedCard = response.data;
+        context.commit('EDIT_CARD', editedCard);
+      });
+    },
   }
 })

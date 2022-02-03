@@ -1,7 +1,7 @@
 <template>
   <div class="view">
     <nav>
-      <router-link :to="{ name: 'new-card' }" class="nav-button"
+      <router-link :to="{ name: 'new-deck' }" class="nav-button"
         >Create New Deck</router-link
       >
       <router-link :to="{ name: 'home' }" class="nav-button">
@@ -12,19 +12,21 @@
       <div id="main">
         <article>
           <div id="deck-container">
+            <p>{{ this.$store.state.decks }}</p>
             <div
               class="deck"
               v-for="deck in this.$store.state.decks"
-              v-bind:key="deck.id"
+              v-bind:key="deck.deckId"
             >
               <deck-component
+                class="deck-card"
                 :name="deck.deckName"
                 :size="deck.cards.length"
                 :createdBy="deck.userName"
                 :id="deck.deckId"
               />
               <div class="deck-buttons">
-                <router-link class="deck-button" :to="{ name: 'edit-card' }"
+                <router-link class="deck-button" :to="{ name: 'home' }"
                   >Edit</router-link
                 >
                 <router-link
@@ -58,9 +60,7 @@ export default {
   },
   name: "my-decks",
   data() {
-    return {
-      decks: [],
-    };
+    return {};
   },
   computed: {},
   created() {
@@ -107,6 +107,9 @@ nav {
 }
 .deck {
   width: 60vh;
+}
+.deck-card {
+  width: 100%;
 }
 .deck-button {
   border: none;

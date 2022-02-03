@@ -8,5 +8,8 @@ export default {
   getDeckById(deckId) {
     return axios.get(`/deck/${deckId}/`);
   },
+  create(deck) {
+    return axios.post("/users/decks/create/", deck);
+  },
 
 }
