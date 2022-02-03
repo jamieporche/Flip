@@ -27,7 +27,12 @@
                 <router-link class="deck-button" :to="{ name: 'edit-card' }"
                   >Edit</router-link
                 >
-                <router-link class="deck-button" :to="{ name: 'edit-card' }"
+                <router-link
+                  class="deck-button"
+                  :to="{
+                    name: 'study-session',
+                    params: { deckId: deck.deckId },
+                  }"
                   >Study</router-link
                 >
               </div>

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcCardDao implements CardDao {
+public class    JdbcCardDao implements CardDao {
     private JdbcTemplate jdbcTemplate;
 
     public JdbcCardDao(JdbcTemplate jdbcTemplate) {

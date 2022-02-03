@@ -4,7 +4,7 @@
       <router-link :to="{ name: 'new-card' }" class="nav-button"
         >Shuffle Deck</router-link
       >
-      <router-link :to="{ name: 'home' }" class="nav-button">
+      <router-link :to="{ name: 'results' }" class="nav-button">
         End Study Session</router-link
       >
     </nav>
@@ -81,7 +81,7 @@ export default {
         if (this.currentCardIndex < maxIndex) {
           this.currentCardIndex++;
         } else {
-          this.currentCardIndex = 0;
+          this.$router.push({ name: "results" });
         }
       }
     },
