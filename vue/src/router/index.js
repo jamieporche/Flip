@@ -9,6 +9,7 @@ import NewCard from '../views/NewCard.vue'
 import MyDecks from '../views/MyDecks.vue'
 import EditCard from '../views/EditCard.vue'
 import DeckDetails from '../views/DeckDetails.vue'
+import StudySession from '../views/StudySession.vue'
 
 Vue.use(Router)
 
@@ -87,6 +88,14 @@ const router = new Router({
       component: EditCard,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: "/study-session/:deckId",
+      name: "study-session",
+      component: StudySession,
+      meta: {
+        requiresAuth: false
       }
     }
   ]

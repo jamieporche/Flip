@@ -18,6 +18,7 @@
           <input
             type="text"
             name="search"
+            id="search-bar"
             v-model="filter"
             placeholder="Search cards"
           />
@@ -214,6 +215,9 @@ select {
   color: grey;
   font-size: 16px;
 }
+select:focus {
+  border-color: #f2ab6d;
+}
 option {
   color: grey;
   padding: 12px 10px 12px 10px;
@@ -246,5 +250,8 @@ input[type="text"] {
 .no-cards {
   font-size: 10vh;
   text-align: center;
+}
+input[name="search"]:focus {
+  border-color: #f2ab6d;
 }
 </style>

@@ -1,29 +1,17 @@
 <template>
   <div class="view">
     <nav>
-      <router-link
-        :to="{ name: 'study-session', params: { deckId: deck.deckId } }"
-        class="nav-button"
-        >Study Deck</router-link
+      <router-link :to="{ name: 'new-card' }" class="nav-button"
+        >Shuffle Deck</router-link
       >
       <router-link :to="{ name: 'home' }" class="nav-button">
-        Add New Card</router-link
-      >
-      <router-link :to="{ name: 'home' }" class="nav-button">
-        Edit Details</router-link
-      >
-      <router-link :to="{ name: 'my-decks' }" class="nav-button">
-        View Your Decks</router-link
-      >
-      <router-link :to="{ name: 'home' }" class="nav-button">
-        View Your Cards</router-link
+        End Study Session</router-link
       >
     </nav>
     <div id="main-body">
       <div id="main">
         <article>
           <div id="deck-container">
-            <h1>{{ deck.deckName }}</h1>
             <div class="cards">
               <flashcard-component
                 :front="
@@ -51,25 +39,6 @@
                 v-on:click="changeCard($event)"
               />
             </div>
-            <div id="deck-info">
-              <p id="created-by">
-                Created by <span class="bold">{{ deck.userName }}</span>
-              </p>
-              <p id="public">{{ deck.isPublic ? "Public" : "Not Public" }}</p>
-              <p id="description">{{ deck.description }}</p>
-            </div>
-            <h3>Cards in this Deck</h3>
-            <div class="card-list">
-              <div
-                v-for="card in this.$store.state.deck.cards"
-                v-bind:key="card.id"
-                class="card-list-item"
-              >
-                <p class="front">{{ card.frontOfCard }}</p>
-                <hr />
-                <p class="back">{{ card.backOfCard }}</p>
-              </div>
-            </div>
           </div>
         </article>
       </div>
@@ -90,7 +59,7 @@ export default {
     FooterComponent,
     FlashcardComponent,
   },
-  name: "deck-details",
+  name: "study-session",
   data() {
     return {
       deck: this.$store.state.deck,
@@ -118,7 +87,7 @@ export default {
     },
     retrieveDeck() {
       deckService
-        .getDeckById(this.$route.params.id)
+        .getDeckById(this.$route.params.deckId)
         .then((response) => {
           this.$store.commit("SET_DECK", response.data);
           this.deck = response.data;
@@ -172,7 +141,7 @@ nav {
   justify-content: flex-start;
 }
 #deck-container {
-  min-height: 60vh;
+  min-height: 67vh;
   width: 76%;
   min-width: 76vw;
   border-radius: 20px;
@@ -184,11 +153,9 @@ nav {
   flex-direction: column;
   align-items: center;
   gap: 5vh 0vh;
-  overflow: auto;
 }
-#deck-info {
-  margin: 0vh auto 0vh 3vh;
-  font-size: 2.2vh;
+.cards {
+  align-self: center;
 }
 .card-navigation {
   width: 20vh;
@@ -196,23 +163,11 @@ nav {
   justify-content: space-between;
 }
 .flashcard-component {
-  height: 24vh;
-  width: 40vh;
+  height: 45vh;
+  width: 75vh;
 }
 .deck {
   width: 60vh;
-}
-.deck-button {
-  border: none;
-  color: white;
-  background-color: rgb(49, 92, 49);
-  padding: 1.5vh 5vh;
-  border-radius: 20px;
-  text-decoration: none;
-}
-.deck-buttons {
-  display: flex;
-  justify-content: space-between;
 }
 .nav-button {
   background-color: #a66f5b;
@@ -242,32 +197,6 @@ nav {
 #main-body {
   display: flex;
   flex-direction: column;
-}
-.card-list {
-  margin: 0vh auto 0vh 3vh;
-  width: 95%;
-  display: flex;
-  flex-direction: column;
-  gap: 2vh;
-}
-.card-list-item {
-  /* padding: 3vh; */
-  border-radius: 20px;
-  background-color: white;
-  border: solid #b4b0ad 1px;
-  display: flex;
-  justify-content: center;
-}
-.front {
-  width: 30%;
-  padding: 3vh;
-}
-.back {
-  padding: 3vh;
-  width: 65%;
-}
-.bold {
-  font-weight: bold;
 }
 .footer {
   z-index: 3;

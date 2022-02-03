@@ -134,6 +134,9 @@ input {
   border: none;
   border-radius: 10px;
 }
+input:focus {
+  border-color: #f2ab6d;
+}
 #register {
   align-self: end;
   text-decoration: none;

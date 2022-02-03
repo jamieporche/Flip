@@ -1,8 +1,12 @@
 <template>
   <div class="scene">
     <div class="flashcard" v-on:click.stop="flip($event)">
-      <div class="card__face card__face--front">Question: {{ this.front }}</div>
-      <div class="card__face card__face--back">Answer: {{ this.back }}</div>
+      <div class="card__face card__face--front">
+        <p class="content">Question: {{ this.front }}</p>
+      </div>
+      <div class="card__face card__face--back">
+        <p class="content">Answer: {{ this.back }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -13,7 +17,13 @@ export default {
   props: ["front", "back"],
   methods: {
     flip(event) {
-      event.target.parentElement.classList.toggle("is-flipped");
+      console.log(event.target.tagName);
+      if (event.target.tagName === "DIV") {
+        event.target.parentElement.classList.toggle("is-flipped");
+      }
+      if (event.target.tagName === "P") {
+        event.target.parentElement.parentElement.classList.toggle("is-flipped");
+      }
     },
   },
 };
@@ -28,18 +38,19 @@ export default {
 .flashcard {
   width: 100%;
   height: 100%;
-  position: relative;
   transition: transform 1s;
   transform-style: preserve-3d;
+}
+.content {
+  padding: 0vh 4vh;
 }
 .card__face {
   position: absolute;
   height: 100%;
-  width: 80%;
+  width: 100%;
   backface-visibility: hidden;
   text-align: center;
   font-size: 2.2vh;
-  padding: 0vh 4vh;
 }
 .card__face--front {
   background: white;

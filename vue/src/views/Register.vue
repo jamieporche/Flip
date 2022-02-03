@@ -148,6 +148,9 @@ input {
   padding: 1vh;
   border: none;
 }
+input:focus {
+  border-color: #f2ab6d;
+}
 #login {
   align-self: end;
   text-decoration: none;
