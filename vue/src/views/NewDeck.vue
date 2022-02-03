@@ -60,7 +60,14 @@ export default {
       const newDeck = {
         ...this.newDeck,
       };
-      this.$store.dispatch("CREATE_NEW_DECK", newDeck, true);
+
+      this.$store.dispatch("CREATE_NEW_DECK", newDeck);
+
+      this.$router.push({ name: "my-decks" });
+
+      // setTimeout(() => {
+      //   this.$router.push({ name: "my-decks" });
+      // }, 4000);
     },
     createDeckAndReset() {
       const newDeck = {

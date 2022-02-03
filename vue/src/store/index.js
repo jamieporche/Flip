@@ -23,6 +23,7 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     cards: [],
+    card: {},
     decks: [],
     deck: {
       deckId: '',
@@ -52,6 +53,9 @@ export default new Vuex.Store({
     SET_CARDS(state, cards) {
       state.cards = cards;
     },
+    SET_CARD(state, card) {
+      state.card = card;
+    },
     ADD_CARD(state, card) {
       state.cards.push(card);
     },
@@ -63,12 +67,19 @@ export default new Vuex.Store({
       state.deck = deck;
     },
     ADD_DECK(state, deck) {
-      console.log("decks before: " + state.decks);
+      // console.log("decks before: " + state.decks);
       state.decks.push(deck);
       console.log(deck.deckName);
-      console.log("decks after: " + state.decks);
-      return "Deck added";
-    }
+      // console.log("decks after: " + state.decks);
+      // return "Deck added";
+    },
+    EDIT_CARD(state, editedCard) {
+      for (let i = 0; i < state.cards.length; i++) {
+        if (state.cards[i].cardId === editedCard.cardId) {
+          state.cards[i] = editedCard;
+        }
+      }
+    }, 
   },
   actions: {
     LOAD_USERS_CARDS(context, userId) {
@@ -91,18 +102,20 @@ export default new Vuex.Store({
       deckService.getDecksByUser(userId).then(response => {
         const decks = response.data;
         context.commit('SET_DECKS', decks);
-        console.log(this.state.decks);
       });
     },
-    CREATE_NEW_DECK(context, deck, isRouteToDecks) {
+    CREATE_NEW_DECK(context, deck) {
       deckService.create(deck).then(response => {
           const newDeck = response.data;
           context.commit('ADD_DECK', newDeck);
-            console.log("Adding deck in create new deck");
-            if (isRouteToDecks) {
-              this.$router.push({ name: "my-decks" });
-            }
+          console.log("Deck created");
       });
-    }
+    },
+    EDIT_CARD(context, card) {
+      cardService.editCard(card).then(response => {
+        const editedCard = response.data;
+        context.commit('EDIT_CARD', editedCard);
+      });
+    },
   }
 })

@@ -20,7 +20,7 @@
               name="frontOfCard"
               placeholder="Question"
               class="input"
-              v-model="newCard.frontOfCard"
+              v-model="card.frontOfCard"
               required
             />
             <label for="backOfCard">Answer</label>
@@ -30,7 +30,7 @@
               rows="5"
               cols="50"
               class="input"
-              v-model="newCard.backOfCard"
+              v-model="card.backOfCard"
               placeholder="Answer"
               required
             ></textarea>
@@ -41,14 +41,11 @@
               name="tags"
               placeholder="Tags"
               class="input"
-              v-model="newCard.tags"
+              v-model="card.tags"
               required
             />
             <div id="save-buttons">
-              <button id="save" v-on:click.prevent="createCard">Save</button>
-              <button id="save-and-new" v-on:click.prevent="createCardAndReset">
-                Save and New
-              </button>
+              <button id="save" v-on:click.prevent="editCard">Save</button>
             </div>
           </form>
         </div>
@@ -62,6 +59,7 @@
 
 <script>
 import FooterComponent from "../components/FooterComponent.vue";
+import cardService from "../services/CardService.js";
 
 export default {
   components: {
@@ -70,37 +68,22 @@ export default {
   name: "edit-card",
   data() {
     return {
-      newCard: {
-        frontOfCard: "",
-        backOfCard: "",
-        tags: "",
-        userId: this.$store.state.user.id,
-      },
+      card: {},
     };
   },
   methods: {
-    createCard() {
-      const newCard = {
-        ...this.newCard,
-      };
-      this.$store.dispatch("CREATE_NEW_CARD", newCard);
+    editCard() {
+      const editedCard = this.card;
+      this.$store.dispatch("EDIT_CARD", editedCard);
       this.$router.push({ name: "home" });
-    },
-    createCardAndReset() {
-      const newCard = {
-        ...this.newCard,
-      };
-      this.$store.dispatch("CREATE_NEW_CARD", newCard);
-      this.newCard = {
-        frontOfCard: "",
-        backOfCard: "",
-        tags: "",
-        userId: this.$store.state.user.id,
-      };
     },
   },
   computed: {},
-  created() {},
+  created() {
+    cardService.getCardById(this.$route.params.id).then((response) => {
+      this.card = response.data;
+    });
+  },
 };
 </script>
 
