@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.model.Card;
 import com.techelevator.model.Deck;
 import org.apache.coyote.http11.filters.SavedRequestInputFilter;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -43,7 +44,6 @@ public class JdbcDeckDao implements DeckDao {
         return deck;
     }
 
-
     @Override           // 2D. this pulls all the decks that the user has made
     public List<Deck> getDecksByUserId(int userId) {
         List<Deck> deckList = new ArrayList<>();
@@ -68,17 +68,36 @@ public class JdbcDeckDao implements DeckDao {
         return retrievedDeck;
     }
 
-
-    @Override       // 4D. this will change deck ispublic property to true
-    public Deck makeDeckPublic(Deck deck) {
-        return null;
+    @Override       // 4D. this will get public decks
+    public List<Deck> getPublicDecks() {
+        List<Deck> deckList = new ArrayList<>();
+        List<Integer> deckIds = new ArrayList<>();
+        String sql = "SELECT deck_id FROM decks WHERE ispublic = true";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while (results.next()) {
+            deckIds.add(mapIdsToList(results));
+        }
+        for (int i = 0; i < deckIds.size(); i++) {
+            Deck deck = getDeckByDeckId(deckIds.get(i));
+            deckList.add(deck);
+        }
+        return deckList;
     }
 
     @Override       // 5D. this will delete a deck
-    public Deck deleteDeck(int deckId) {
-        return null;
+    public void deleteDeck(Deck deck) {
+        String sql = "DELETE FROM card_deck WHERE deck_id = ?";
+        jdbcTemplate.update(sql, deck.getDeckId());
+        String sql2 = "DELETE FROM decks WHERE deck_id = ?";
+        jdbcTemplate.update(sql2, deck.getDeckId());
     }
 
+    @Override       // 6D. this will update an existing deck
+    public Deck updateDeck(Deck deck) {
+        String sql = "UPDATE decks SET deck_name = ?, user_id = ?, ispublic = ? WHERE deck_id = ?";
+        jdbcTemplate.update(sql, deck.getDeckName(), deck.getUserId(), deck.isPublic(), deck.getDeckId());
+        return deck;
+    }
 
     // Helper Method for mapping/building decks
     private Deck mapRowToDeck(SqlRowSet rowSet) {
