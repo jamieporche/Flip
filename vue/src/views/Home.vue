@@ -10,12 +10,18 @@
     </nav>
     <div id="main-body">
       <div id="main">
-        <input
-          type="text"
-          name="search"
-          v-model="filter"
-          placeholder="Search cards by tag"
-        />
+        <div id="search">
+          <select v-model="searchBy">
+            <option value="tags">Search Tags</option>
+            <option value="content">Search Card Content</option>
+          </select>
+          <input
+            type="text"
+            name="search"
+            v-model="filter"
+            placeholder="Search cards"
+          />
+        </div>
         <article>
           <div id="card-container">
             <div id="card-list-empty" v-if="filteredCards.length == 0">
@@ -68,18 +74,18 @@ export default {
   data() {
     return {
       filter: "",
+      searchBy: "tags",
       cards: [],
     };
   },
   computed: {
     filteredCards() {
       if (this.filter !== "") {
-        console.log(this.filter.toLowerCase());
-        return this.$store.state.cards.filter((card) => {
-          if (card.tags !== null) {
-            return card.tags.toLowerCase().includes(this.filter.toLowerCase());
-          }
-        });
+        if (this.searchBy === "tags") {
+          return this.filterByTags();
+        } else {
+          return this.filterByContent();
+        }
       } else {
         return this.$store.state.cards;
       }
@@ -87,6 +93,28 @@ export default {
   },
   created() {
     this.$store.dispatch("LOAD_USERS_CARDS", this.$store.state.user.id);
+  },
+  methods: {
+    filterByTags() {
+      return this.$store.state.cards.filter((card) => {
+        if (card.tags !== null) {
+          return card.tags.toLowerCase().includes(this.filter.toLowerCase());
+        }
+      });
+    },
+    filterByContent() {
+      return this.$store.state.cards.filter((card) => {
+        if (card.tags !== null) {
+          let isFrontMatch = card.frontOfCard
+            .toLowerCase()
+            .includes(this.filter.toLowerCase());
+          let isBackMatch = card.backOfCard
+            .toLowerCase()
+            .includes(this.filter.toLowerCase());
+          return isFrontMatch || isBackMatch;
+        }
+      });
+    },
   },
 };
 </script>
@@ -170,12 +198,33 @@ nav {
   display: flex;
   flex-direction: column;
 }
-input[type="text"] {
+#search {
+  width: 49%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+select {
   width: 30%;
-  right: 0;
+  padding: 12px 5px 12px 10px;
+  margin: 1vh 0vh 2vh 0vh;
+  background-color: #f8f7f6;
+  border: 2px solid #ccc;
+  border-radius: 20px 0px 0px 20px;
+  color: grey;
+  font-size: 16px;
+}
+option {
+  color: grey;
+  padding: 12px 10px 12px 10px;
+  border-radius: 20px;
+  font-size: 16px;
+}
+input[type="text"] {
+  width: 70%;
   box-sizing: border-box;
   border: 2px solid #ccc;
-  border-radius: 20px;
+  border-radius: 0px 20px 20px 0px;
   font-size: 16px;
   background-color: white;
   background-image: url("../assets/icons8-search-32.png");
