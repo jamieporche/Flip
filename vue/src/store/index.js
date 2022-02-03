@@ -57,9 +57,17 @@ export default new Vuex.Store({
     },
     SET_DECKS(state, decks) {
       state.decks = decks;
+      console.log("Last deck: " + state.decks[state.decks.length - 1].deckName)
     },
     SET_DECK(state, deck) {
       state.deck = deck;
+    },
+    ADD_DECK(state, deck) {
+      console.log("decks before: " + state.decks);
+      state.decks.push(deck);
+      console.log(deck.deckName);
+      console.log("decks after: " + state.decks);
+      return "Deck added";
     }
   },
   actions: {
@@ -79,10 +87,22 @@ export default new Vuex.Store({
       });
     },
     LOAD_USERS_DECKS(context, userId) {
+      console.log("loading users decks");
       deckService.getDecksByUser(userId).then(response => {
         const decks = response.data;
         context.commit('SET_DECKS', decks);
-      })
+        console.log(this.state.decks);
+      });
+    },
+    CREATE_NEW_DECK(context, deck, isRouteToDecks) {
+      deckService.create(deck).then(response => {
+          const newDeck = response.data;
+          context.commit('ADD_DECK', newDeck);
+            console.log("Adding deck in create new deck");
+            if (isRouteToDecks) {
+              this.$router.push({ name: "my-decks" });
+            }
+      });
     }
   }
 })

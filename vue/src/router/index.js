@@ -11,6 +11,7 @@ import EditCard from '../views/EditCard.vue'
 import DeckDetails from '../views/DeckDetails.vue'
 import StudySession from '../views/StudySession.vue'
 import SessionResults from '../views/SessionResults.vue'
+import NewDeck from '../views/NewDeck.vue'
 
 Vue.use(Router)
 
@@ -71,6 +72,14 @@ const router = new Router({
       path: "/my-decks",
       name: "my-decks",
       component: MyDecks,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/new-deck",
+      name: "new-deck",
+      component: NewDeck,
       meta: {
         requiresAuth: true
       }
