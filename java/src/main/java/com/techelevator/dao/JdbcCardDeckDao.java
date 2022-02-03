@@ -19,11 +19,12 @@ public class JdbcCardDeckDao implements CardDeckDao{
         jdbcTemplate.update(sql, cardDecks.getDeckId(), cardDecks.getCardId() );
         return cardDecks;
     }
-                    ///// this method is still throwing an error for null value for the Ids, still working on it
 
 
-    @Override
-    public CardDecks removeCardFromDeck(Deck deck) {
-        return null;
+
+    @Override       // 2CD. this will remove a card from deck
+    public void removeCardFromDeck(CardDecks cardDecks) {
+        String sql = "DELETE FROM card_deck WHERE deck_id = ? AND card_id = ?";
+        jdbcTemplate.update(sql, cardDecks.getDeckId(), cardDecks.getCardId());
     }
 }
