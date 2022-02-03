@@ -10,6 +10,7 @@ import MyDecks from '../views/MyDecks.vue'
 import EditCard from '../views/EditCard.vue'
 import DeckDetails from '../views/DeckDetails.vue'
 import StudySession from '../views/StudySession.vue'
+import SessionResults from '../views/SessionResults.vue'
 
 Vue.use(Router)
 
@@ -96,6 +97,14 @@ const router = new Router({
       component: StudySession,
       meta: {
         requiresAuth: false
+      }
+    },
+    {
+      path: "/results",
+      name: "results",
+      component: SessionResults,
+      meta: {
+        requiresAuth: true
       }
     }
   ]
