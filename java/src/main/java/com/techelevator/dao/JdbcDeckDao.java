@@ -53,8 +53,8 @@ public class JdbcDeckDao implements DeckDao {
         while (results.next()){
             deckIds.add(mapIdsToList(results));
         }
-        for (int i = 1; i <= deckIds.size(); i++){
-            Deck deck = getDeckByDeckId(i);
+        for (int i = 0; i < deckIds.size(); i++){
+            Deck deck = getDeckByDeckId(deckIds.get(i));
             deckList.add(deck);
         }
         return deckList;
