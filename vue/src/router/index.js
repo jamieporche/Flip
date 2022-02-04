@@ -12,6 +12,7 @@ import DeckDetails from '../views/DeckDetails.vue'
 import StudySession from '../views/StudySession.vue'
 import SessionResults from '../views/SessionResults.vue'
 import NewDeck from '../views/NewDeck.vue'
+import AddCard from '../views/AddCard.vue'
 
 Vue.use(Router)
 
@@ -112,6 +113,14 @@ const router = new Router({
       path: "/results",
       name: "results",
       component: SessionResults,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/decks/:id/add-card",
+      name: "add-card",
+      component: AddCard,
       meta: {
         requiresAuth: true
       }

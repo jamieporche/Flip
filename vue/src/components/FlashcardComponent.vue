@@ -17,7 +17,6 @@ export default {
   props: ["front", "back"],
   methods: {
     flip(event) {
-      console.log(event.target.tagName);
       if (event.target.tagName === "DIV") {
         event.target.parentElement.classList.toggle("is-flipped");
       }

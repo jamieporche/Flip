@@ -6,7 +6,10 @@
         class="nav-button"
         >Study Deck</router-link
       >
-      <router-link :to="{ name: 'home' }" class="nav-button">
+      <router-link
+        :to="{ name: 'add-card', params: { id: deck.deckId } }"
+        class="nav-button"
+      >
         Add New Card</router-link
       >
       <router-link :to="{ name: 'home' }" class="nav-button">
