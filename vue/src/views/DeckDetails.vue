@@ -26,6 +26,7 @@
             <h1>{{ deck.deckName }}</h1>
             <div class="cards">
               <flashcard-component
+                v-if="deck.cards.length > 0"
                 :front="
                   this.$store.state.deck.cards[currentCardIndex].frontOfCard
                 "
@@ -35,7 +36,7 @@
                 class="flashcard-component"
               />
             </div>
-            <div class="card-navigation">
+            <div class="card-navigation" v-if="deck.cards.length > 0">
               <img
                 src="../assets/left.png"
                 id="previous-card"
@@ -59,7 +60,7 @@
               <p id="description">{{ deck.description }}</p>
             </div>
             <h3>Cards in this Deck</h3>
-            <div class="card-list">
+            <div class="card-list" v-if="deck.cards.length > 0">
               <div
                 v-for="card in this.$store.state.deck.cards"
                 v-bind:key="card.id"

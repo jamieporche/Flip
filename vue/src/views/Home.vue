@@ -156,7 +156,7 @@ nav {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-between;
-  gap: 7vh 0vh;
+  gap: 7vh 3vh;
   overflow: auto;
 }
 .card-button {

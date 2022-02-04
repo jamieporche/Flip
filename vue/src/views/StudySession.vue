@@ -11,7 +11,7 @@
     <div id="main-body">
       <div id="main">
         <article>
-          <div id="deck-container">
+          <div id="study-container">
             <div class="cards">
               <flashcard-component
                 :front="
@@ -23,21 +23,15 @@
                 class="flashcard-component"
               />
             </div>
-            <div class="card-navigation">
-              <img
-                src="../assets/left.png"
-                id="previous-card"
-                v-on:click="changeCard($event)"
-              />
+            <div class="study-buttons" v-on:click.stop="changeCard($event)">
+              <button id="mark-incorrect">Incorrect</button>
               <span>
                 {{ currentCardIndex + 1 }} /
                 {{ this.$store.state.deck.cards.length }}
               </span>
-              <img
-                src="../assets/right.png"
-                id="next-card"
-                v-on:click="changeCard($event)"
-              />
+              <button id="mark-correct" v-on:click.stop="changeCard($event)">
+                Correct
+              </button>
             </div>
           </div>
         </article>
@@ -71,18 +65,26 @@ export default {
     changeCard(event) {
       const maxIndex = this.$store.state.deck.cards.length - 1;
 
-      if (event.target.id === "previous-card") {
-        if (this.currentCardIndex > 0) {
-          this.currentCardIndex--;
-        } else {
-          this.currentCardIndex = maxIndex;
-        }
-      } else if (event.target.id === "next-card") {
-        if (this.currentCardIndex < maxIndex) {
-          this.currentCardIndex++;
-        } else {
-          this.$router.push({ name: "results" });
-        }
+      if (this.currentCardIndex < maxIndex) {
+        this.currentCardIndex++;
+      }
+
+      if (event.target.id === "mark-incorrect") {
+        let cardState = {
+          index: this.currentCardIndex,
+          isCorrect: false,
+        };
+        this.$store.commit("MARK_CARD_ISCORRECT", cardState);
+      } else if (event.target.id === "mark-correct") {
+        let cardState = {
+          index: this.currentCardIndex,
+          isCorrect: true,
+        };
+        this.$store.commit("MARK_CARD_ISCORRECT", cardState);
+      }
+
+      if (this.currentCardIndex == maxIndex) {
+        this.$router.push({ name: "results" });
       }
     },
     retrieveDeck() {
@@ -121,6 +123,18 @@ h3 {
   color: #464443;
   font-size: 3vh;
 }
+button {
+  border: none;
+  color: white;
+  font-weight: bold;
+  background-color: rgb(49, 92, 49);
+  padding: 1.5vh 5vh;
+  border-radius: 20px;
+  text-decoration: none;
+}
+#mark-incorrect {
+  background-color: red;
+}
 .view {
   min-height: 100vh;
 }
@@ -140,7 +154,7 @@ nav {
   align-items: center;
   justify-content: flex-start;
 }
-#deck-container {
+#study-container {
   min-height: 67vh;
   width: 76%;
   min-width: 76vw;
@@ -157,8 +171,8 @@ nav {
 .cards {
   align-self: center;
 }
-.card-navigation {
-  width: 20vh;
+.study-buttons {
+  width: 75vh;
   display: flex;
   justify-content: space-between;
 }
