@@ -5,6 +5,8 @@ import com.techelevator.model.Deck;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class JdbcCardDeckDao implements CardDeckDao{
     private final JdbcTemplate jdbcTemplate;
@@ -14,10 +16,12 @@ public class JdbcCardDeckDao implements CardDeckDao{
     }
 
     @Override         // 1CD. this will add card to deck
-    public CardDecks addCardToDeck(CardDecks cardDecks) {
+    public void addCardsToDeck(List<CardDecks> cardDecks) {
         String sql = "INSERT INTO card_deck (deck_id, card_id) VALUES (?,?)";
-        jdbcTemplate.update(sql, cardDecks.getDeckId(), cardDecks.getCardId() );
-        return cardDecks;
+
+        for (CardDecks cardDeck : cardDecks) {
+            jdbcTemplate.update(sql, cardDeck.getDeckId(), cardDeck.getCardId());
+        }
     }
 
 

@@ -9,6 +9,14 @@
       <div id="main">
         <article>
           <div id="card-container">
+            <div id="action-buttons">
+              <button class="action-button">
+                Create New Card and Add to Deck
+              </button>
+              <button class="action-button" v-on:click.stop="addCards">
+                Add Selected to Deck
+              </button>
+            </div>
             <table id="tblCards">
               <thead>
                 <tr class="tbl-header">
@@ -19,7 +27,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="search-bars">
+                <tr id="search-bars">
                   <td>
                     <input
                       type="checkbox"
@@ -58,16 +66,17 @@
                   v-for="(card, index) in filteredCards"
                   v-bind:key="index"
                   v-bind:class="{
-                    selected:
-                      card.isSelected != undefined && card.isSelected === true,
+                    selected: card.isSelected === true,
                   }"
+                  class="card-details"
                 >
                   <td>
                     <input
                       type="checkbox"
-                      v-bind:id="card.id"
-                      v-bind:value="card.id"
+                      v-bind:id="card.cardId"
+                      v-bind:value="card.cardId"
                       v-on:change="selectCard($event)"
+                      v-model="card.isSelected"
                       class="checkbox"
                     />
                   </td>
@@ -89,6 +98,7 @@
 
 <script>
 import FooterComponent from "../components/FooterComponent.vue";
+// import cardDeckService from
 
 export default {
   components: {
@@ -173,11 +183,25 @@ export default {
         this.selectedCardIds = this.filteredCards.map((card) => card.cardId);
         checkboxes.forEach((checkbox) => {
           checkbox.checked = true;
+          if (checkbox.parentElement.parentElement.id != "search-bars") {
+            checkbox.parentElement.parentElement.classList.add("selected");
+          }
         });
       } else {
-        checkboxes.forEach((checkbox) => (checkbox.checked = false));
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = false;
+          if (checkbox.parentElement.parentElement.id != "search-bars") {
+            checkbox.parentElement.parentElement.classList.remove("selected");
+          }
+        });
         this.selectedCardIds = [];
       }
+    },
+    addCards() {
+      let cardDecks = [];
+      this.selectedCardIds.forEach((id) =>
+        cardDecks.push({ cardId: id, deckId: this.$route.params.id })
+      );
     },
   },
 };
@@ -228,8 +252,14 @@ nav {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-between;
-  gap: 7vh 3vh;
+  gap: 3vh 3vh;
   overflow: auto;
+}
+.card-details {
+  color: #464443;
+}
+.selected {
+  background-color: rgba(112, 177, 112, 0.335);
 }
 tbody {
   background-color: white;
@@ -240,15 +270,16 @@ th {
 }
 th,
 td {
-  width: 150px;
   text-align: left;
   /* border-right: solid 1px grey; */
   padding: 2vh;
 }
 tr {
   border-radius: 20px;
+  border: solid #b4b0ad 1px;
 }
 table {
+  width: 90%;
   border-collapse: separate;
   border-spacing: 0 2.5vh;
 }
@@ -286,17 +317,23 @@ tr th:last-child {
   width: 10%;
 }
 .question {
-  width: 20%;
+  width: 25%;
 }
 .answer {
-  width: 50%;
+  width: 45%;
 }
 .tags {
   width: 20%;
 }
+#action-buttons {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
 .action-button {
   border: none;
   color: white;
+  font-weight: bold;
   background-color: rgb(49, 92, 49);
   padding: 1.5vh 5vh;
   border-radius: 20px;
@@ -304,8 +341,6 @@ tr th:last-child {
 }
 .action-button:hover {
   background-color: rgb(36, 66, 36);
-}
-.selected {
 }
 .nav-button {
   background-color: #a66f5b;
@@ -331,7 +366,7 @@ input[type="text"] {
   border-bottom: solid 1px grey;
   font-size: 16px;
   background-color: white;
-  padding: 12px;
+  padding: 2vh 2vh 0.3vh 2vh;
   margin: 1vh 3vh 2vh 0vh;
 }
 input[name="search"]:focus {
@@ -347,5 +382,8 @@ input[name="search"]:focus {
 input[type="checkbox"] {
   width: 2.5vh;
   height: 2.5vh;
+}
+.checkbox input[type="checkbox"]:checked + span {
+  background-color: rgb(49, 92, 49);
 }
 </style>

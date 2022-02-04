@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @PreAuthorize("isAuthenticated()")
 @CrossOrigin
@@ -19,8 +21,8 @@ public class CardDeckController {
 
     // 1CD. this will add card to deck
     @RequestMapping(path = "/decks/add/", method = RequestMethod.POST)
-    public CardDecks addCardToDeck(@RequestBody CardDecks cardDecks) {
-        return cardDeckDao.addCardToDeck(cardDecks);
+    public void addCardToDeck(@RequestBody List<CardDecks> cardDecks) {
+        cardDeckDao.addCardsToDeck(cardDecks);
     }
 
 
