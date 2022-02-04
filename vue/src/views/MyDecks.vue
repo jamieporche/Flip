@@ -72,9 +72,8 @@ export default {
     deleteDeck(deckId){
      if (window.confirm("Are you sure you want to delete?")){
        this.$store.dispatch("DELETE_DECK", deckId);
-       this.$router.push( {name: "my-decks"});
      }
-    }
+    },
   },
 };
 </script>

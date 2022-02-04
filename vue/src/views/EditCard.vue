@@ -83,7 +83,7 @@ export default {
     deleteCard(cardId){
       if (window.confirm("Are you sure you want to delete?")){
         this.$store.dispatch("DELETE_CARD", cardId);
-        this.$router.push( {name: "edit-card"});
+        this.$router.push( {name: "home"});
       }
     }
   },

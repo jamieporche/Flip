@@ -138,6 +138,7 @@ export default new Vuex.Store({
       deckService.deleteDeck(deckId).then(response => {
         if(response.status === 200){
         context.commit('DELETE_DECK', deckId);
+        this.$forceUpdate();
         }
       });
     },
@@ -145,6 +146,7 @@ export default new Vuex.Store({
       cardService.deleteCard(cardId).then(response =>{
         if(response.status === 200){
           context.commit('DELETE_CARD', cardId);
+
         }
       });
     }
