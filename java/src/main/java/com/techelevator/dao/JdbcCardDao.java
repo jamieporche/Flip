@@ -65,8 +65,10 @@ public class    JdbcCardDao implements CardDao {
 
     @Override        // 5C. this will delete a card
     public void deleteCard(Card card) {
-        String sql = "DELETE FROM cards WHERE card_id = ?";
+        String sql = "DELETE FROM card_deck WHERE card_id = ?";
         jdbcTemplate.update(sql, card.getCardId());
+        String sql2 = "DELETE FROM cards WHERE card_id = ?";
+        jdbcTemplate.update(sql2, card.getCardId());
     }
 
 
