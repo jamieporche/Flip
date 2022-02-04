@@ -79,8 +79,7 @@ export default new Vuex.Store({
           state.cards[i] = editedCard;
         }
       }
-    }, 
-  },
+    },                          
   actions: {
     LOAD_USERS_CARDS(context, userId) {
       cardService.getCardsByUser(userId).then(

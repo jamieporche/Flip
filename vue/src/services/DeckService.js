@@ -11,5 +11,8 @@ export default {
   create(deck) {
     return axios.post("/users/decks/create/", deck);
   },
+  deleteDeck(deckId){
+    return axios.delete(`/users/decks/${deckId}/`);
+  },
 
 }
