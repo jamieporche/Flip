@@ -44,6 +44,9 @@
               v-model="card.tags"
               required
             />
+            <div id="delete-buttons">
+               <button v-on:click.prevent="deleteCard(card.cardId)" class="deck-button">Delete</button>
+            </div>
             <div id="save-buttons">
               <button id="save" v-on:click.prevent="editCard">Save</button>
             </div>
@@ -77,6 +80,12 @@ export default {
       this.$store.dispatch("EDIT_CARD", editedCard);
       this.$router.push({ name: "home" });
     },
+    deleteCard(cardId){
+      if (window.confirm("Are you sure you want to delete?")){
+        this.$store.dispatch("DELETE_CARD", cardId);
+        this.$router.push( {name: "home"});
+      }
+    }
   },
   computed: {},
   created() {
@@ -140,6 +149,11 @@ button {
 #save-buttons {
   display: flex;
   justify-content: flex-end;
+  gap: 4vh;
+}
+#delete-buttons {
+  display: flex;
+  justify-content: flex-start;
   gap: 4vh;
 }
 .nav-button {
