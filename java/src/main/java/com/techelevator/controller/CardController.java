@@ -42,9 +42,9 @@ public class CardController {
     }
 
     // 5C. this will delete a card
-    @RequestMapping(path = "/cards/delete/", method = RequestMethod.DELETE)
-    public void  deleteCard(@RequestBody Card card){
-       cardDao.deleteCard(card);
+    @RequestMapping(path = "/users/card/{cardId}/", method = RequestMethod.DELETE)
+    public void  deleteCard(@PathVariable int cardId){
+       cardDao.deleteCard(cardId);
     }
 
 

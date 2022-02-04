@@ -80,6 +80,16 @@ export default new Vuex.Store({
     MARK_CARD_ISCORRECT(state, cardState) {
       state.deck.cards[cardState.index].isCorrect = cardState.isCorrect;
     }, 
+    DELETE_DECK(state, deckId){
+      state.decks = state.decks.filter((deck) =>{
+        deck.deckId != deckId
+      });
+    },
+    DELETE_CARD(state, cardId){
+      state.cards = state.cards.filter((card) =>{
+        card.cardId != cardId;
+      })
+    }
   },
   actions: {
     LOAD_USERS_CARDS(context, userId) {
@@ -124,5 +134,19 @@ export default new Vuex.Store({
         context.commit('EDIT_CARD', editedCard);
       });
     },
+    DELETE_DECK(context, deckId){
+      deckService.deleteDeck(deckId).then(response => {
+        if(response.status === 200){
+        context.commit('DELETE_DECK', deckId);
+        }
+      });
+    },
+    DELETE_CARD(context, cardId){
+      cardService.deleteCard(cardId).then(response =>{
+        if(response.status === 200){
+          context.commit('DELETE_CARD', cardId);
+        }
+      });
+    }
   }
 })

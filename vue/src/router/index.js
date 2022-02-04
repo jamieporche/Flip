@@ -116,14 +116,6 @@ const router = new Router({
         requiresAuth: true
       }
     },
-    {
-      path: "/users/decks/delete/",
-      name: "delete-deck",
-      component: MyDecks,
-      meta:{
-        requiresAuth: true
-      }
-    },
 
   ]
 })
