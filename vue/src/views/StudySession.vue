@@ -23,13 +23,13 @@
                 class="flashcard-component"
               />
             </div>
-            <div class="study-buttons" v-on:click.stop="changeCard($event)">
+            <div class="study-buttons" v-on:click.stop="markIsCorrect($event)">
               <button id="mark-incorrect">Incorrect</button>
               <span>
                 {{ currentCardIndex + 1 }} /
                 {{ this.$store.state.deck.cards.length }}
               </span>
-              <button id="mark-correct" v-on:click.stop="changeCard($event)">
+              <button id="mark-correct" v-on:click.stop="markIsCorrect($event)">
                 Correct
               </button>
             </div>
@@ -62,29 +62,29 @@ export default {
     };
   },
   methods: {
-    changeCard(event) {
-      const maxIndex = this.$store.state.deck.cards.length - 1;
+    markIsCorrect(event) {
+      if (event.target.tagName === "BUTTON") {
+        const maxIndex = this.$store.state.deck.cards.length - 1;
 
-      if (this.currentCardIndex < maxIndex) {
+        if (event.target.id === "mark-incorrect") {
+          let cardState = {
+            index: this.currentCardIndex,
+            isCorrect: false,
+          };
+          this.$store.commit("MARK_CARD_ISCORRECT", cardState);
+        } else if (event.target.id === "mark-correct") {
+          let cardState = {
+            index: this.currentCardIndex,
+            isCorrect: true,
+          };
+          this.$store.commit("MARK_CARD_ISCORRECT", cardState);
+        }
+
+        if (this.currentCardIndex + 1 > maxIndex) {
+          this.$router.push({ name: "results" });
+        }
+
         this.currentCardIndex++;
-      }
-
-      if (event.target.id === "mark-incorrect") {
-        let cardState = {
-          index: this.currentCardIndex,
-          isCorrect: false,
-        };
-        this.$store.commit("MARK_CARD_ISCORRECT", cardState);
-      } else if (event.target.id === "mark-correct") {
-        let cardState = {
-          index: this.currentCardIndex,
-          isCorrect: true,
-        };
-        this.$store.commit("MARK_CARD_ISCORRECT", cardState);
-      }
-
-      if (this.currentCardIndex == maxIndex) {
-        this.$router.push({ name: "results" });
       }
     },
     retrieveDeck() {
