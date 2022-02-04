@@ -12,11 +12,10 @@
       <div id="main">
         <article>
           <div id="deck-container">
-            <p>{{ this.$store.state.decks }}</p>
             <div
               class="deck"
               v-for="deck in this.$store.state.decks"
-              v-bind:key="deck.deckId"
+              v-bind:key="deck.id"
             >
               <deck-component
                 class="deck-card"
@@ -60,7 +59,9 @@ export default {
   },
   name: "my-decks",
   data() {
-    return {};
+    return {
+      decks: [],
+    };
   },
   computed: {},
   created() {

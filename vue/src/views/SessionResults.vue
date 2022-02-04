@@ -1,7 +1,12 @@
 <template>
   <div class="view">
     <nav>
-      <router-link :to="{ name: 'new-card' }" class="nav-button"
+      <router-link
+        :to="{
+          name: 'study-session',
+          params: { deckId: this.$store.state.deck.deckId },
+        }"
+        class="nav-button"
         >Study Deck Again</router-link
       >
       <router-link :to="{ name: 'home' }" class="nav-button">
@@ -15,7 +20,11 @@
       <div id="main">
         <article>
           <div id="deck-container">
-            <h2>Results</h2>
+            <div id="number-correct-container">
+              <p class="number-correct">{{ numberCorrect }} Correct</p>
+              <p class="number-correct">{{ numberIncorrect }} Incorrect</p>
+            </div>
+            <!-- <div class="pie animate" style="--p: 90; --c: lightgreen">90%</div> -->
           </div>
         </article>
       </div>
@@ -28,7 +37,6 @@
 
 <script>
 import FooterComponent from "../components/FooterComponent.vue";
-import deckService from "../services/DeckService.js";
 
 export default {
   components: {
@@ -36,52 +44,26 @@ export default {
   },
   name: "results",
   data() {
-    return {
-      deck: this.$store.state.deck,
-      isLoading: true,
-      currentCardIndex: 0,
-    };
+    return {};
   },
-  methods: {
-    changeCard(event) {
-      const maxIndex = this.$store.state.deck.cards.length - 1;
+  methods: {},
+  computed: {
+    numberCorrect() {
+      let sumCorrect = this.$store.state.deck.cards.filter(
+        (card) => card.isCorrect === true
+      ).length;
 
-      if (event.target.id === "previous-card") {
-        if (this.currentCardIndex > 0) {
-          this.currentCardIndex--;
-        } else {
-          this.currentCardIndex = maxIndex;
-        }
-      } else if (event.target.id === "next-card") {
-        if (this.currentCardIndex < maxIndex) {
-          this.currentCardIndex++;
-        } else {
-          this.currentCardIndex = 0;
-        }
-      }
+      return sumCorrect;
     },
-    retrieveDeck() {
-      deckService
-        .getDeckById(this.$route.params.deckId)
-        .then((response) => {
-          this.$store.commit("SET_DECK", response.data);
-          this.deck = response.data;
-          this.isLoading = false;
-        })
-        .catch((error) => {
-          if (error.response && error.response.status === 404) {
-            alert(
-              "Deck not available. This deck may have been deleted or you have entered an invalid deck ID."
-            );
-            this.$router.push("/");
-          }
-        });
+    numberIncorrect() {
+      let sumIncorrect = this.$store.state.deck.cards.filter(
+        (card) => card.isCorrect === false
+      ).length;
+
+      return sumIncorrect;
     },
   },
-  computed: {},
-  created() {
-    this.retrieveDeck();
-  },
+  created() {},
 };
 </script>
 
@@ -128,6 +110,14 @@ nav {
   flex-direction: column;
   align-items: center;
   gap: 5vh 0vh;
+}
+#number-correct-container {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+.number-correct {
+  font-size: 5vh;
 }
 .cards {
   align-self: center;

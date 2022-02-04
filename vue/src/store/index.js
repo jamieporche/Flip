@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import cardService from '../services/CardService.js'
 import deckService from '../services/DeckService.js'
+import router from '../router'
 
 Vue.use(Vuex)
 
@@ -30,7 +31,8 @@ export default new Vuex.Store({
       deckName: '',
       isPublic: false,
       userName: '',
-      cards: []
+      cards: [],
+      isCorrect: false,
     },
   },
   mutations: {
@@ -61,17 +63,12 @@ export default new Vuex.Store({
     },
     SET_DECKS(state, decks) {
       state.decks = decks;
-      console.log("Last deck: " + state.decks[state.decks.length - 1].deckName)
     },
     SET_DECK(state, deck) {
       state.deck = deck;
     },
     ADD_DECK(state, deck) {
-      // console.log("decks before: " + state.decks);
       state.decks.push(deck);
-      console.log(deck.deckName);
-      // console.log("decks after: " + state.decks);
-      // return "Deck added";
     },
     EDIT_CARD(state, editedCard) {
       for (let i = 0; i < state.cards.length; i++) {
@@ -79,6 +76,9 @@ export default new Vuex.Store({
           state.cards[i] = editedCard;
         }
       }
+    },
+    MARK_CARD_ISCORRECT(state, cardState) {
+      state.deck.cards[cardState.index].isCorrect = cardState.isCorrect;
     }, 
   },
   actions: {
@@ -94,6 +94,7 @@ export default new Vuex.Store({
         if (response.status == 200) {
           const newCard = response.data;
           context.commit('ADD_CARD', newCard);
+
         }
       });
     },
@@ -108,7 +109,13 @@ export default new Vuex.Store({
       deckService.create(deck).then(response => {
           const newDeck = response.data;
           context.commit('ADD_DECK', newDeck);
-          console.log("Deck created");
+          router.push({ name: "my-decks" })
+      });
+    },
+    CREATE_NEW_DECK_SAVE_AND_NEW(context, deck) {
+      deckService.create(deck).then(response => {
+          const newDeck = response.data;
+          context.commit('ADD_DECK', newDeck);
       });
     },
     EDIT_CARD(context, card) {

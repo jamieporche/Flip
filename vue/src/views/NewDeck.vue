@@ -63,8 +63,7 @@ export default {
 
       this.$store.dispatch("CREATE_NEW_DECK", newDeck);
 
-      this.$router.push({ name: "my-decks" });
-
+      // this.$router.push({ name: "my-decks" });
       // setTimeout(() => {
       //   this.$router.push({ name: "my-decks" });
       // }, 4000);
@@ -73,7 +72,8 @@ export default {
       const newDeck = {
         ...this.newDeck,
       };
-      this.$store.dispatch("CREATE_NEW_DECK", newDeck, false);
+
+      this.$store.dispatch("CREATE_NEW_DECK_SAVE_AND_NEW", newDeck);
       this.newDeck = {
         deckName: "",
         userId: this.$store.state.user.id,
