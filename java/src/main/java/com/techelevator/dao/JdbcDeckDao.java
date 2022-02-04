@@ -85,11 +85,11 @@ public class JdbcDeckDao implements DeckDao {
     }
 
     @Override       // 5D. this will delete a deck
-    public void deleteDeck(Deck deck) {
+    public void deleteDeck(int deckId) {
         String sql = "DELETE FROM card_deck WHERE deck_id = ?";
-        jdbcTemplate.update(sql, deck.getDeckId());
+        jdbcTemplate.update(sql, deckId);
         String sql2 = "DELETE FROM decks WHERE deck_id = ?";
-        jdbcTemplate.update(sql2, deck.getDeckId());
+        jdbcTemplate.update(sql2, deckId);
     }
 
     @Override       // 6D. this will update an existing deck

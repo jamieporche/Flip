@@ -42,9 +42,9 @@ public class DeckController {
     }
 
     // 5D. this will delete a deck
-    @RequestMapping(path = "/users/decks/delete/", method = RequestMethod.DELETE)
-    public void deleteDeck(@RequestBody Deck deck) {
-        deckDao.deleteDeck(deck);
+    @RequestMapping(path = "/users/decks/{deckId}/", method = RequestMethod.DELETE)
+    public void deleteDeck(@PathVariable int deckId) {
+        deckDao.deleteDeck(deckId);
     }
 
     // 6D. this will update an existing deck
