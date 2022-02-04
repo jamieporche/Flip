@@ -1,57 +1,82 @@
 <template>
   <div class="view">
     <nav>
-      <router-link :to="{ name: 'new-card' }" class="nav-button"
-        >Create New Card</router-link
-      >
       <router-link :to="{ name: 'my-decks' }" class="nav-button">
         View Your Decks</router-link
       >
     </nav>
     <div id="main-body">
       <div id="main">
-        <div id="search">
-          <select v-model="searchBy">
-            <option value="tags">Search Tags</option>
-            <option value="content">Search Card Content</option>
-          </select>
-          <input
-            type="text"
-            name="search"
-            id="search-bar"
-            v-model="filter"
-            placeholder="Search cards"
-          />
-        </div>
         <article>
           <div id="card-container">
-            <div id="card-list-empty" v-if="filteredCards.length == 0">
-              <p class="no-cards">There are no cards to show</p>
-            </div>
-            <div
-              class="card"
-              v-for="(card, index) in filteredCards"
-              v-bind:key="index"
-            >
-              <flashcard-component
-                :front="card.frontOfCard"
-                :back="card.backOfCard"
-                class="flashcard-component"
-              />
-              <p><span>Tags:</span> {{ card.tags }}</p>
-              <div id="card-buttons">
-                <router-link
-                  class="card-button"
-                  :to="{ name: 'edit-card', params: { id: card.cardId } }"
-                  >Edit</router-link
+            <table id="tblCards">
+              <thead>
+                <tr class="tbl-header">
+                  <th class="checkbox">&nbsp;</th>
+                  <th class="question">Question</th>
+                  <th class="answer">Answer</th>
+                  <th class="tags">Tags</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="search-bars">
+                  <td>
+                    <input
+                      type="checkbox"
+                      id="selectAll"
+                      v-on:click="selectAll($event)"
+                      v-bind:checked="allCardsSelected"
+                      class="checkbox"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      id="questionFilter"
+                      v-model="filter.question"
+                      class="question"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      id="answerFilter"
+                      v-model="filter.answer"
+                      class="answer"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      id="tagsFilter"
+                      v-model="filter.tags"
+                      class="tags"
+                    />
+                  </td>
+                </tr>
+                <tr
+                  v-for="(card, index) in filteredCards"
+                  v-bind:key="index"
+                  v-bind:class="{
+                    selected:
+                      card.isSelected != undefined && card.isSelected === true,
+                  }"
                 >
-                <router-link
-                  class="card-button"
-                  :to="{ name: 'edit-card', params: { id: card.cardId } }"
-                  >Add to Deck</router-link
-                >
-              </div>
-            </div>
+                  <td>
+                    <input
+                      type="checkbox"
+                      v-bind:id="card.id"
+                      v-bind:value="card.id"
+                      v-on:change="selectCard($event)"
+                      class="checkbox"
+                    />
+                  </td>
+                  <td class="question">{{ card.frontOfCard }}</td>
+                  <td class="answer">{{ card.backOfCard }}</td>
+                  <td class="tags">{{ card.tags }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </article>
       </div>
@@ -63,33 +88,50 @@
 </template>
 
 <script>
-import FlashcardComponent from "../components/FlashcardComponent.vue";
 import FooterComponent from "../components/FooterComponent.vue";
 
 export default {
   components: {
-    FlashcardComponent,
     FooterComponent,
   },
   name: "add-card",
   data() {
     return {
-      filter: "",
+      filter: {
+        question: "",
+        answer: "",
+        tags: "",
+      },
       searchBy: "tags",
       cards: [],
+      selectedCardIds: [],
     };
   },
   computed: {
     filteredCards() {
-      if (this.filter !== "") {
-        if (this.searchBy === "tags") {
-          return this.filterByTags();
-        } else {
-          return this.filterByContent();
-        }
+      let isFilterEmpty =
+        this.filter.question === "" &&
+        this.filter.answer === "" &&
+        this.filter.tags === "";
+      if (!isFilterEmpty) {
+        return this.$store.state.cards.filter((card) => {
+          let isQuestionAMatch = card.frontOfCard
+            .toLowerCase()
+            .includes(this.filter.question.toLowerCase());
+          let isAnswerAMatch = card.backOfCard
+            .toLowerCase()
+            .includes(this.filter.answer.toLowerCase());
+          let isTagsAMatch = card.tags
+            .toLowerCase()
+            .includes(this.filter.tags.toLowerCase());
+          return isQuestionAMatch && isAnswerAMatch && isTagsAMatch;
+        });
       } else {
         return this.$store.state.cards;
       }
+    },
+    allCardsSelected() {
+      return this.$store.state.cards.length === this.selectedCardIds.length;
     },
   },
   created() {
@@ -116,6 +158,27 @@ export default {
         }
       });
     },
+    selectCard(event) {
+      if (event.target.checked) {
+        this.selectedCardIds.push(parseInt(event.target.id));
+      } else {
+        this.selectedCardIds = this.selectedCardIds.filter(
+          (id) => id !== parseInt(event.target.id)
+        );
+      }
+    },
+    selectAll(event) {
+      let checkboxes = document.querySelectorAll("input[type=checkbox]");
+      if (event.target.checked) {
+        this.selectedCardIds = this.filteredCards.map((card) => card.cardId);
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = true;
+        });
+      } else {
+        checkboxes.forEach((checkbox) => (checkbox.checked = false));
+        this.selectedCardIds = [];
+      }
+    },
   },
 };
 </script>
@@ -123,9 +186,6 @@ export default {
 <style scoped>
 .view {
   min-height: 100vh;
-}
-span {
-  font-weight: bold;
 }
 nav {
   height: 80%;
@@ -143,6 +203,18 @@ nav {
   align-items: center;
   justify-content: flex-start;
 }
+#main {
+  margin-top: 18vh;
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-bottom: 3vh;
+}
+#main-body {
+  display: flex;
+  flex-direction: column;
+}
 #card-container {
   min-height: 60vh;
   width: 76%;
@@ -159,7 +231,70 @@ nav {
   gap: 7vh 3vh;
   overflow: auto;
 }
-.card-button {
+tbody {
+  background-color: white;
+}
+th {
+  background-color: #a66f5b;
+  color: white;
+}
+th,
+td {
+  width: 150px;
+  text-align: left;
+  /* border-right: solid 1px grey; */
+  padding: 2vh;
+}
+tr {
+  border-radius: 20px;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0 2.5vh;
+}
+td {
+  border: solid 1px transparent;
+}
+tr td:first-child {
+  border-top-left-radius: 20px;
+}
+tr td:first-child {
+  border-bottom-left-radius: 20px;
+}
+tr td:last-child {
+  border-top-right-radius: 20px;
+}
+tr td:last-child {
+  border-bottom-right-radius: 20px;
+}
+th {
+  text-align: center;
+}
+tr th:first-child {
+  border-top-left-radius: 20px;
+}
+tr th:first-child {
+  border-bottom-left-radius: 20px;
+}
+tr th:last-child {
+  border-top-right-radius: 20px;
+}
+tr th:last-child {
+  border-bottom-right-radius: 20px;
+}
+.checkbox {
+  width: 10%;
+}
+.question {
+  width: 20%;
+}
+.answer {
+  width: 50%;
+}
+.tags {
+  width: 20%;
+}
+.action-button {
   border: none;
   color: white;
   background-color: rgb(49, 92, 49);
@@ -167,8 +302,10 @@ nav {
   border-radius: 20px;
   text-decoration: none;
 }
-.card-button:hover {
+.action-button:hover {
   background-color: rgb(36, 66, 36);
+}
+.selected {
 }
 .nav-button {
   background-color: #a66f5b;
@@ -187,62 +324,18 @@ nav {
 .nav-button:hover {
   background-color: #8a5d4d;
 }
-#main {
-  margin-top: 18vh;
-  min-height: 75vh;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding-bottom: 3vh;
-}
-#main-body {
-  display: flex;
-  flex-direction: column;
-}
-#search {
-  width: 49%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-select {
-  width: 30%;
-  padding: 12px 5px 12px 10px;
-  margin: 1vh 0vh 2vh 0vh;
-  background-color: #f8f7f6;
-  border: 2px solid #ccc;
-  border-radius: 20px 0px 0px 20px;
-  color: grey;
-  font-size: 16px;
-}
-select:focus {
-  border-color: #f2ab6d;
-}
-option {
-  color: grey;
-  padding: 12px 10px 12px 10px;
-  border-radius: 20px;
-  font-size: 16px;
-}
 input[type="text"] {
-  width: 70%;
+  width: 100%;
   box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 0px 20px 20px 0px;
+  border: none;
+  border-bottom: solid 1px grey;
   font-size: 16px;
   background-color: white;
-  background-image: url("../assets/icons8-search-32.png");
-  background-repeat: no-repeat;
-  padding: 12px 20px 12px 40px;
+  padding: 12px;
   margin: 1vh 3vh 2vh 0vh;
 }
-.flashcard-component {
-  height: 24vh;
-  width: 40vh;
-}
-#card-buttons {
-  display: flex;
-  justify-content: space-between;
+input[name="search"]:focus {
+  border-color: #f2ab6d;
 }
 .footer {
   z-index: 3;
@@ -251,7 +344,8 @@ input[type="text"] {
   font-size: 10vh;
   text-align: center;
 }
-input[name="search"]:focus {
-  border-color: #f2ab6d;
+input[type="checkbox"] {
+  width: 2.5vh;
+  height: 2.5vh;
 }
 </style>
