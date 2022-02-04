@@ -12,11 +12,7 @@
       <div id="main">
         <article>
           <div id="deck-container">
-            <div
-              class="deck"
-              v-for="deck in this.$store.state.decks"
-              v-bind:key="deck.id"
-            >
+            <div class="deck" v-for="deck in decks" v-bind:key="deck.id">
               <deck-component
                 class="deck-card"
                 :name="deck.deckName"
@@ -25,10 +21,17 @@
                 :id="deck.deckId"
               />
               <div class="deck-buttons">
-                <router-link class="deck-button" :to="{ name: 'home' }"
+                <router-link
+                  class="deck-button"
+                  :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
                   >Edit</router-link
                 >
-                <button v-on:click.prevent="deleteDeck(deck.deckId)" class="deck-button">Delete</button>
+                <button
+                  v-on:click.prevent="deleteDeck(deck.deckId)"
+                  class="deck-button"
+                >
+                  Delete
+                </button>
                 <router-link
                   class="deck-button"
                   :to="{
@@ -60,19 +63,21 @@ export default {
   },
   name: "my-decks",
   data() {
-    return {
-      decks: [],
-    };
+    return {};
   },
-  computed: {},
+  computed: {
+    decks() {
+      return this.$store.state.decks;
+    },
+  },
   created() {
     this.$store.dispatch("LOAD_USERS_DECKS", this.$store.state.user.id);
   },
-  methods:{
-    deleteDeck(deckId){
-     if (window.confirm("Are you sure you want to delete?")){
-       this.$store.dispatch("DELETE_DECK", deckId);
-     }
+  methods: {
+    deleteDeck(deckId) {
+      if (window.confirm("Are you sure you want to delete?")) {
+        this.$store.dispatch("DELETE_DECK", deckId);
+      }
     },
   },
 };

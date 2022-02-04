@@ -81,15 +81,23 @@ export default new Vuex.Store({
       state.deck.cards[cardState.index].isCorrect = cardState.isCorrect;
     }, 
     DELETE_DECK(state, deckId){
-      state.decks = state.decks.filter((deck) =>{
-        deck.deckId != deckId
+      let filteredDecks = state.decks.filter((deck) =>{
+        return deck.deckId != deckId;
       });
+      state.decks = filteredDecks;
     },
     DELETE_CARD(state, cardId){
       state.cards = state.cards.filter((card) =>{
-        card.cardId != cardId;
+        return card.cardId != cardId;
       })
-    }
+    },
+    EDIT_DECK(state, editedDeck) {
+      for (let i = 0; i < state.decks.length; i++) {
+        if (state.decks[i].deckId === editedDeck.deckId) {
+          state.decks[i] = editedDeck;
+        }
+      }
+    },
   },
   actions: {
     LOAD_USERS_CARDS(context, userId) {
@@ -119,7 +127,7 @@ export default new Vuex.Store({
       deckService.create(deck).then(response => {
           const newDeck = response.data;
           context.commit('ADD_DECK', newDeck);
-          router.push({ name: "my-decks" })
+          router.push({ name: "my-decks" });
       });
     },
     CREATE_NEW_DECK_SAVE_AND_NEW(context, deck) {
@@ -138,7 +146,6 @@ export default new Vuex.Store({
       deckService.deleteDeck(deckId).then(response => {
         if(response.status === 200){
         context.commit('DELETE_DECK', deckId);
-        this.$forceUpdate();
         }
       });
     },
@@ -146,9 +153,16 @@ export default new Vuex.Store({
       cardService.deleteCard(cardId).then(response =>{
         if(response.status === 200){
           context.commit('DELETE_CARD', cardId);
-
         }
       });
+    },
+    EDIT_DECK(context, deck) {
+      deckService.edit(deck).then(response => {
+        if (response.status === 200) {
+          context.commit('EDIT_DECK', deck);
+          router.push({ name: "my-decks" });
+        }
+      })
     }
   }
 })

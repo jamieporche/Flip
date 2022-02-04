@@ -33,8 +33,7 @@ public class JdbcDeckDao implements DeckDao {
         String sql2 = " SELECT cards.card_id, cards.user_id, cards.front, cards.back, cards.card_tags\n" +
                 " FROM cards\n" +
                 " JOIN card_deck ON card_deck.card_id = cards.card_id\n" +
-                " JOIN decks ON decks.deck_id = card_deck.deck_id\n" +
-                " WHERE decks.deck_id = ?";
+                " WHERE card_deck.deck_id = ?";
         SqlRowSet cardResults = jdbcTemplate.queryForRowSet(sql2, deckId);
         List<Card> cardList = new ArrayList<>();
         while (cardResults.next()) {

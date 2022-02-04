@@ -14,5 +14,8 @@ export default {
   deleteDeck(deckId){
     return axios.delete(`/users/decks/${deckId}/`);
   },
+  edit(deck) {
+    return axios.put(`/decks/update/${deck.deckId}/`, deck);
+  }
 
 }

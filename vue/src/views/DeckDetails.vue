@@ -12,7 +12,10 @@
       >
         Add New Card</router-link
       >
-      <router-link :to="{ name: 'home' }" class="nav-button">
+      <router-link
+        :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
+        class="nav-button"
+      >
         Edit Details</router-link
       >
       <router-link :to="{ name: 'my-decks' }" class="nav-button">

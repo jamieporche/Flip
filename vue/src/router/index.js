@@ -13,6 +13,7 @@ import StudySession from '../views/StudySession.vue'
 import SessionResults from '../views/SessionResults.vue'
 import NewDeck from '../views/NewDeck.vue'
 import AddCard from '../views/AddCard.vue'
+import EditDeck from '../views/EditDeck.vue'
 
 Vue.use(Router)
 
@@ -91,6 +92,14 @@ const router = new Router({
       component: DeckDetails,
       meta: {
         requiresAuth: false
+      }
+    },
+    {
+      path: "/edit-deck/:id",
+      name: "edit-deck",
+      component: EditDeck,
+      meta: {
+        requiresAuth: true
       }
     },
     {

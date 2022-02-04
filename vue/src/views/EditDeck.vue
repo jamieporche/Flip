@@ -12,36 +12,15 @@
       <div id="form-background">
         <div id="form-container">
           <form>
-            <h2>Edit Card</h2>
-            <label for="frontOfCard">Question</label>
+            <h2>Edit Deck</h2>
+            <label for="deck-name">Deck Name</label>
             <input
               type="text"
-              id="frontOfCard"
-              name="frontOfCard"
-              placeholder="Question"
+              id="deck-name"
+              name="deck-name"
+              placeholder="Deck Name"
               class="input"
-              v-model="card.frontOfCard"
-              required
-            />
-            <label for="backOfCard">Answer</label>
-            <textarea
-              id="backOfCard"
-              name="backOfCard"
-              rows="5"
-              cols="50"
-              class="input"
-              v-model="card.backOfCard"
-              placeholder="Answer"
-              required
-            ></textarea>
-            <label for="tags">Tags</label>
-            <input
-              type="text"
-              id="tags"
-              name="tags"
-              placeholder="Tags"
-              class="input"
-              v-model="card.tags"
+              v-model="deck.deckName"
               required
             />
             <div id="buttons">
@@ -52,7 +31,7 @@
               >
                 Delete
               </button>
-              <button id="save" v-on:click.prevent="editCard">Save</button>
+              <button id="save" v-on:click.prevent="editDeck">Save</button>
             </div>
           </form>
         </div>
@@ -66,36 +45,50 @@
 
 <script>
 import FooterComponent from "../components/FooterComponent.vue";
-import cardService from "../services/CardService.js";
+import deckService from "../services/DeckService.js";
 
 export default {
   components: {
     FooterComponent,
   },
-  name: "edit-card",
+  name: "edit-deck",
   data() {
     return {
-      card: {},
+      deck: {},
     };
   },
   methods: {
-    editCard() {
-      const editedCard = this.card;
-      this.$store.dispatch("EDIT_CARD", editedCard);
-      this.$router.push({ name: "home" });
+    editDeck() {
+      const editedDeck = this.deck;
+      this.$store.dispatch("EDIT_DECK", editedDeck);
     },
-    deleteCard(cardId) {
+    deleteDeck(deckId) {
       if (window.confirm("Are you sure you want to delete?")) {
-        this.$store.dispatch("DELETE_CARD", cardId);
-        this.$router.push({ name: "home" });
+        this.$store.dispatch("DELETE_DECK", deckId);
+        this.$router.push({ name: "my-decks" });
       }
+    },
+    retrieveDeck() {
+      deckService
+        .getDeckById(this.$route.params.id)
+        .then((response) => {
+          this.$store.commit("SET_DECK", response.data);
+          this.deck = response.data;
+          this.isLoading = false;
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 404) {
+            alert(
+              "Deck not available. This deck may have been deleted or you have entered an invalid deck ID."
+            );
+            this.$router.push("/");
+          }
+        });
     },
   },
   computed: {},
   created() {
-    cardService.getCardById(this.$route.params.id).then((response) => {
-      this.card = response.data;
-    });
+    this.retrieveDeck();
   },
 };
 </script>
@@ -135,7 +128,7 @@ nav {
   margin: 0vh 3vh 3vh auto;
 }
 #form-background {
-  min-height: 68vh;
+  min-height: 70vh;
   margin: 20vh 0px 0px 0px;
 }
 form {
@@ -153,7 +146,6 @@ button {
 #buttons {
   display: flex;
   justify-content: space-between;
-  /* gap: 4vh; */
 }
 #delete-buttons {
   display: flex;
