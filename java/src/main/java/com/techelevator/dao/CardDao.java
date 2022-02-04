@@ -10,5 +10,5 @@ public interface CardDao {
     public List<Card> getListOfCardsByUserId(int userId);           // 2C. this gets list of cards by userId
     public Card createCard(Card card);                    // 3C. this creates a card
     public Card updateCard(Card card);                    // 4C. this will update an existing card
-    void deleteCard(Card card);                        // 5C. this will delete a card
+    void deleteCard(int cardId);                        // 5C. this will delete a card
 }

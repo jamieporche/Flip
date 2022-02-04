@@ -13,6 +13,9 @@ export default {
   },
   getCardById(cardId) {
     return axios.get(`/cards/${cardId}/`);
+  },
+  deleteCard(cardId){
+    return axios.delete(`/users/card/${cardId}/`);
   }
 
 }
