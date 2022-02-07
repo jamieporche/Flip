@@ -28,9 +28,9 @@ public class JdbcCardDeckDao implements CardDeckDao{
     }
 
     @Override       // 2CD. this will remove a card from deck
-    public void removeCardFromDeck(CardDecks cardDecks) {
+    public void removeCardFromDeck(int deckId, int cardId) {
         String sql = "DELETE FROM card_deck WHERE deck_id = ? AND card_id = ?";
-        jdbcTemplate.update(sql, cardDecks.getDeckId(), cardDecks.getCardId());
+        jdbcTemplate.update(sql, deckId, cardId);
     }
 
     @Override      // 3CD. this will return CardDecks where cardId is cardId

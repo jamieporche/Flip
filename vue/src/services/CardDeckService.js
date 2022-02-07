@@ -7,6 +7,9 @@ export default {
     },
     getCardDecksByCardId(cardId) {
         return axios.get(`/cards/${cardId}/card-decks`);
-    }
+    },
+    removeCard(deckId, cardId) {
+        return axios.delete(`/decks/${deckId}/cards/${cardId}`);
+    },
 
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
     <div id="logo">
-      <img src="../assets/flip-logo.png"/>
+      <img src="../assets/flip-logo.png" />
     </div>
     <div id="app-name">
       <p>StudyBlueGreen</p>
@@ -35,6 +35,13 @@ export default {
 p {
   margin: 0;
 }
+img {
+  height: 15vh;
+  margin-bottom: -4vh;
+}
+#logo {
+  width: auto;
+}
 .header-container {
   height: 13vh;
   display: flex;
@@ -43,10 +50,6 @@ p {
   border: solid 2px #b4b0ad;
   background-image: linear-gradient(white, #e4e0dd);
   padding: 0vh 5vh 3vh 5vh;
-  color: #464443;
-}
-#logo {
-  font-size: 3vh;
   color: #464443;
 }
 #app-name {

@@ -68,13 +68,18 @@
             <h3>Cards in this Deck</h3>
             <div class="card-list" v-if="deck.cards.length > 0">
               <div
-                v-for="card in this.$store.state.deck.cards"
+                v-for="card in cards"
                 v-bind:key="card.id"
                 class="card-list-item"
               >
                 <p class="front">{{ card.frontOfCard }}</p>
                 <hr />
                 <p class="back">{{ card.backOfCard }}</p>
+                <img
+                  class="remove-card"
+                  src="../assets/x-icon.png"
+                  v-on:click.stop="removeCard(card.cardId)"
+                />
               </div>
             </div>
           </div>
@@ -91,6 +96,7 @@
 import FlashcardComponent from "../components/FlashcardComponent.vue";
 import FooterComponent from "../components/FooterComponent.vue";
 import deckService from "../services/DeckService.js";
+import cardDeckService from "../services/CardDeckService.js";
 
 export default {
   components: {
@@ -101,6 +107,7 @@ export default {
   data() {
     return {
       deck: {},
+      cards: [],
       isLoading: true,
       currentCardIndex: 0,
     };
@@ -129,6 +136,7 @@ export default {
         .then((response) => {
           this.$store.commit("SET_DECK", response.data);
           this.deck = response.data;
+          this.cards = response.data.cards;
           this.isLoading = false;
         })
         .catch((error) => {
@@ -139,6 +147,24 @@ export default {
             this.$router.push("/");
           }
         });
+    },
+    removeCard(cardId) {
+      if (
+        window.confirm(
+          "Are you sure you want to remove this card from the deck?"
+        )
+      ) {
+        cardDeckService
+          .removeCard(this.$route.params.id, cardId)
+          .then((response) => {
+            if (response.status === 200) {
+              let cardsRemaining = this.cards.filter((card) => {
+                return card.cardId != cardId;
+              });
+              this.cards = cardsRemaining;
+            }
+          });
+      }
     },
   },
   computed: {},
@@ -272,6 +298,11 @@ nav {
 .back {
   padding: 3vh;
   width: 65%;
+}
+.remove-card {
+  height: 4vh;
+  align-self: center;
+  margin-right: 2vh;
 }
 .bold {
   font-weight: bold;

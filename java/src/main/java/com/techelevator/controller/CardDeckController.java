@@ -27,9 +27,9 @@ public class CardDeckController {
 
 
     // 2CD. this will remove a card from deck
-    @RequestMapping(path = "/decks/remove/", method = RequestMethod.DELETE)
-    public void removeCardFromDeck(@RequestBody CardDecks cardDecks) {
-         cardDeckDao.removeCardFromDeck(cardDecks);
+    @RequestMapping(path = "/decks/{deckId}/cards/{cardId}", method = RequestMethod.DELETE)
+    public void removeCardFromDeck(@PathVariable int deckId, @PathVariable int cardId) {
+         cardDeckDao.removeCardFromDeck(deckId, cardId);
     }
 
     @RequestMapping(path = "/cards/{cardId}/card-decks", method = RequestMethod.GET)
