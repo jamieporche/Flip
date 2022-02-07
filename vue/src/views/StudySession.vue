@@ -57,6 +57,7 @@ export default {
   data() {
     return {
       deck: this.$store.state.deck,
+      cards: [],
       isLoading: true,
       currentCardIndex: 0,
     };

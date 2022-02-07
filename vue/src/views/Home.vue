@@ -20,7 +20,7 @@
             name="search"
             id="search-bar"
             v-model="filter"
-            placeholder="Search cards"
+            placeholder="Search"
           />
         </div>
         <article>
@@ -145,13 +145,13 @@ nav {
 }
 #card-container {
   min-height: 60vh;
-  width: 76%;
-  min-width: 76vw;
+  width: 70%;
+  min-width: 73vw;
   border-radius: 20px;
   background-color: #e4e0dd;
   border: solid #b4b0ad 1px;
   margin: 0vh 3vh 0vh auto;
-  padding: 4vh 0vh 4vh 0vh;
+  padding: 4vh 4vh 4vh 4vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
