@@ -1,9 +1,9 @@
 <template>
   <div class="view">
     <nav>
-      <router-link :to="{ name: 'new-card' }" class="nav-button"
-        >Shuffle Deck</router-link
-      >
+      <button class="nav-button" v-on:click.stop="shuffleDeck(cards)">
+        Shuffle Deck
+      </button>
       <router-link :to="{ name: 'results' }" class="nav-button">
         End Study Session</router-link
       >
@@ -14,12 +14,8 @@
           <div id="study-container">
             <div class="cards">
               <flashcard-component
-                :front="
-                  this.$store.state.deck.cards[currentCardIndex].frontOfCard
-                "
-                :back="
-                  this.$store.state.deck.cards[currentCardIndex].backOfCard
-                "
+                :front="frontOfCard"
+                :back="backOfCard"
                 class="flashcard-component"
               />
             </div>
@@ -94,6 +90,7 @@ export default {
         .then((response) => {
           this.$store.commit("SET_DECK", response.data);
           this.deck = response.data;
+          this.cards = response.data.cards;
           this.isLoading = false;
         })
         .catch((error) => {
@@ -105,8 +102,35 @@ export default {
           }
         });
     },
+    shuffleDeck(cards) {
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = cards[i];
+        cards[i] = cards[j];
+        cards[j] = temp;
+      }
+
+      this.cards = cards;
+      this.currentCardIndex = 1;
+      this.currentCardIndex = 0;
+    },
   },
-  computed: {},
+  computed: {
+    frontOfCard() {
+      if (this.cards[this.currentCardIndex] === undefined) {
+        return "undefined";
+      } else {
+        return this.cards[this.currentCardIndex].frontOfCard;
+      }
+    },
+    backOfCard() {
+      if (this.cards[this.currentCardIndex] === undefined) {
+        return "undefined";
+      } else {
+        return this.cards[this.currentCardIndex].backOfCard;
+      }
+    },
+  },
   created() {
     this.retrieveDeck();
   },
