@@ -100,7 +100,7 @@ export default {
   name: "deck-details",
   data() {
     return {
-      deck: this.$store.state.deck,
+      deck: {},
       isLoading: true,
       currentCardIndex: 0,
     };

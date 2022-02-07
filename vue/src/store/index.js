@@ -66,6 +66,8 @@ export default new Vuex.Store({
     },
     SET_DECK(state, deck) {
       state.deck = deck;
+      console.log("cards length " + state.deck.cards.length);
+
     },
     ADD_DECK(state, deck) {
       state.decks.push(deck);
@@ -163,6 +165,6 @@ export default new Vuex.Store({
           router.push({ name: "my-decks" });
         }
       })
-    }
+    },
   }
 })

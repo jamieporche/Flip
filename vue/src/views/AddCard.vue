@@ -98,7 +98,7 @@
 
 <script>
 import FooterComponent from "../components/FooterComponent.vue";
-// import cardDeckService from
+import cardDeckService from "../services/CardDeckService.js";
 
 export default {
   components: {
@@ -119,12 +119,22 @@ export default {
   },
   computed: {
     filteredCards() {
+      let cardsInDeck = this.$store.state.deck.cards;
+      let cardsNotInDeck = this.$store.state.cards.filter((card) => {
+        let isCardInDeck = false;
+        for (let i = 0; i < cardsInDeck.length; i++) {
+          if (card.cardId == cardsInDeck[i].cardId) {
+            isCardInDeck = true;
+          }
+        }
+        return !isCardInDeck;
+      });
       let isFilterEmpty =
         this.filter.question === "" &&
         this.filter.answer === "" &&
         this.filter.tags === "";
       if (!isFilterEmpty) {
-        return this.$store.state.cards.filter((card) => {
+        return cardsNotInDeck.filter((card) => {
           let isQuestionAMatch = card.frontOfCard
             .toLowerCase()
             .includes(this.filter.question.toLowerCase());
@@ -137,7 +147,7 @@ export default {
           return isQuestionAMatch && isAnswerAMatch && isTagsAMatch;
         });
       } else {
-        return this.$store.state.cards;
+        return cardsNotInDeck;
       }
     },
     allCardsSelected() {
@@ -199,9 +209,19 @@ export default {
     },
     addCards() {
       let cardDecks = [];
-      this.selectedCardIds.forEach((id) =>
-        cardDecks.push({ cardId: id, deckId: this.$route.params.id })
-      );
+      this.selectedCardIds.forEach((id) => {
+        cardDecks.push({ cardId: id, deckId: this.$route.params.id });
+      });
+      cardDeckService.addCards(cardDecks).then((response) => {
+        if (response.status === 200) {
+          this.$router.push({
+            name: "deck-details",
+            params: { id: this.$route.params.id },
+          });
+        } else {
+          console.log("post not successful");
+        }
+      });
     },
   },
 };

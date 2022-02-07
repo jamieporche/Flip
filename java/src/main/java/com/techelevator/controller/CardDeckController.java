@@ -32,4 +32,9 @@ public class CardDeckController {
          cardDeckDao.removeCardFromDeck(cardDecks);
     }
 
+    @RequestMapping(path = "/cards/{cardId}/card-decks", method = RequestMethod.GET)
+    public List<CardDecks> getCardDecksByCardId(@PathVariable int cardId) {
+        return cardDeckDao.getCardDecksByCardId(cardId);
+    }
+
 }

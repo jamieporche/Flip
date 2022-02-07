@@ -2,8 +2,11 @@ import axios from 'axios';
 
 export default {
 
-    addCard(cardDeck) {
-        return axios.post("/decks/add/", cardDeck);
+    addCards(cardDecks) {
+        return axios.post("/decks/add/", cardDecks);
+    },
+    getCardDecksByCardId(cardId) {
+        return axios.get(`/cards/${cardId}/card-decks`);
     }
 
 }

@@ -47,8 +47,8 @@
                 >
                 <router-link
                   class="card-button"
-                  :to="{ name: 'edit-card', params: { id: card.cardId } }"
-                  >Add to Deck</router-link
+                  :to="{ name: 'decks-with-card', params: { id: card.cardId } }"
+                  >Decks with Card</router-link
                 >
               </div>
             </div>

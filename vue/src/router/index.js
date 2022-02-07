@@ -14,6 +14,7 @@ import SessionResults from '../views/SessionResults.vue'
 import NewDeck from '../views/NewDeck.vue'
 import AddCard from '../views/AddCard.vue'
 import EditDeck from '../views/EditDeck.vue'
+import DecksWithCard from '../views/DecksWithCard.vue'
 
 Vue.use(Router)
 
@@ -134,6 +135,14 @@ const router = new Router({
         requiresAuth: true
       }
     },
+    {
+      path: "/cards/:id/decks",
+      name: "decks-with-card",
+      component: DecksWithCard,
+      meta: {
+        requiresAuth: true
+      }
+    }
   ]
 })
 

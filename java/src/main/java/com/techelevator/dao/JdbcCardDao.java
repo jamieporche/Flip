@@ -45,8 +45,6 @@ public class    JdbcCardDao implements CardDao {
         return cardList;
     }
 
-
-
     @Override         // 3C. this creates a card
     public Card createCard(Card card) {
         String sql = "INSERT INTO cards (front, back, user_id, card_tags) VALUES (?, ?, ?, ?) RETURNING card_id  ";
