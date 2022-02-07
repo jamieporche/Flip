@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
     <div id="logo">
-      <p>Logo Here</p>
+      <img src="../assets/flip-logo.png"/>
     </div>
     <div id="app-name">
       <p>StudyBlueGreen</p>
