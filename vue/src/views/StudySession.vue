@@ -1,7 +1,7 @@
 <template>
   <div class="view">
     <nav>
-      <button class="nav-button" v-on:click.stop="shuffleDeck(cards)">
+      <button class="shuffle nav-button" v-on:click.stop="shuffleDeck(cards)">
         Shuffle Deck
       </button>
       <router-link :to="{ name: 'results' }" class="nav-button">
@@ -20,12 +20,18 @@
               />
             </div>
             <div class="study-buttons" v-on:click.stop="markIsCorrect($event)">
-              <button id="mark-incorrect">Incorrect</button>
+              <button class="study-button" id="mark-incorrect">
+                Incorrect
+              </button>
               <span>
                 {{ currentCardIndex + 1 }} /
                 {{ this.$store.state.deck.cards.length }}
               </span>
-              <button id="mark-correct" v-on:click.stop="markIsCorrect($event)">
+              <button
+                class="study-button"
+                id="mark-correct"
+                v-on:click.stop="markIsCorrect($event)"
+              >
                 Correct
               </button>
             </div>
@@ -148,7 +154,7 @@ h3 {
   color: #464443;
   font-size: 3vh;
 }
-button {
+.study-button {
   border: none;
   color: white;
   font-weight: bold;
@@ -221,6 +227,10 @@ nav {
   cursor: pointer;
   width: 60%;
   justify-self: flex-end;
+}
+.shuffle {
+  border: none;
+  width: 85%;
 }
 .nav-button:hover {
   background-color: #8a5d4d;
