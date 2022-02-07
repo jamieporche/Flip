@@ -62,11 +62,6 @@ export default {
       };
 
       this.$store.dispatch("CREATE_NEW_DECK", newDeck);
-
-      // this.$router.push({ name: "my-decks" });
-      // setTimeout(() => {
-      //   this.$router.push({ name: "my-decks" });
-      // }, 4000);
     },
     createDeckAndReset() {
       const newDeck = {
@@ -139,6 +134,7 @@ button {
   display: flex;
   justify-content: flex-end;
   gap: 4vh;
+  margin-top: 4vh;
 }
 .nav-button {
   background-color: #a66f5b;

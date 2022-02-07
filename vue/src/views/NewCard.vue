@@ -145,7 +145,7 @@ nav {
 form {
   display: flex;
   flex-direction: column;
-  padding: 10vh;
+  padding: 5vh 10vh;
 }
 button {
   border: none;
@@ -158,6 +158,7 @@ button {
   display: flex;
   justify-content: flex-end;
   gap: 4vh;
+  margin-top: 4vh;
 }
 .nav-button {
   background-color: #a66f5b;

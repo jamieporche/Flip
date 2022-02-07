@@ -26,12 +26,6 @@
                   :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
                   >Edit</router-link
                 >
-                <button
-                  v-on:click.prevent="deleteDeck(deck.deckId)"
-                  class="deck-button"
-                >
-                  Delete
-                </button>
                 <router-link
                   class="deck-button"
                   :to="{
@@ -73,13 +67,7 @@ export default {
   created() {
     this.$store.dispatch("LOAD_USERS_DECKS", this.$store.state.user.id);
   },
-  methods: {
-    deleteDeck(deckId) {
-      if (window.confirm("Are you sure you want to delete?")) {
-        this.$store.dispatch("DELETE_DECK", deckId);
-      }
-    },
-  },
+  methods: {},
 };
 </script>
 
