@@ -104,6 +104,9 @@ h2 {
   font-size: 4vh;
   color: #464443;
 }
+label {
+  padding-left: 1.5vh;
+}
 nav {
   height: 80%;
   width: 20%;

@@ -10,7 +10,7 @@
         :to="{ name: 'add-card', params: { id: deck.deckId } }"
         class="nav-button"
       >
-        Add New Card</router-link
+        Add Cards</router-link
       >
       <router-link
         :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
@@ -28,7 +28,10 @@
     <div id="main-body">
       <div id="main">
         <article>
-          <div id="deck-container">
+          <div
+            id="deck-container"
+            v-bind:class="{ flex: deck.cards.length > 0 }"
+          >
             <h1>{{ deck.deckName }}</h1>
             <div class="cards">
               <flashcard-component
@@ -65,7 +68,13 @@
               <p id="public">{{ deck.isPublic ? "Public" : "Not Public" }}</p>
               <p id="description">{{ deck.description }}</p>
             </div>
-            <h3>Cards in this Deck</h3>
+            <h3>
+              {{
+                deck.cards.length > 0
+                  ? "Cards in this Deck"
+                  : "No Cards in this Deck"
+              }}
+            </h3>
             <div class="card-list" v-if="deck.cards.length > 0">
               <div
                 v-for="card in cards"
@@ -213,11 +222,13 @@ nav {
   border: solid #b4b0ad 1px;
   margin: 0vh 3vh 0vh auto;
   padding: 4vh 0vh 4vh 0vh;
-  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5vh 0vh;
   overflow: auto;
+}
+.flex {
+  display: flex;
 }
 #deck-info {
   margin: 0vh auto 0vh 3vh;

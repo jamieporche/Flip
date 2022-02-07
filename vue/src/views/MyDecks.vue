@@ -28,6 +28,9 @@
                 >
                 <router-link
                   class="deck-button"
+                  :disabled="deck.cards.length === 0"
+                  :event="deck.cards.length > 0 ? 'click' : ''"
+                  v-bind:class="{ disabled: deck.cards.length === 0 }"
                   :to="{
                     name: 'study-session',
                     params: { deckId: deck.deckId },
@@ -123,6 +126,13 @@ nav {
 }
 .deck-button:hover {
   background-color: rgb(36, 66, 36);
+}
+.disabled {
+  cursor: not-allowed;
+  background-color: rgb(49, 92, 49);
+}
+.disabled:hover {
+  background-color: rgb(49, 92, 49);
 }
 .deck-buttons {
   display: flex;
