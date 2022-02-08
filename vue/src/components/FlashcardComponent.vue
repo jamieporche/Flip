@@ -47,7 +47,6 @@ export default {
   height: 100%;
   transition: transform 1s;
   transform-style: preserve-3d;
-  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);
   border-radius: 20px;
   margin: auto;
   background-image: linear-gradient(to bottom, rgb(255, 255, 255), #e4e0dd);
@@ -71,6 +70,7 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);
 }
 .card__face--back {
   background: white;
@@ -82,6 +82,7 @@ export default {
   align-items: center;
   transform: rotateY(180deg);
   font-size: 1.2vw;
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);
 }
 .show-answer {
   color: #464443;

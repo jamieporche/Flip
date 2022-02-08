@@ -24,6 +24,11 @@
               </router-link>
               <button class="action-button" v-on:click.stop="addCards">
                 Add Selected to Deck
+                {{
+                  selectedCardIds.length > 0
+                    ? "(" + selectedCardIds.length + ")"
+                    : ""
+                }}
               </button>
             </div>
             <table id="tblCards">
@@ -98,9 +103,9 @@
           </div>
         </article>
       </div>
-      <div class="footer">
-        <footer-component />
-      </div>
+    </div>
+    <div class="footer">
+      <footer-component />
     </div>
   </div>
 </template>
@@ -239,18 +244,19 @@ export default {
 <style scoped>
 .view {
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "nav body"
+    "footer footer";
+  column-gap: 10px;
 }
 nav {
-  height: 80%;
-  width: 20%;
-  position: fixed;
-  left: 0;
-  top: 16.2vh;
-  padding-top: 20px;
+  grid-area: nav;
+  padding-top: 184.5px;
   padding-bottom: 20px;
   overflow-x: hidden;
-  background-color: #e4e0dd;
-  border-right: solid #b4b0ad 1px;
+  background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -264,43 +270,35 @@ nav {
   align-items: flex-end;
   padding-bottom: 3vh;
 }
-#main-body {
-  display: flex;
-  flex-direction: column;
-}
 #card-container {
+  grid-area: card-container;
   min-height: 60vh;
-  width: 76%;
-  min-width: 76vw;
   border-radius: 20px;
-  background-color: #e4e0dd;
-  border: solid #b4b0ad 1px;
-  margin: 0vh 3vh 0vh auto;
+  background-image: url("../assets/lighter-blue-green-background.png");
   padding: 4vh 0vh 4vh 0vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-between;
-  gap: 3vh 3vh;
+  margin-right: 10px;
   overflow: auto;
 }
 .card-details {
   color: #464443;
 }
 .selected {
-  background-color: rgba(112, 177, 112, 0.335);
+  background-color: #0095ff1c;
 }
 tbody {
   background-color: white;
 }
 th {
-  background-color: #a66f5b;
+  background-color: rgba(0, 148, 255, 255);
   color: white;
 }
 th,
 td {
   text-align: left;
-  /* border-right: solid 1px grey; */
   padding: 2vh;
 }
 tr {
@@ -316,31 +314,31 @@ td {
   border: solid 1px transparent;
 }
 tr td:first-child {
-  border-top-left-radius: 20px;
+  border-top-left-radius: 10px;
 }
 tr td:first-child {
-  border-bottom-left-radius: 20px;
+  border-bottom-left-radius: 10px;
 }
 tr td:last-child {
-  border-top-right-radius: 20px;
+  border-top-right-radius: 10px;
 }
 tr td:last-child {
-  border-bottom-right-radius: 20px;
+  border-bottom-right-radius: 10px;
 }
 th {
   text-align: center;
 }
 tr th:first-child {
-  border-top-left-radius: 20px;
+  border-top-left-radius: 10px;
 }
 tr th:first-child {
-  border-bottom-left-radius: 20px;
+  border-bottom-left-radius: 10px;
 }
 tr th:last-child {
-  border-top-right-radius: 20px;
+  border-top-right-radius: 10px;
 }
 tr th:last-child {
-  border-bottom-right-radius: 20px;
+  border-bottom-right-radius: 10px;
 }
 .checkbox {
   width: 10%;
@@ -364,16 +362,16 @@ tr th:last-child {
   color: white;
   font-size: 1.5vh;
   font-weight: bold;
-  background-color: rgb(49, 92, 49);
+  background-color: rgba(0, 167, 88, 255);
   padding: 1.5vh 5vh;
-  border-radius: 20px;
+  border-radius: 10px;
   text-decoration: none;
 }
 .action-button:hover {
-  background-color: rgb(36, 66, 36);
+  background-color: rgb(2, 131, 70);
 }
 .nav-button {
-  background-color: #a66f5b;
+  background-color: rgba(0, 148, 255, 255);
   color: #f7fafc;
   text-decoration: none;
   border-radius: 10px;
@@ -387,7 +385,7 @@ tr th:last-child {
   justify-self: flex-end;
 }
 .nav-button:hover {
-  background-color: #8a5d4d;
+  background-color: rgb(6, 102, 171);
 }
 input[type="text"] {
   width: 100%;
@@ -404,6 +402,7 @@ input[name="search"]:focus {
 }
 .footer {
   z-index: 3;
+  grid-area: footer;
 }
 .no-cards {
   font-size: 10vh;

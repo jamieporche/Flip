@@ -25,7 +25,8 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: solid 2px #b4b0ad;
+  border: none;
+  border-top: solid 2px #b4b0ad;
   background-image: linear-gradient(#cad6ff, white);
   background-image: ("./assets/cool-background(1).png");
   font-size: 1.5vh;
@@ -47,6 +48,6 @@ h1 {
   margin-left: 2vh;
 }
 #about-us:hover {
-  color: #f2ab6d;
+  color: #00a758;
 }
 </style>
