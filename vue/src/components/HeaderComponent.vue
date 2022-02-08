@@ -1,25 +1,30 @@
 <template>
   <div class="header-container">
     <div id="logo">
-      <img src="../assets/flip-logo.png" />
+        <router-link
+            v-bind:to="{ name: 'home' }"
+            v-if="$store.state.token != ''"
+            class="link"><img src="../assets/flip-logo.png" alt="Flip">
+        </router-link>
     </div>
-    <div id="app-name">
-      <p>StudyBlueGreen</p>
-    </div>
-    <div id="home">
-      <router-link
-        v-bind:to="{ name: 'home' }"
-        v-if="$store.state.token != ''"
-        class="link"
-        >Home</router-link
-      >
-    </div>
+<!--    <div id="app-name">-->
+<!--      <span>StudyBlueGreen</span>-->
+<!--    </div>-->
+<!--    <div id="home">-->
+<!--      <router-link-->
+<!--          v-bind:to="{ name: 'home' }"-->
+<!--          v-if="$store.state.token != ''"-->
+<!--          class="link"-->
+<!--      >Home-->
+<!--      </router-link>-->
+<!--    </div>-->
     <div id="logout">
       <router-link
-        v-bind:to="{ name: 'logout' }"
-        v-if="$store.state.token != ''"
-        class="link"
-        >Logout</router-link
+          v-bind:to="{ name: 'logout' }"
+          v-if="$store.state.token != ''"
+          class="link"
+      >Logout
+      </router-link
       >
     </div>
   </div>
@@ -32,43 +37,51 @@ export default {
 </script>
 
 <style scoped>
-p {
-  margin: 0;
-}
-img {
-  height: 15vh;
-  margin-bottom: -4vh;
-}
-#logo {
-  width: auto;
-}
+
 .header-container {
-  height: 13vh;
+  height: 8vh;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-end;
+  align-items: center;
   border: solid 2px #b4b0ad;
   background-image: linear-gradient(white, #e4e0dd);
   padding: 0vh 5vh 3vh 5vh;
   color: #464443;
 }
+
+img {
+  height: 15vh;
+  margin-bottom: -4vh;
+}
+
+#logo {
+  /*width: auto;*/
+  display: flex;
+  justify-content: center;
+}
+
 #app-name {
+  display: flex;
   padding: 0vh 5vh;
   font-size: 5vh;
   color: #464443;
 }
+
 #logout {
   margin-left: auto;
 }
+
 .link {
   text-decoration: none;
   font-size: 2.5vh;
   color: #464443;
 }
+
 .link:hover {
   color: #f2ab6d;
 }
-.router-link-exact-active {
-  border-bottom: solid #f2ab6d 3px;
-}
+
+/*.router-link-exact-active {*/
+/*  border-bottom: solid #f2ab6d 3px;*/
+/*}*/
 </style>

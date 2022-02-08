@@ -47,6 +47,10 @@ export default {
   height: 100%;
   transition: transform 1s;
   transform-style: preserve-3d;
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);
+  border-radius: 20px;
+  margin: auto;
+  background-image: linear-gradient(to bottom, rgb(255, 255, 255), #e4e0dd);
 }
 .content {
   padding: 0vh 4vh;

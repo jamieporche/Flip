@@ -38,7 +38,7 @@
                 :back="card.backOfCard"
                 class="flashcard-component"
               />
-              <p><span>Tags:</span> {{ card.tags }}</p>
+              <span id="tags">Tags: {{ card.tags }}</span>
               <div id="card-buttons">
                 <router-link
                   class="card-button"
@@ -121,6 +121,7 @@ export default {
 </script>
 
 <style scoped>
+
 .view {
   min-height: 100vh;
 }
@@ -136,7 +137,7 @@ nav {
   padding-top: 20px;
   padding-bottom: 20px;
   overflow-x: hidden;
-  background-color: #e4e0dd;
+  /*background-image: url("../assets/side-menu-background-img.jpg");*/
   border-right: solid #b4b0ad 1px;
   display: flex;
   flex-direction: column;
@@ -148,8 +149,9 @@ nav {
   width: 70%;
   min-width: 73vw;
   border-radius: 20px;
-  background-color: #e4e0dd;
-  border: solid #b4b0ad 1px;
+  background-image: url("../assets/lighter-blue-green-background.png");
+  /*background-color: #e4e0dd;*/
+  /*border: solid #b4b0ad 1px;*/
   margin: 0vh 3vh 0vh auto;
   padding: 4vh 4vh 4vh 4vh;
   display: flex;
@@ -159,19 +161,28 @@ nav {
   gap: 7vh 3vh;
   overflow: auto;
 }
+#tags {
+  /*margin: 0 3vh 0vh auto;*/
+  padding: 2vh 0 2vh 0;
+  justify-content: space-evenly;
+  align-content: space-between;
+  display: flex;
+  /*border: solid black;*/
+  /*background-color: #ffffff;*/
+}
 .card-button {
   border: none;
   color: white;
-  background-color: rgb(49, 92, 49);
+  background-color: rgba(0, 167, 88, 255);
   padding: 1.5vh 5vh;
-  border-radius: 20px;
+  border-radius: 10px;
   text-decoration: none;
 }
 .card-button:hover {
-  background-color: rgb(36, 66, 36);
+  background-color: rgb(2, 131, 70);
 }
 .nav-button {
-  background-color: #a66f5b;
+  background-color: rgba(0, 148, 255, 255);
   color: #f7fafc;
   text-decoration: none;
   border-radius: 10px;
@@ -185,7 +196,7 @@ nav {
   justify-self: flex-end;
 }
 .nav-button:hover {
-  background-color: #8a5d4d;
+  background-color: rgb(6, 102, 171);
 }
 #main {
   margin-top: 18vh;
