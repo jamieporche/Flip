@@ -18,6 +18,7 @@ import DecksWithCard from '../views/DecksWithCard.vue'
 import NewCardAddToDeck from '../views/NewCardAddToDeck.vue'
 import PublicDecks from '../views/PublicDecks.vue'
 import ReviewDecks from '../views/ReviewDecks.vue'
+import AboutUs from '../views/AboutUs.vue'
 
 Vue.use(Router)
 
@@ -169,6 +170,14 @@ const router = new Router({
       component: DecksWithCard,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: "/about-us",
+      name: "about-us",
+      component: AboutUs,
+      meta: {
+        requiresAuth: false
       }
     }
   ]
