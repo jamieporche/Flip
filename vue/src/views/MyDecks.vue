@@ -26,14 +26,11 @@
                   :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
                   >Edit</router-link
                 >
-                <button
-                  v-on:click.prevent="deleteDeck(deck.deckId)"
-                  class="deck-button"
-                >
-                  Delete
-                </button>
                 <router-link
                   class="deck-button"
+                  :disabled="deck.cards.length === 0"
+                  :event="deck.cards.length > 0 ? 'click' : ''"
+                  v-bind:class="{ disabled: deck.cards.length === 0 }"
                   :to="{
                     name: 'study-session',
                     params: { deckId: deck.deckId },
@@ -73,13 +70,7 @@ export default {
   created() {
     this.$store.dispatch("LOAD_USERS_DECKS", this.$store.state.user.id);
   },
-  methods: {
-    deleteDeck(deckId) {
-      if (window.confirm("Are you sure you want to delete?")) {
-        this.$store.dispatch("DELETE_DECK", deckId);
-      }
-    },
-  },
+  methods: {},
 };
 </script>
 
@@ -135,6 +126,13 @@ nav {
 }
 .deck-button:hover {
   background-color: rgb(36, 66, 36);
+}
+.disabled {
+  cursor: not-allowed;
+  background-color: rgb(49, 92, 49);
+}
+.disabled:hover {
+  background-color: rgb(49, 92, 49);
 }
 .deck-buttons {
   display: flex;

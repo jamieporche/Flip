@@ -1,9 +1,9 @@
 <template>
   <div class="view">
     <nav>
-      <router-link :to="{ name: 'new-card' }" class="nav-button"
-        >Shuffle Deck</router-link
-      >
+      <button class="shuffle nav-button" v-on:click.stop="shuffleDeck(cards)">
+        Shuffle Deck
+      </button>
       <router-link :to="{ name: 'results' }" class="nav-button">
         End Study Session</router-link
       >
@@ -14,22 +14,24 @@
           <div id="study-container">
             <div class="cards">
               <flashcard-component
-                :front="
-                  this.$store.state.deck.cards[currentCardIndex].frontOfCard
-                "
-                :back="
-                  this.$store.state.deck.cards[currentCardIndex].backOfCard
-                "
+                :front="frontOfCard"
+                :back="backOfCard"
                 class="flashcard-component"
               />
             </div>
             <div class="study-buttons" v-on:click.stop="markIsCorrect($event)">
-              <button id="mark-incorrect">Incorrect</button>
+              <button class="study-button" id="mark-incorrect">
+                Incorrect
+              </button>
               <span>
                 {{ currentCardIndex + 1 }} /
                 {{ this.$store.state.deck.cards.length }}
               </span>
-              <button id="mark-correct" v-on:click.stop="markIsCorrect($event)">
+              <button
+                class="study-button"
+                id="mark-correct"
+                v-on:click.stop="markIsCorrect($event)"
+              >
                 Correct
               </button>
             </div>
@@ -57,6 +59,7 @@ export default {
   data() {
     return {
       deck: this.$store.state.deck,
+      cards: [],
       isLoading: true,
       currentCardIndex: 0,
     };
@@ -80,6 +83,11 @@ export default {
           this.$store.commit("MARK_CARD_ISCORRECT", cardState);
         }
 
+        document.querySelector(".flashcard").classList.remove("is-flipped");
+        document
+          .querySelector(".card__face--back")
+          .classList.remove("show-answer");
+
         if (this.currentCardIndex + 1 > maxIndex) {
           this.$router.push({ name: "results" });
         }
@@ -93,6 +101,7 @@ export default {
         .then((response) => {
           this.$store.commit("SET_DECK", response.data);
           this.deck = response.data;
+          this.cards = response.data.cards;
           this.isLoading = false;
         })
         .catch((error) => {
@@ -104,8 +113,35 @@ export default {
           }
         });
     },
+    shuffleDeck(cards) {
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = cards[i];
+        cards[i] = cards[j];
+        cards[j] = temp;
+      }
+
+      this.cards = cards;
+      this.currentCardIndex = 1;
+      this.currentCardIndex = 0;
+    },
   },
-  computed: {},
+  computed: {
+    frontOfCard() {
+      if (this.cards[this.currentCardIndex] === undefined) {
+        return "undefined";
+      } else {
+        return this.cards[this.currentCardIndex].frontOfCard;
+      }
+    },
+    backOfCard() {
+      if (this.cards[this.currentCardIndex] === undefined) {
+        return "undefined";
+      } else {
+        return this.cards[this.currentCardIndex].backOfCard;
+      }
+    },
+  },
   created() {
     this.retrieveDeck();
   },
@@ -123,7 +159,7 @@ h3 {
   color: #464443;
   font-size: 3vh;
 }
-button {
+.study-button {
   border: none;
   color: white;
   font-weight: bold;
@@ -196,6 +232,10 @@ nav {
   cursor: pointer;
   width: 60%;
   justify-self: flex-end;
+}
+.shuffle {
+  border: none;
+  width: 85%;
 }
 .nav-button:hover {
   background-color: #8a5d4d;

@@ -25,8 +25,8 @@
             />
             <div id="buttons">
               <button
-                id="delete-buttons"
-                v-on:click.prevent="deleteCard(card.cardId)"
+                id="delete-button"
+                v-on:click.prevent="deleteDeck(deck.deckId)"
                 class="deck-button"
               >
                 Delete
@@ -104,6 +104,9 @@ h2 {
   font-size: 4vh;
   color: #464443;
 }
+label {
+  padding-left: 1.5vh;
+}
 nav {
   height: 80%;
   width: 20%;
@@ -146,11 +149,13 @@ button {
 #buttons {
   display: flex;
   justify-content: space-between;
+  margin-top: 4vh;
 }
-#delete-buttons {
+#delete-button {
   display: flex;
   justify-content: flex-start;
   gap: 4vh;
+  background-color: red;
 }
 .nav-button {
   background-color: #a66f5b;

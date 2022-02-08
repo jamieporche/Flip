@@ -15,6 +15,7 @@ import NewDeck from '../views/NewDeck.vue'
 import AddCard from '../views/AddCard.vue'
 import EditDeck from '../views/EditDeck.vue'
 import DecksWithCard from '../views/DecksWithCard.vue'
+import NewCardAddToDeck from '../views/NewCardAddToDeck.vue'
 
 Vue.use(Router)
 
@@ -131,6 +132,14 @@ const router = new Router({
       path: "/decks/:id/add-card",
       name: "add-card",
       component: AddCard,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/decks/:id/new-card",
+      name: "new-card-to-deck",
+      component: NewCardAddToDeck,
       meta: {
         requiresAuth: true
       }
