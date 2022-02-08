@@ -34,7 +34,12 @@ export default new Vuex.Store({
       cards: [],
       isCorrect: false,
     },
-  },
+    teammates: [ { dan: { profilePhoto: "", bio: "", linkedinUrl: "" } },
+    { anna: { profilePhoto: "", bio: "", linkedinUrl: "" } },
+    { sean: { profilePhoto: "", bio: "", linkedinUrl: "" } },
+    { jamie: { profilePhoto: "", bio: "", linkedinUrl: "" } }
+  ],
+},
   mutations: {
     SET_AUTH_TOKEN(state, token) {
       state.token = token;

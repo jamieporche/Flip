@@ -5,7 +5,7 @@
       ><span id="green">Green</span>
     </h1>
     <div id="nav">
-      <router-link id="about-us" v-bind:to="{}" class="link"
+      <router-link id="about-us" v-bind:to="{ name: 'about-us' }" class="link"
         >About Us</router-link
       >
       <!-- empty router link, we can decide later to make a About us page if we would like -->
