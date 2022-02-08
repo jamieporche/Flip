@@ -230,12 +230,10 @@ nav {
   margin: 10px;
   text-align: center;
   cursor: pointer;
-  width: 60%;
   justify-self: flex-end;
-}
-.shuffle {
+  box-sizing: border-box;
   border: none;
-  width: 85%;
+  width: 78%;
 }
 .nav-button:hover {
   background-color: #8a5d4d;

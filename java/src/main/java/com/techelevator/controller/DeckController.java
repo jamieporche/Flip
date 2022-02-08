@@ -61,7 +61,7 @@ public class DeckController {
 
     // 8D. this will return a list of submitted decks
     @RequestMapping(path = "/users/get/submit/", method = RequestMethod.GET)
-    public List<Deck> getSumittedDecks() {
+    public List<Deck> getSubmittedDecks() {
         return deckDao.getSubmittedDecks();
     }
 

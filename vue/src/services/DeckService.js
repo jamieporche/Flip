@@ -22,6 +22,9 @@ export default {
   },
   submitDeckToPublish(deck) {
     return axios.put(`/decks/submit/${deck.deckId}/`, deck);
-  } 
+  },
+  getSubmittedDecks() {
+    return axios.get('/users/get/submit/');
+  }, 
 
 }

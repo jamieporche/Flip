@@ -128,6 +128,12 @@ export default new Vuex.Store({
         context.commit('SET_DECKS', decks);
       });
     },
+    LOAD_SUBMITTED_DECKS(context) {
+      deckService.getSubmittedDecks().then(response => {
+        const decks = response.data;
+        context.commit('SET_DECKS', decks);
+      });
+    },
     CREATE_NEW_DECK(context, deck) {
       deckService.create(deck).then(response => {
           const newDeck = response.data;

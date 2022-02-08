@@ -10,6 +10,13 @@
       <router-link :to="{ name: 'public-decks' }" class="nav-button">
         View Public Decks</router-link
       >
+      <router-link
+        :to="{ name: 'review-decks' }"
+        class="nav-button"
+        v-if="this.$store.state.user.authorities[0].name === 'ROLE_ADMIN'"
+      >
+        Review Submitted Decks</router-link
+      >
     </nav>
     <div id="main-body">
       <div id="main">

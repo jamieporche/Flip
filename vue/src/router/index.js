@@ -17,6 +17,7 @@ import EditDeck from '../views/EditDeck.vue'
 import DecksWithCard from '../views/DecksWithCard.vue'
 import NewCardAddToDeck from '../views/NewCardAddToDeck.vue'
 import PublicDecks from '../views/PublicDecks.vue'
+import ReviewDecks from '../views/ReviewDecks.vue'
 
 Vue.use(Router)
 
@@ -87,6 +88,15 @@ const router = new Router({
       component: PublicDecks,
       meta: {
         requiresAuth: false
+      }
+    },
+    {
+      path: "/review-decks",
+      name: "review-decks",
+      component: ReviewDecks,
+      meta: {
+        requiresAuth: true,
+        adminOnly: true
       }
     },
     {
@@ -167,12 +177,19 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   // Determine if the route requires Authentication
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
+  const adminOnly = to.matched.some(x => x.meta.adminOnly);
 
   // If it does and they are not logged in, send the user to "/login"
   if (requiresAuth && store.state.token === '') {
     next("/login");
   } else {
     // Else let them go to their next destination
+    next();
+  }
+
+  if (adminOnly && store.state.user.authorities[0].name != "ROLE_ADMIN") {
+    next("/"); 
+  } else {
     next();
   }
 });
