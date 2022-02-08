@@ -8,21 +8,26 @@
       >
       <router-link
         :to="{ name: 'add-card', params: { id: deck.deckId } }"
+        v-if="this.$store.state.user.id == deck.userId"
         class="nav-button"
       >
         Add Cards</router-link
       >
       <router-link
         :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
+        v-if="this.$store.state.user.id == deck.userId"
         class="nav-button"
       >
         Edit Details</router-link
       >
+      <router-link :to="{ name: 'home' }" class="nav-button">
+        View Your Cards</router-link
+      >
       <router-link :to="{ name: 'my-decks' }" class="nav-button">
         View Your Decks</router-link
       >
-      <router-link :to="{ name: 'home' }" class="nav-button">
-        View Your Cards</router-link
+      <router-link :to="{ name: 'public-decks' }" class="nav-button">
+        View Public Decks</router-link
       >
     </nav>
     <div id="main-body">
@@ -65,7 +70,18 @@
               <p id="created-by">
                 Created by <span class="bold">{{ deck.userName }}</span>
               </p>
-              <p id="public">{{ deck.isPublic ? "Public" : "Not Public" }}</p>
+              <p id="public">{{ deck.public ? "Public" : "Not Public" }}</p>
+              <button
+                id="submit"
+                v-if="!deck.public && currentUserId == deck.userId"
+                v-on:click="submitDeckToPublish"
+              >
+                {{
+                  deck.submitted
+                    ? "Deck Pending Admin Appproval"
+                    : "Submit Deck to be Published"
+                }}
+              </button>
               <p id="description">{{ deck.description }}</p>
             </div>
             <h3>
@@ -87,6 +103,7 @@
                 <img
                   class="remove-card"
                   src="../assets/x-icon.png"
+                  v-if="currentUserId == deck.userId"
                   v-on:click.stop="removeCard(card.cardId)"
                 />
               </div>
@@ -119,6 +136,7 @@ export default {
       cards: [],
       isLoading: true,
       currentCardIndex: 0,
+      currentUserId: this.$store.state.user.id,
     };
   },
   methods: {
@@ -179,6 +197,15 @@ export default {
             }
           });
       }
+    },
+    submitDeckToPublish() {
+      let submittedDeck = this.deck;
+      submittedDeck.submitted = true;
+      deckService.submitDeckToPublish(submittedDeck).then((response) => {
+        if (response.status === 200) {
+          window.alert("Deck has been submitted to the admin for approval!");
+        }
+      });
     },
   },
   computed: {},
@@ -251,7 +278,7 @@ nav {
 .deck {
   width: 60vh;
 }
-.deck-button {
+#submit {
   border: none;
   color: white;
   background-color: rgb(49, 92, 49);

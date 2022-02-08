@@ -7,6 +7,9 @@
       <router-link :to="{ name: 'my-decks' }" class="nav-button">
         View Your Decks</router-link
       >
+      <router-link :to="{ name: 'public-decks' }" class="nav-button">
+        View Public Decks</router-link
+      >
     </nav>
     <div id="main-body">
       <div id="main">

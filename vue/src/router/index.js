@@ -16,6 +16,7 @@ import AddCard from '../views/AddCard.vue'
 import EditDeck from '../views/EditDeck.vue'
 import DecksWithCard from '../views/DecksWithCard.vue'
 import NewCardAddToDeck from '../views/NewCardAddToDeck.vue'
+import PublicDecks from '../views/PublicDecks.vue'
 
 Vue.use(Router)
 
@@ -78,6 +79,14 @@ const router = new Router({
       component: MyDecks,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: "/public-decks",
+      name: "public-decks",
+      component: PublicDecks,
+      meta: {
+        requiresAuth: false
       }
     },
     {

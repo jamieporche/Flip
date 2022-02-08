@@ -1,14 +1,11 @@
 <template>
   <div class="view">
     <nav>
-      <router-link :to="{ name: 'new-deck' }" class="nav-button"
-        >Create New Deck</router-link
-      >
       <router-link :to="{ name: 'home' }" class="nav-button">
         View Your Cards</router-link
       >
-      <router-link :to="{ name: 'public-decks' }" class="nav-button">
-        View Public Decks</router-link
+      <router-link :to="{ name: 'my-decks' }" class="nav-button">
+        View Your Decks</router-link
       >
     </nav>
     <div id="main-body">
@@ -24,11 +21,6 @@
                 :id="deck.deckId"
               />
               <div class="deck-buttons">
-                <router-link
-                  class="deck-button"
-                  :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
-                  >Edit</router-link
-                >
                 <router-link
                   class="deck-button"
                   :disabled="deck.cards.length === 0"
@@ -61,7 +53,7 @@ export default {
     FooterComponent,
     DeckComponent,
   },
-  name: "my-decks",
+  name: "public-decks",
   data() {
     return {};
   },
@@ -71,7 +63,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("LOAD_USERS_DECKS", this.$store.state.user.id);
+    this.$store.dispatch("LOAD_PUBLIC_DECKS");
   },
   methods: {},
 };
@@ -119,6 +111,10 @@ nav {
 .deck-card {
   width: 100%;
 }
+.deck-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
 .deck-button {
   border: none;
   color: white;
@@ -136,10 +132,6 @@ nav {
 }
 .disabled:hover {
   background-color: rgb(49, 92, 49);
-}
-.deck-buttons {
-  display: flex;
-  justify-content: space-between;
 }
 .nav-button {
   background-color: #a66f5b;
