@@ -1,6 +1,6 @@
 <template>
   <div class="footer-container">
-    <h1>Brought to you by Team Name Here</h1>
+    <h1>Brought to you by StudyBlueGreen</h1>
     <div id="nav">
       <router-link id="about-us" v-bind:to="{}" class="link"
         >About Us</router-link

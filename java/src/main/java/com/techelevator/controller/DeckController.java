@@ -53,4 +53,21 @@ public class DeckController {
         return deckDao.updateDeck(deck);
     }
 
+    // 7D. this will set a deck to be submitted
+    @RequestMapping(path = "/decks/submit/{deckId}/", method = RequestMethod.PUT)
+    public Deck submitDeck(@PathVariable int deckId, @RequestBody Deck deck){
+    return deckDao.submitDeck(deck);
+    }
+
+    // 8D. this will return a list of submitted decks
+    @RequestMapping(path = "/users/get/submit/", method = RequestMethod.GET)
+    public List<Deck> getSumittedDecks() {
+        return deckDao.getSubmittedDecks();
+    }
+
+    // 9D. this will make Decks public
+    @RequestMapping(path = "/decks/submit/public/{deckId}/", method = RequestMethod.PUT)
+    public Deck makeDeckPublic(@PathVariable int deckId, @RequestBody Deck deck){
+        return deckDao.makeDeckPublic(deck);
+    }
 }

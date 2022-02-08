@@ -30,12 +30,6 @@
                   :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
                   >Edit</router-link
                 >
-                <button
-                  v-on:click.prevent="deleteDeck(deck.deckId)"
-                  class="deck-button"
-                >
-                  Delete
-                </button>
                 <router-link
                   class="deck-button"
                   :to="{

@@ -22,7 +22,7 @@ public class JdbcDeckDao implements DeckDao {
     @Override        // 1D. this pulls deck and its cards by deckId
     public Deck getDeckByDeckId(int deckId) {
         Deck deck = new Deck();
-        String sql = " SELECT  decks.deck_id, decks.user_id, decks.deck_name, decks.ispublic, users.username\n" +
+        String sql = " SELECT  decks.deck_id, decks.user_id, decks.deck_name, decks.ispublic, decks.issubmitted, users.username\n" +
                 " FROM decks\n" +
                 "  JOIN users ON  users.user_id = decks.user_id\n" +
                 "  WHERE decks.deck_id = ?;";
@@ -93,8 +93,37 @@ public class JdbcDeckDao implements DeckDao {
 
     @Override       // 6D. this will update an existing deck
     public Deck updateDeck(Deck deck) {
-        String sql = "UPDATE decks SET deck_name = ?, user_id = ?, ispublic = ? WHERE deck_id = ?";
-        jdbcTemplate.update(sql, deck.getDeckName(), deck.getUserId(), deck.isPublic(), deck.getDeckId());
+        String sql = "UPDATE decks SET deck_name = ?, user_id = ?, ispublic = ? , issubmitted = ? WHERE deck_id = ?";
+        jdbcTemplate.update(sql, deck.getDeckName(), deck.getUserId(), deck.isPublic(),deck.isSubmitted(), deck.getDeckId());
+        return deck;
+    }
+
+    @Override       // 7D. this will set a deck to be submitted
+    public Deck submitDeck(Deck deck) {
+        String sql = "UPDATE decks SET deck_name = ?, user_id = ?, ispublic = ? , issubmitted = ? WHERE deck_id = ?";
+        jdbcTemplate.update(sql, deck.getDeckName(), deck.getUserId(), deck.isPublic(),deck.isSubmitted(), deck.getDeckId());
+        return deck;
+    }
+
+    @Override       // 8D. this will return a list of submitted decks
+    public List<Deck> getSubmittedDecks() {
+        List<Deck> deckList = new ArrayList<>();
+        List<Integer> deckIds = new ArrayList<>();
+        String sql = "SELECT deck_id FROM decks WHERE issumitted = true";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while (results.next()) {
+            deckIds.add(mapIdsToList(results));
+        } for (int i = 0; i < deckIds.size(); i++) {
+            Deck deck = getDeckByDeckId(deckIds.get(i));
+            deckList.add(deck);
+        }
+        return deckList;
+    }
+
+    @Override       // 9D. this will make Decks public
+    public Deck makeDeckPublic(Deck deck) {
+        String sql = "UPDATE decks SET deck_name = ?, user_id = ?, ispublic = ? , issubmitted = ? WHERE deck_id = ?";
+        jdbcTemplate.update(sql, deck.getDeckName(), deck.getUserId(), deck.isPublic(),deck.isSubmitted(), deck.getDeckId());
         return deck;
     }
 
@@ -106,6 +135,7 @@ public class JdbcDeckDao implements DeckDao {
         deck.setUserName(rowSet.getString("username"));
         deck.setPublic(rowSet.getBoolean("ispublic"));
         deck.setUserId(rowSet.getInt("user_id"));
+        deck.setSubmitted(rowSet.getBoolean("issubmitted"));
         return deck;
     }
 

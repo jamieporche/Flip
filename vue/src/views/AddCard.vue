@@ -10,9 +10,15 @@
         <article>
           <div id="card-container">
             <div id="action-buttons">
-              <button class="action-button">
+              <router-link
+                :to="{
+                  name: 'new-card-to-deck',
+                  params: { id: this.$route.params.id },
+                }"
+                class="action-button"
+              >
                 Create New Card and Add to Deck
-              </button>
+              </router-link>
               <button class="action-button" v-on:click.stop="addCards">
                 Add Selected to Deck
               </button>
@@ -353,6 +359,7 @@ tr th:last-child {
 .action-button {
   border: none;
   color: white;
+  font-size: 1.5vh;
   font-weight: bold;
   background-color: rgb(49, 92, 49);
   padding: 1.5vh 5vh;

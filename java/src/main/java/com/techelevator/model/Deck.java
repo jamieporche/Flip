@@ -9,12 +9,21 @@ public class Deck {
     private boolean isPublic;
     private String userName;
     private List<Card> cards;
+    private boolean isSubmitted;
 
     public Deck() {}
 
     public Deck(int deckId, String deckName) {
         this.deckId = deckId;
         this.deckName = deckName;
+    }
+
+    public boolean isSubmitted() {
+        return isSubmitted;
+    }
+
+    public void setSubmitted(boolean submitted) {
+        isSubmitted = submitted;
     }
 
     public String getUserName() {

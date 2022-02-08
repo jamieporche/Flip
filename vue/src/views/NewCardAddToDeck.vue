@@ -67,7 +67,7 @@ export default {
   components: {
     FooterComponent,
   },
-  name: "new-card",
+  name: "new-card-add-to-deck",
   data() {
     return {
       newCard: {
