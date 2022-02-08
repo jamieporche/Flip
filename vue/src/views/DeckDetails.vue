@@ -138,6 +138,11 @@ export default {
           this.currentCardIndex = 0;
         }
       }
+
+      document.querySelector(".flashcard").classList.remove("is-flipped");
+      document
+        .querySelector(".card__face--back")
+        .classList.remove("show-answer");
     },
     retrieveDeck() {
       deckService
