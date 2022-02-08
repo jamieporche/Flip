@@ -19,15 +19,17 @@ export default {
     flip(event) {
       if (event.target.tagName === "DIV") {
         event.target.parentElement.classList.toggle("is-flipped");
-        document
-          .querySelector(".card__face--back")
-          .classList.add("show-answer");
+        let cardBacks = document.querySelectorAll(".card__face--back");
+        for (let i = 0; i < cardBacks.length; i++) {
+          cardBacks[i].classList.add("show-answer");
+        }
       }
       if (event.target.tagName === "P") {
         event.target.parentElement.parentElement.classList.toggle("is-flipped");
-        document
-          .querySelector(".card__face--back")
-          .classList.add("show-answer");
+        let cardBacks = document.querySelectorAll(".card__face--back");
+        for (let i = 0; i < cardBacks.length; i++) {
+          cardBacks[i].classList.add("show-answer");
+        }
       }
     },
   },

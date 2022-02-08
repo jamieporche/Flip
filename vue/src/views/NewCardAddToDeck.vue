@@ -12,26 +12,43 @@
       <div id="form-background">
         <div id="form-container">
           <form>
-            <h2>Edit Deck</h2>
-            <label for="deck-name">Deck Name</label>
+            <h2>Create a new Card</h2>
+            <label for="frontOfCard">Question</label>
             <input
               type="text"
-              id="deck-name"
-              name="deck-name"
-              placeholder="Deck Name"
+              id="frontOfCard"
+              name="frontOfCard"
+              placeholder="Question"
               class="input"
-              v-model="deck.deckName"
+              v-model="newCard.frontOfCard"
               required
             />
-            <div id="buttons">
-              <button
-                id="delete-button"
-                v-on:click.prevent="deleteDeck(deck.deckId)"
-                class="deck-button"
-              >
-                Delete
+            <label for="backOfCard">Answer</label>
+            <textarea
+              id="backOfCard"
+              name="backOfCard"
+              rows="5"
+              cols="50"
+              class="input"
+              v-model="newCard.backOfCard"
+              placeholder="Answer"
+              required
+            ></textarea>
+            <label for="tags">Tags</label>
+            <input
+              type="text"
+              id="tags"
+              name="tags"
+              placeholder="Tags"
+              class="input"
+              v-model="newCard.tags"
+              required
+            />
+            <div id="save-buttons">
+              <button id="save" v-on:click.prevent="createCard">Save</button>
+              <button id="save-and-new" v-on:click.prevent="createCardAndReset">
+                Save and New
               </button>
-              <button id="save" v-on:click.prevent="editDeck">Save</button>
             </div>
           </form>
         </div>
@@ -45,51 +62,45 @@
 
 <script>
 import FooterComponent from "../components/FooterComponent.vue";
-import deckService from "../services/DeckService.js";
 
 export default {
   components: {
     FooterComponent,
   },
-  name: "edit-deck",
+  name: "new-card-add-to-deck",
   data() {
     return {
-      deck: {},
+      newCard: {
+        frontOfCard: "",
+        backOfCard: "",
+        tags: "",
+        userId: this.$store.state.user.id,
+      },
     };
   },
   methods: {
-    editDeck() {
-      const editedDeck = this.deck;
-      this.$store.dispatch("EDIT_DECK", editedDeck);
+    createCard() {
+      const newCard = {
+        ...this.newCard,
+      };
+      this.$store.dispatch("CREATE_NEW_CARD", newCard);
+      this.$router.push({ name: "home" });
     },
-    deleteDeck(deckId) {
-      if (window.confirm("Are you sure you want to delete?")) {
-        this.$store.dispatch("DELETE_DECK", deckId);
-        this.$router.push({ name: "my-decks" });
-      }
-    },
-    retrieveDeck() {
-      deckService
-        .getDeckById(this.$route.params.id)
-        .then((response) => {
-          this.$store.commit("SET_DECK", response.data);
-          this.deck = response.data;
-          this.isLoading = false;
-        })
-        .catch((error) => {
-          if (error.response && error.response.status === 404) {
-            alert(
-              "Deck not available. This deck may have been deleted or you have entered an invalid deck ID."
-            );
-            this.$router.push("/");
-          }
-        });
+    createCardAndReset() {
+      const newCard = {
+        ...this.newCard,
+      };
+      this.$store.dispatch("CREATE_NEW_CARD", newCard);
+      this.newCard = {
+        frontOfCard: "",
+        backOfCard: "",
+        tags: "",
+        userId: this.$store.state.user.id,
+      };
     },
   },
   computed: {},
-  created() {
-    this.retrieveDeck();
-  },
+  created() {},
 };
 </script>
 
@@ -131,13 +142,13 @@ nav {
   margin: 0vh 3vh 3vh auto;
 }
 #form-background {
-  min-height: 70vh;
+  min-height: 68vh;
   margin: 20vh 0px 0px 0px;
 }
 form {
   display: flex;
   flex-direction: column;
-  padding: 10vh;
+  padding: 5vh 10vh;
 }
 button {
   border: none;
@@ -146,16 +157,11 @@ button {
   padding: 1.5vh 5vh;
   border-radius: 20px;
 }
-#buttons {
+#save-buttons {
   display: flex;
-  justify-content: space-between;
-  margin-top: 4vh;
-}
-#delete-button {
-  display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   gap: 4vh;
-  background-color: red;
+  margin-top: 4vh;
 }
 .nav-button {
   background-color: #a66f5b;
