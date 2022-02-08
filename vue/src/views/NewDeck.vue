@@ -1,5 +1,10 @@
 <template>
   <div class="view">
+    <!-- experiment below -->
+    <div class="header">
+      <header-component />
+    </div>
+    <!-- experiment above -->
     <nav>
       <router-link :to="{ name: 'home' }" class="nav-button"
         >View Your Cards</router-link
@@ -43,10 +48,16 @@
 </template>
 
 <script>
+// experiment below:
+import HeaderComponent from "../components/HeaderComponent.vue";
+// experiment above
 import FooterComponent from "../components/FooterComponent.vue";
 
 export default {
   components: {
+    // experiment below:
+    HeaderComponent,
+    // experiment above
     FooterComponent,
   },
   name: "new-deck",
@@ -84,9 +95,19 @@ export default {
 </script>
 
 <style scoped>
-.view {
+/* .view {
   display: flex;
   flex-direction: column;
+} */
+.view {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "header header"
+    "nav body"
+    "footer footer";
+  column-gap: 10px;
 }
 h2 {
   margin: 0vh 0vh 4vh 0vh;
@@ -97,32 +118,40 @@ h2 {
 label {
   padding-left: 1.5vh;
 }
+.header{
+  grid-area: header;
+}
 nav {
-  height: 80%;
+  grid-area: nav;
+  /* height: 80%;
   width: 20%;
   position: fixed;
   left: 0;
-  top: 16.2vh;
-  padding-top: 20px;
+  top: 16.2vh; */
+  padding-top: 60px;
   padding-bottom: 20px;
   overflow-x: hidden;
-  background-color: #e4e0dd;
-  border-right: solid #b4b0ad 1px;
+  /* background-color: #e4e0dd; */
+  /* border-right: solid #b4b0ad 1px; */
+  background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 #form-container {
-  width: 75.8%;
+  grid-area: body;
+  /* width: 75.8%; */
+  min-height: 81vh;
   border-radius: 20px;
-  background-color: #e4e0dd;
+  /* background-color: #e4e0dd; */
+  background-image: url("../assets/lighter-blue-green-background.png");
   border: solid #b4b0ad 1px;
-  margin: 0vh 3vh 3vh auto;
+  margin: 0vh auto 0vh auto;
 }
 #form-background {
-  min-height: 70vh;
-  margin: 20vh 0px 0px 0px;
+  /* min-height: 70vh; */
+  /* margin: 20vh 0px 0px 0px; */
 }
 .form {
   display: flex;
@@ -132,9 +161,12 @@ nav {
 button {
   border: none;
   color: white;
-  background-color: rgb(49, 92, 49);
+  background-color: rgba(0, 167, 88, 255);
   padding: 1.5vh 5vh;
   border-radius: 20px;
+}
+button:hover {
+  background-color: rgb(2, 131, 70);
 }
 #save-buttons {
   display: flex;
@@ -143,7 +175,7 @@ button {
   margin-top: 4vh;
 }
 .nav-button {
-  background-color: #a66f5b;
+  background-color: rgba(0, 148, 255, 255);
   color: #f7fafc;
   text-decoration: none;
   border-radius: 10px;
@@ -157,7 +189,7 @@ button {
   justify-self: flex-end;
 }
 .nav-button:hover {
-  background-color: #8a5d4d;
+  background-color: rgb(6, 102, 171);
 }
 .input {
   width: 100%;
@@ -174,7 +206,9 @@ button {
 ::placeholder {
   color: grey;
 }
+
 .footer {
+  grid-area: footer;
   z-index: 3;
 }
 </style>
