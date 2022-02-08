@@ -55,9 +55,9 @@
           </div>
         </article>
       </div>
-      <div class="footer">
-        <footer-component />
-      </div>
+    </div>
+    <div class="footer">
+      <footer-component />
     </div>
   </div>
 </template>
@@ -121,38 +121,43 @@ export default {
 </script>
 
 <style scoped>
-
 .view {
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "nav body"
+    "nav body"
+    "footer footer";
+  column-gap: 10px;
 }
 span {
   font-weight: bold;
 }
 nav {
-  height: 80%;
-  width: 20%;
-  position: fixed;
-  left: 0;
-  top: 16.2vh;
-  padding-top: 20px;
+  grid-area: nav;
+  /* height: 100%; */
+  /* width: 100%; */
+  padding-top: 184.5px;
   padding-bottom: 20px;
   overflow-x: hidden;
-  /*background-image: url("../assets/side-menu-background-img.jpg");*/
-  border-right: solid #b4b0ad 1px;
+  background-image: url("../assets/lighter-blue-green-background.png");
+  /* border-right: solid #b4b0ad 1px; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 #card-container {
+  grid-area: card-container;
   min-height: 60vh;
-  width: 70%;
-  min-width: 73vw;
+  /* width: 77.5%; */
+  /* min-width: 73vw; */
   border-radius: 20px;
   background-image: url("../assets/lighter-blue-green-background.png");
   /*background-color: #e4e0dd;*/
   /*border: solid #b4b0ad 1px;*/
-  margin: 0vh 3vh 0vh auto;
+  margin: 0vh auto 0vh auto;
   padding: 4vh 4vh 4vh 4vh;
   display: flex;
   flex-wrap: wrap;
@@ -199,21 +204,25 @@ nav {
   background-color: rgb(6, 102, 171);
 }
 #main {
-  margin-top: 18vh;
+  margin-top: 12vh;
   min-height: 75vh;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding-bottom: 3vh;
+  /* display: flex;
+  flex-direction: column; */
+  align-items: flex-start;
+  /* padding-bottom: 3vh; */
 }
 #main-body {
-  display: flex;
-  flex-direction: column;
+  grid-area: "body";
+  /* display: flex; */
+  /* flex-direction: column; */
 }
 #search {
+  grid-area: "search";
   width: 49%;
+  /* margin-left: 3vh; */
+  margin: 0vh auto 0vh auto;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
 }
 select {
@@ -256,6 +265,7 @@ input[type="text"] {
   justify-content: space-between;
 }
 .footer {
+  grid-area: footer;
   z-index: 3;
 }
 .no-cards {
