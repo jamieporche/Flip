@@ -7,6 +7,9 @@
       <router-link :to="{ name: 'home' }" class="nav-button">
         View Your Cards</router-link
       >
+      <router-link :to="{ name: 'my-decks' }" class="nav-button">
+        View Your Decks</router-link
+      >
       <router-link :to="{ name: 'public-decks' }" class="nav-button">
         View Public Decks</router-link
       >
@@ -24,22 +27,19 @@
                 :id="deck.deckId"
               />
               <div class="deck-buttons">
-                <router-link
+                <button
                   class="deck-button"
-                  :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
-                  >Edit</router-link
+                  id="reject"
+                  v-on:click.stop="review($event, deck.deckId)"
                 >
-                <router-link
+                  Reject
+                </button>
+                <button
                   class="deck-button"
-                  :disabled="deck.cards.length === 0"
-                  :event="deck.cards.length > 0 ? 'click' : ''"
-                  v-bind:class="{ disabled: deck.cards.length === 0 }"
-                  :to="{
-                    name: 'study-session',
-                    params: { deckId: deck.deckId },
-                  }"
-                  >Study</router-link
+                  v-on:click.stop="review($event, deck.deckId)"
                 >
+                  Approve
+                </button>
               </div>
             </div>
           </div>
@@ -55,25 +55,37 @@
 <script>
 import DeckComponent from "../components/DeckComponent.vue";
 import FooterComponent from "../components/FooterComponent.vue";
+import DeckService from "../services/DeckService";
 
 export default {
   components: {
     FooterComponent,
     DeckComponent,
   },
-  name: "my-decks",
+  name: "review-decks",
   data() {
     return {};
   },
   computed: {
     decks() {
-      return this.$store.state.decks;
+      return this.$store.state.decks.filter((deck) => deck.submitted);
     },
   },
   created() {
-    this.$store.dispatch("LOAD_USERS_DECKS", this.$store.state.user.id);
+    this.$store.dispatch("LOAD_SUBMITTED_DECKS");
   },
-  methods: {},
+  methods: {
+    review(event, deckId) {
+      let deck = this.decks.find((deck) => deck.deckId === deckId);
+      deck.submitted = false;
+
+      if (event.target.id !== "reject") {
+        deck.public = true;
+      }
+
+      DeckService.submitDeckToPublish(deck);
+    },
+  },
 };
 </script>
 
@@ -126,6 +138,9 @@ nav {
   padding: 1.5vh 5vh;
   border-radius: 20px;
   text-decoration: none;
+}
+#reject {
+  background-color: red;
 }
 .deck-button:hover {
   background-color: rgb(36, 66, 36);

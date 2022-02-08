@@ -16,6 +16,15 @@ export default {
   },
   edit(deck) {
     return axios.put(`/decks/update/${deck.deckId}/`, deck);
-  }
+  },
+  getPublicDecks() {
+    return axios.get('/users/get/public/');
+  },
+  submitDeckToPublish(deck) {
+    return axios.put(`/decks/submit/${deck.deckId}/`, deck);
+  },
+  getSubmittedDecks() {
+    return axios.get('/users/get/submit/');
+  }, 
 
 }

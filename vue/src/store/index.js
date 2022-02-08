@@ -117,8 +117,19 @@ export default new Vuex.Store({
       });
     },
     LOAD_USERS_DECKS(context, userId) {
-      console.log("loading users decks");
       deckService.getDecksByUser(userId).then(response => {
+        const decks = response.data;
+        context.commit('SET_DECKS', decks);
+      });
+    },
+    LOAD_PUBLIC_DECKS(context) {
+      deckService.getPublicDecks().then(response => {
+        const decks = response.data;
+        context.commit('SET_DECKS', decks);
+      });
+    },
+    LOAD_SUBMITTED_DECKS(context) {
+      deckService.getSubmittedDecks().then(response => {
         const decks = response.data;
         context.commit('SET_DECKS', decks);
       });

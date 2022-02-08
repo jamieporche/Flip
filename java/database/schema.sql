@@ -41,7 +41,7 @@ CREATE TABLE decks (
 	deck_name varchar(100) NOT NULL,
 	user_id int NOT NULL,
 	isPublic boolean NOT NULL DEFAULT FALSE,
-	isSumbitted boolean NOT NULL DEFAULT FALSE,
+	isSubmitted boolean NOT NULL DEFAULT FALSE,
 	CONSTRAINT PK_decks PRIMARY KEY (deck_id),
 	CONSTRAINT FK_decks_users FOREIGN KEY (user_id) REFERENCES users(user_id)
 );

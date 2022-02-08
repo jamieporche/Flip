@@ -109,7 +109,7 @@ public class JdbcDeckDao implements DeckDao {
     public List<Deck> getSubmittedDecks() {
         List<Deck> deckList = new ArrayList<>();
         List<Integer> deckIds = new ArrayList<>();
-        String sql = "SELECT deck_id FROM decks WHERE issumitted = true";
+        String sql = "SELECT deck_id FROM decks WHERE issubmitted = true";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
             deckIds.add(mapIdsToList(results));
