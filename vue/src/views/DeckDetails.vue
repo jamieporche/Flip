@@ -75,6 +75,7 @@
                 id="submit"
                 v-if="!deck.public && currentUserId == deck.userId"
                 v-on:click="submitDeckToPublish"
+                :disabled="deck.submitted"
               >
                 {{
                   deck.submitted
@@ -201,11 +202,7 @@ export default {
     submitDeckToPublish() {
       let submittedDeck = this.deck;
       submittedDeck.submitted = true;
-      deckService.submitDeckToPublish(submittedDeck).then((response) => {
-        if (response.status === 200) {
-          window.alert("Deck has been submitted to the admin for approval!");
-        }
-      });
+      deckService.submitDeckToPublish(submittedDeck);
     },
   },
   computed: {},
