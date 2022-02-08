@@ -19,9 +19,15 @@ export default {
     flip(event) {
       if (event.target.tagName === "DIV") {
         event.target.parentElement.classList.toggle("is-flipped");
+        document
+          .querySelector(".card__face--back")
+          .classList.add("show-answer");
       }
       if (event.target.tagName === "P") {
         event.target.parentElement.parentElement.classList.toggle("is-flipped");
+        document
+          .querySelector(".card__face--back")
+          .classList.add("show-answer");
       }
     },
   },
@@ -53,6 +59,7 @@ export default {
 }
 .card__face--front {
   background: white;
+  color: #464443;
   border: solid 1px black;
   border-radius: 10px;
   display: flex;
@@ -61,6 +68,7 @@ export default {
 }
 .card__face--back {
   background: white;
+  color: white;
   border: solid 1px black;
   border-radius: 10px;
   display: flex;
@@ -68,6 +76,9 @@ export default {
   align-items: center;
   transform: rotateY(180deg);
   font-size: 1.2vw;
+}
+.show-answer {
+  color: #464443;
 }
 .is-flipped {
   transform: rotateY(180deg);
