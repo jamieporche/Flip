@@ -108,9 +108,18 @@ export default {
 </script>
 
 <style scoped>
-.view {
+/* .view {
   display: flex;
   flex-direction: column;
+} */
+.view {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "nav body"
+    "footer footer";
+  column-gap: 10px;
 }
 h2 {
   margin: 0vh 0vh 4vh 0vh;
@@ -122,27 +131,32 @@ label {
   padding-left: 1.5vh;
 }
 nav {
-  height: 80%;
+  grid-area: nav;
+  /* height: 80%;
   width: 20%;
   position: fixed;
   left: 0;
-  top: 16.2vh;
-  padding-top: 20px;
+  top: 16.2vh; */
+  padding-top: 184.5px;
   padding-bottom: 20px;
   overflow-x: hidden;
-  background-color: #e4e0dd;
-  border-right: solid #b4b0ad 1px;
+  /* background-color: #e4e0dd; */
+  /* border-right: solid #b4b0ad 1px; */
+  background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 #form-container {
-  width: 75.8%;
+  grid-area: body;
+  /* width: 75.8%; */
+  min-height: 85vh;
   border-radius: 20px;
-  background-color: #e4e0dd;
+  /* background-color: #e4e0dd; */
+  background-image: url("../assets/lighter-blue-green-background.png");
   border: solid #b4b0ad 1px;
-  margin: 0vh 3vh 3vh auto;
+  margin: -10vh auto -5vh auto;
 }
 #form-background {
   min-height: 68vh;
@@ -151,14 +165,17 @@ nav {
 form {
   display: flex;
   flex-direction: column;
-  padding: 5vh 10vh;
+  padding: 15vh 10vh;
 }
 button {
   border: none;
   color: white;
-  background-color: rgb(49, 92, 49);
+  background-color: rgba(0, 167, 88, 255);
   padding: 1.5vh 5vh;
   border-radius: 20px;
+}
+button:hover {
+  background-color: rgb(2, 131, 70);
 }
 #save-buttons {
   display: flex;
@@ -167,7 +184,7 @@ button {
   margin-top: 4vh;
 }
 .nav-button {
-  background-color: #a66f5b;
+  background-color: rgba(0, 148, 255, 255);
   color: #f7fafc;
   text-decoration: none;
   border-radius: 10px;
@@ -181,7 +198,7 @@ button {
   justify-self: flex-end;
 }
 .nav-button:hover {
-  background-color: #8a5d4d;
+  background-color: rgb(6, 102, 171);
 }
 .input {
   width: 100%;
@@ -199,6 +216,7 @@ button {
   color: grey;
 }
 .footer {
+  grid-area: footer;
   z-index: 3;
 }
 </style>
