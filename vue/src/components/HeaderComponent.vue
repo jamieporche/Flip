@@ -45,7 +45,8 @@ export default {
   display: grid;
   grid-template-columns: 1fr 5fr;
   grid-template-areas: "logo links";
-  border: solid 2px #b4b0ad;
+  border: none;
+  border-bottom: solid 2px #b4b0ad;
   background-image: linear-gradient(white, #cad6ff);
   /* padding: 1vh 0vh 1vh 0vh; */
   color: #464443;
@@ -84,7 +85,7 @@ img {
 }
 
 .link:hover {
-  color: #f2ab6d;
+  color: #00a758;
 }
 
 /*.router-link-exact-active {*/

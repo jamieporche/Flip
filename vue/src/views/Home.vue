@@ -167,7 +167,7 @@ nav {
   background-image: url("../assets/lighter-blue-green-background.png");
   /*background-color: #e4e0dd;*/
   /*border: solid #b4b0ad 1px;*/
-  margin: 0vh auto 0vh auto;
+  margin-right: 10px;
   padding: 4vh 4vh 4vh 4vh;
   display: flex;
   flex-wrap: wrap;
@@ -214,7 +214,7 @@ nav {
   background-color: rgb(6, 102, 171);
 }
 #main {
-  margin-top: 12vh;
+  margin-top: 13vh;
   min-height: 75vh;
   /* display: flex;
   flex-direction: column; */
