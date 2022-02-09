@@ -184,7 +184,7 @@ h3 {
 }
 nav {
   grid-area: nav;
-  padding-top: 184.5px;
+  padding-top: 20vh;
   padding-bottom: 20px;
   overflow-x: hidden;
   background-image: url("../assets/lighter-blue-green-background.png");
@@ -223,10 +223,8 @@ nav {
 }
 #study-container {
   min-height: 73vh;
-  border-radius: 20px;
   background-image: url("../assets/lighter-blue-green-background.png");
   padding: 4vh 0vh 4vh 0vh;
-  margin-right: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -243,9 +241,6 @@ nav {
 .flashcard-component {
   height: 45vh;
   width: 75vh;
-}
-.deck {
-  width: 60vh;
 }
 .footer {
   z-index: 3;

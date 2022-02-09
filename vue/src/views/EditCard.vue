@@ -128,7 +128,7 @@ label {
 }
 nav {
   grid-area: nav;
-  padding-top: 184.5px;
+  padding-top: 20vh;
   padding-bottom: 20px;
   overflow-x: hidden;
   background-image: url("../assets/lighter-blue-green-background.png");
@@ -139,9 +139,7 @@ nav {
 }
 #form-container {
   min-height: 75vh;
-  border-radius: 20px;
   background-image: url("../assets/lighter-blue-green-background.png");
-  margin-right: 10px;
   padding: 4vh 4vh 4vh 4vh;
 }
 form {
@@ -161,11 +159,9 @@ button {
 .save-button:hover {
   background-color: rgb(2, 131, 70);
 }
-
 #buttons {
   display: flex;
   justify-content: space-between;
-
   margin-top: 4vh;
 }
 .delete-button {
@@ -211,6 +207,10 @@ button {
   background-color: white;
   padding: 12px 20px 12px 12px;
   margin: 1vh 3vh 2vh 0vh;
+}
+.input:focus {
+  outline: none;
+  border-color: rgba(0, 148, 255, 255);
 }
 ::placeholder {
   color: grey;

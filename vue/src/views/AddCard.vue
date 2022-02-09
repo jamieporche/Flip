@@ -47,7 +47,7 @@
                     id="selectAll"
                     v-on:click="selectAll($event)"
                     v-bind:checked="allCardsSelected"
-                    class="checkbox"
+                    class="checkbox search"
                   />
                 </td>
                 <td>
@@ -55,7 +55,7 @@
                     type="text"
                     id="questionFilter"
                     v-model="filter.question"
-                    class="question"
+                    class="question search"
                   />
                 </td>
                 <td>
@@ -63,7 +63,7 @@
                     type="text"
                     id="answerFilter"
                     v-model="filter.answer"
-                    class="answer"
+                    class="answer search"
                   />
                 </td>
                 <td>
@@ -71,7 +71,7 @@
                     type="text"
                     id="tagsFilter"
                     v-model="filter.tags"
-                    class="tags"
+                    class="tags search"
                   />
                 </td>
               </tr>
@@ -251,7 +251,7 @@ export default {
 }
 nav {
   grid-area: nav;
-  padding-top: 184.5px;
+  padding-top: 20vh;
   padding-bottom: 20px;
   overflow-x: hidden;
   background-image: url("../assets/lighter-blue-green-background.png");
@@ -270,14 +270,12 @@ nav {
 }
 #card-container {
   min-height: 60vh;
-  border-radius: 20px;
   background-image: url("../assets/lighter-blue-green-background.png");
   padding: 4vh 0vh 4vh 0vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-between;
-  margin-right: 10px;
   overflow: auto;
 }
 .nav-button {
@@ -391,11 +389,12 @@ input[type="text"] {
   border-bottom: solid 1px grey;
   font-size: 16px;
   background-color: white;
-  padding: 2vh 2vh 0.3vh 2vh;
+  padding: 2vh 2vh 0.3vh 0vh;
   margin: 1vh 3vh 2vh 0vh;
 }
-input[name="search"]:focus {
-  border-color: #f2ab6d;
+input.search:focus {
+  outline: none;
+  border-color: rgba(0, 148, 255, 255);
 }
 .no-cards {
   font-size: 10vh;
@@ -404,9 +403,6 @@ input[name="search"]:focus {
 input[type="checkbox"] {
   width: 2.5vh;
   height: 2.5vh;
-}
-.checkbox input[type="checkbox"]:checked + span {
-  background-color: rgb(49, 92, 49);
 }
 .footer {
   z-index: 3;

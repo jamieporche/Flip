@@ -130,7 +130,7 @@ label {
 }
 nav {
   grid-area: nav;
-  padding-top: 184.5px;
+  padding-top: 20vh;
   padding-bottom: 20px;
   overflow-x: hidden;
   background-image: url("../assets/lighter-blue-green-background.png");
@@ -141,9 +141,7 @@ nav {
 }
 #form-container {
   min-height: 76vh;
-  border-radius: 20px;
   background-image: url("../assets/lighter-blue-green-background.png");
-  margin-right: 10px;
 }
 #form-background {
   grid-area: body;
@@ -199,6 +197,10 @@ button:hover {
   background-color: white;
   padding: 12px 20px 12px 12px;
   margin: 1vh 3vh 2vh 0vh;
+}
+.input:focus {
+  outline: none;
+  border-color: rgba(0, 148, 255, 255);
 }
 ::placeholder {
   color: grey;

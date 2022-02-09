@@ -14,37 +14,38 @@
         View Public Decks</router-link
       >
     </nav>
-    <div id="main-body">
-      <div id="main">
-        <article>
-          <div id="deck-container">
-            <div class="deck" v-for="deck in decks" v-bind:key="deck.id">
-              <deck-component
-                class="deck-card"
-                :name="deck.deckName"
-                :size="deck.cards.length"
-                :createdBy="deck.userName"
-                :id="deck.deckId"
-              />
-              <div class="deck-buttons">
-                <button
-                  class="deck-button"
-                  id="reject"
-                  v-on:click.stop="review($event, deck.deckId)"
-                >
-                  Reject
-                </button>
-                <button
-                  class="deck-button"
-                  v-on:click.stop="review($event, deck.deckId)"
-                >
-                  Approve
-                </button>
-              </div>
+    <div id="main">
+      <article>
+        <div id="deck-container">
+          <div id="card-list-empty" v-if="decks.length == 0">
+            <p class="no-decks">There are no decks to review</p>
+          </div>
+          <div class="deck" v-for="deck in decks" v-bind:key="deck.id">
+            <deck-component
+              class="deck-card"
+              :name="deck.deckName"
+              :size="deck.cards.length"
+              :createdBy="deck.userName"
+              :id="deck.deckId"
+            />
+            <div class="deck-buttons">
+              <button
+                class="deck-button"
+                id="reject"
+                v-on:click.stop="review($event, deck.deckId)"
+              >
+                Reject
+              </button>
+              <button
+                class="deck-button"
+                v-on:click.stop="review($event, deck.deckId)"
+              >
+                Approve
+              </button>
             </div>
           </div>
-        </article>
-      </div>
+        </div>
+      </article>
     </div>
     <div class="footer">
       <footer-component />
@@ -99,6 +100,9 @@ export default {
     "footer footer";
   column-gap: 10px;
 }
+p {
+  color: #464443;
+}
 nav {
   grid-area: nav;
   padding-top: 184.5px;
@@ -131,11 +135,9 @@ nav {
   background-color: rgb(6, 102, 171);
 }
 #deck-container {
-  min-height: 75vh;
-  border-radius: 20px;
+  min-height: 73vh;
   background-image: url("../assets/lighter-blue-green-background.png");
   padding: 4vh 0vh 4vh 0vh;
-  margin-right: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -183,9 +185,9 @@ nav {
   flex-direction: column;
   align-items: stretch;
 }
-#main-body {
-  display: flex;
-  flex-direction: column;
+.no-decks {
+  font-size: 7vh;
+  text-align: center;
 }
 .footer {
   z-index: 3;

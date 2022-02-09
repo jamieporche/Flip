@@ -12,6 +12,7 @@
               <div class="scene">
                 <div class="flashcard" v-on:click.stop="flip($event)">
                   <div class="card__face card__face--front">
+                    <p class="name">{{ teammate.fullName }}</p>
                     <img
                       :src="
                         teammate.name === 'dan'
@@ -91,8 +92,12 @@ img {
   object-fit: cover;
   border-radius: 50%;
 }
+.name {
+  margin: 0;
+}
 a {
   display: block;
+  color: rgba(0, 148, 255, 255);
 }
 #card-container {
   height: 75vh;

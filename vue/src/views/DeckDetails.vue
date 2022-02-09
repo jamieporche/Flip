@@ -30,93 +30,85 @@
         View Public Decks</router-link
       >
     </nav>
-    <div id="main-body">
-      <div id="main">
-        <article>
-          <div
-            id="deck-container"
-            v-bind:class="{ flex: deck.cards.length > 0 }"
-          >
-            <h1>{{ deck.deckName }}</h1>
-            <div class="cards">
-              <flashcard-component
-                v-if="deck.cards.length > 0"
-                :front="
-                  this.$store.state.deck.cards[currentCardIndex].frontOfCard
-                "
-                :back="
-                  this.$store.state.deck.cards[currentCardIndex].backOfCard
-                "
-                class="flashcard-component"
-              />
-            </div>
-            <div class="card-navigation" v-if="deck.cards.length > 0">
-              <img
-                src="../assets/left.png"
-                id="previous-card"
-                v-on:click="changeCard($event)"
-              />
-              <span>
-                {{ currentCardIndex + 1 }} /
-                {{ this.$store.state.deck.cards.length }}
-              </span>
-              <img
-                src="../assets/right.png"
-                id="next-card"
-                v-on:click="changeCard($event)"
-              />
-            </div>
-            <div id="deck-info">
-              <p id="created-by">
-                Created by <span class="bold">{{ deck.userName }}</span>
-              </p>
-              <p id="public">{{ deck.public ? "Public" : "Not Public" }}</p>
-              <button
-                id="submit"
-                v-if="!deck.public && currentUserId == deck.userId"
-                v-on:click="submitDeckToPublish"
-                :disabled="deck.submitted"
-              >
-                {{
-                  deck.submitted
-                    ? "Deck Pending Admin Appproval"
-                    : "Submit Deck to be Published"
-                }}
-              </button>
-              <p id="description">{{ deck.description }}</p>
-            </div>
-            <h3>
+    <div id="main">
+      <article>
+        <div id="deck-container" v-bind:class="{ flex: deck.cards.length > 0 }">
+          <h1>{{ deck.deckName }}</h1>
+          <div class="cards">
+            <flashcard-component
+              v-if="deck.cards.length > 0"
+              :front="
+                this.$store.state.deck.cards[currentCardIndex].frontOfCard
+              "
+              :back="this.$store.state.deck.cards[currentCardIndex].backOfCard"
+              class="flashcard-component"
+            />
+          </div>
+          <div class="card-navigation" v-if="deck.cards.length > 0">
+            <img
+              src="../assets/left.png"
+              id="previous-card"
+              v-on:click="changeCard($event)"
+            />
+            <span>
+              {{ currentCardIndex + 1 }} /
+              {{ this.$store.state.deck.cards.length }}
+            </span>
+            <img
+              src="../assets/right.png"
+              id="next-card"
+              v-on:click="changeCard($event)"
+            />
+          </div>
+          <div id="deck-info">
+            <p id="created-by">
+              Created by <span class="bold">{{ deck.userName }}</span>
+            </p>
+            <p id="public">{{ deck.public ? "Public" : "Not Public" }}</p>
+            <button
+              id="submit"
+              v-if="!deck.public && currentUserId == deck.userId"
+              v-on:click="submitDeckToPublish"
+              :disabled="deck.submitted"
+            >
               {{
-                deck.cards.length > 0
-                  ? "Cards in this Deck"
-                  : "No Cards in this Deck"
+                deck.submitted
+                  ? "Deck Pending Admin Appproval"
+                  : "Submit Deck to be Published"
               }}
-            </h3>
-            <div class="card-list" v-if="deck.cards.length > 0">
-              <div
-                v-for="card in cards"
-                v-bind:key="card.id"
-                class="card-list-item"
-              >
-                <p class="front">{{ card.frontOfCard }}</p>
-                <hr />
-                <p class="back">{{ card.backOfCard }}</p>
-                <img
-                  class="remove-card"
-                  src="../assets/x-icon.png"
-                  v-if="currentUserId == deck.userId"
-                  v-on:click.stop="removeCard(card.cardId)"
-                />
-              </div>
+            </button>
+            <p id="description">{{ deck.description }}</p>
+          </div>
+          <h3>
+            {{
+              deck.cards.length > 0
+                ? "Cards in this Deck"
+                : "No Cards in this Deck"
+            }}
+          </h3>
+          <div class="card-list" v-if="deck.cards.length > 0">
+            <div
+              v-for="card in cards"
+              v-bind:key="card.id"
+              class="card-list-item"
+            >
+              <p class="front">{{ card.frontOfCard }}</p>
+              <hr />
+              <p class="back">{{ card.backOfCard }}</p>
+              <img
+                class="remove-card"
+                src="../assets/x-icon.png"
+                v-if="currentUserId == deck.userId"
+                v-on:click.stop="removeCard(card.cardId)"
+              />
             </div>
           </div>
-        </article>
-      </div>
+        </div>
+      </article>
     </div>
     <div class="footer">
       <footer-component />
     </div>
-    <!-- </div> -->
   </div>
 </template>
 
@@ -236,32 +228,17 @@ h3 {
 }
 nav {
   grid-area: nav;
-  /* height: 80%;
-  width: 20%; */
-  /* position: fixed;
-  left: 0;
-  top: 16.2vh; */
-  padding-top: 130.5px; /* this different, making it fit right with nav buttons */
+  padding-top: 20vh;
   padding-bottom: 20px;
   overflow-x: hidden;
-  /* background-color: #e4e0dd;
-  border-right: solid #b4b0ad 1px; */
+  background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background-image: url("../assets/lighter-blue-green-background.png"); /**/
 }
 #deck-container {
   min-height: 60vh;
-  /* width: 76%;
-  min-width: 76vw; */
-  border-radius: 20px;
-  /* background-color: #e4e0dd;
-  border: solid #b4b0ad 1px; */
-  /* margin: 0vh 3vh 0vh auto; */
-  margin-top: -8vh; /*  this is set to move main component up */
-  margin-right: 10px;
   padding: 4vh 4vh 4vh 4vh;
   display: flex;
   flex-direction: column;
@@ -323,17 +300,10 @@ nav {
   background-color: rgb(6, 102, 171);
 }
 #main {
-  margin-top: 19.5vh;
+  grid-area: body;
+  margin-top: 11vh;
   min-height: 75vh;
-  /* display: flex;
-  flex-direction: column; */
   align-items: flex-end;
-  /* padding-bottom: 3vh; */
-}
-#main-body {
-  grid-area: "body";
-  /* display: flex;
-  flex-direction: column; */
 }
 .card-list {
   margin: 0vh auto 0vh 3vh;
@@ -343,7 +313,6 @@ nav {
   gap: 2vh;
 }
 .card-list-item {
-  /* padding: 3vh; */
   border-radius: 20px;
   background-color: white;
   border: solid #b4b0ad 1px;
