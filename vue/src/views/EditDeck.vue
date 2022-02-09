@@ -136,7 +136,7 @@ nav {
   min-height: 60vh;
   border-radius: 20px;
   background-image: url("../assets/lighter-blue-green-background.png");
-  margin: 25px;
+  margin-right: 10px;
   margin-bottom: 2vh;
   padding: 4vh 4vh 4vh 4vh;
   display: flex;
