@@ -11,57 +11,58 @@
         View Public Decks</router-link
       >
     </nav>
-    <div id="main-body">
     <div id="main">
-    <article>
-      <div id="form-background">
-        <div id="form-container">
-          <form>
-            <h2>Edit Card</h2>
-            <label for="frontOfCard">Question</label>
-            <input
-              type="text"
-              id="frontOfCard"
-              name="frontOfCard"
-              placeholder="Question"
-              class="input"
-              v-model="card.frontOfCard"
-              required
-            />
-            <label for="backOfCard">Answer</label>
-            <textarea
-              id="backOfCard"
-              name="backOfCard"
-              rows="5"
-              cols="50"
-              class="input"
-              v-model="card.backOfCard"
-              placeholder="Answer"
-              required
-            ></textarea>
-            <label for="tags">Tags</label>
-            <input
-              type="text"
-              id="tags"
-              name="tags"
-              placeholder="Tags"
-              class="input"
-              v-model="card.tags"
-              required
-            />
-            <div id="buttons">
-              <button
-                class="delete-button"
-                v-on:click.prevent="deleteCard(card.cardId)">
-                Delete
-              </button>
-              <button class="save-button" v-on:click.prevent="editCard">Save</button>
-            </div>
-          </form>
+      <article>
+        <div id="form-background">
+          <div id="form-container">
+            <form>
+              <h2>Edit Card</h2>
+              <label for="frontOfCard">Question</label>
+              <input
+                type="text"
+                id="frontOfCard"
+                name="frontOfCard"
+                placeholder="Question"
+                class="input"
+                v-model="card.frontOfCard"
+                required
+              />
+              <label for="backOfCard">Answer</label>
+              <textarea
+                id="backOfCard"
+                name="backOfCard"
+                rows="5"
+                cols="50"
+                class="input"
+                v-model="card.backOfCard"
+                placeholder="Answer"
+                required
+              ></textarea>
+              <label for="tags">Tags</label>
+              <input
+                type="text"
+                id="tags"
+                name="tags"
+                placeholder="Tags"
+                class="input"
+                v-model="card.tags"
+                required
+              />
+              <div id="buttons">
+                <button
+                  class="delete-button"
+                  v-on:click.prevent="deleteCard(card.cardId)"
+                >
+                  Delete
+                </button>
+                <button class="save-button" v-on:click.prevent="editCard">
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    </article>
-    </div>
+      </article>
     </div>
     <div class="footer">
       <footer-component />
@@ -126,7 +127,7 @@ label {
   padding-left: 1.5vh;
 }
 nav {
- grid-area: nav;
+  grid-area: nav;
   padding-top: 184.5px;
   padding-bottom: 20px;
   overflow-x: hidden;
@@ -137,32 +138,11 @@ nav {
   justify-content: flex-start;
 }
 #form-container {
-  grid-area: card-container;
-  min-height: 60vh;
+  min-height: 75vh;
   border-radius: 20px;
   background-image: url("../assets/lighter-blue-green-background.png");
   margin-right: 10px;
-  margin-bottom: 2vh;
   padding: 4vh 4vh 4vh 4vh;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-content: space-between;
-  gap: 7vh 3vh;
-  overflow: auto;
-}
-#frontOfCard {
-  border-radius: 10px;
-}
-#backOfCard {
-  border-radius: 10px;
-}
-#tags {
-  border-radius: 10px;
-}
-#form-background {
-  min-height: 68vh;
-  margin: 20vh 0px 0px 0px;
 }
 form {
   display: flex;
@@ -185,7 +165,7 @@ button {
 #buttons {
   display: flex;
   justify-content: space-between;
-  
+
   margin-top: 4vh;
 }
 .delete-button {
@@ -216,12 +196,9 @@ button {
   background-color: rgb(6, 102, 171);
 }
 #main {
-  margin-top: 13vh;
+  grid-area: body;
+  margin-top: 11vh;
   min-height: 75vh;
-  align-items: flex-start;
-}
-#main-body {
-  grid-area: "body";
 }
 .input {
   width: 100%;

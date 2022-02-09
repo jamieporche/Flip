@@ -148,6 +148,7 @@ nav {
   background-image: url("../assets/lighter-blue-green-background.png");
   border: solid #b4b0ad 1px;
   margin: 0vh auto 0vh auto;
+  margin-right: 10px;
 }
 #form-background {
   /* min-height: 70vh; */
