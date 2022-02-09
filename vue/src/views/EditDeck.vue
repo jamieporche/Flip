@@ -205,7 +205,7 @@ button {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   border: 2px solid #ccc;
-  border-radius: 20px;
+  border-radius: 10px;
   font-size: 16px;
   background-color: white;
   padding: 12px 20px 12px 12px;

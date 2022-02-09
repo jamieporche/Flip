@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import cardService from '../services/CardService.js'
 import deckService from '../services/DeckService.js'
+import cardDeckService from '../services/CardDeckService.js'
 import router from '../router'
 
 Vue.use(Vuex)
@@ -34,10 +35,10 @@ export default new Vuex.Store({
       cards: [],
       isCorrect: false,
     },
-    teammates: [ { dan: { profilePhoto: "", bio: "", linkedinUrl: "" } },
-    { anna: { profilePhoto: "", bio: "", linkedinUrl: "" } },
-    { sean: { profilePhoto: "", bio: "", linkedinUrl: "" } },
-    { jamie: { profilePhoto: "", bio: "", linkedinUrl: "" } }
+    teammates: [ { dan: { profilePhoto: "../assets/dan-headshot.jpg", bio: "", linkedinUrl: "https://www.linkedin.com/in/daniel-schnelzer-398944223/" } },
+    { anna: { profilePhoto: "../assets/anna-headshot.jpg", bio: "", linkedinUrl: "https://www.linkedin.com/in/annaokada1/" } },
+    { sean: { profilePhoto: "", bio: "", linkedinUrl: "https://www.linkedin.com/in/seanoberc/" } },
+    { jamie: { profilePhoto: "../jamie-headshot.png", bio: "", linkedinUrl: "https://www.linkedin.com/in/jamieporche/" } }
   ],
 },
   mutations: {
@@ -117,7 +118,31 @@ export default new Vuex.Store({
         if (response.status == 200) {
           const newCard = response.data;
           context.commit('ADD_CARD', newCard);
-
+        }
+      });
+    },
+    CREATE_NEW_CARD_ADD_TO_DECK(context, card) {
+      cardService.create(card).then(response => {
+        if (response.status == 200) {
+          const newCard = response.data;
+          const cardToAdd = [{ cardId: newCard.cardId, deckId: card.deckId }];
+          console.log(cardToAdd);
+          cardDeckService.addCards(cardToAdd).then(response => {
+            if (response.status === 200) {
+              console.log("deck id " + card.deckId);
+              router.push({ name: "deck-details", params: { id: card.deckId } });
+            }
+          });
+        }
+      });
+    },
+    CREATE_NEW_CARD_ADD_TO_DECK_SAVE_AND_NEW(context, card) {
+      cardService.create(card).then(response => {
+        if (response.status == 200) {
+          const newCard = response.data;
+          const cardToAdd = [{ cardId: newCard.cardId, deckId: card.deckId }];
+          console.log(cardToAdd);
+          cardDeckService.addCards(cardToAdd);
         }
       });
     },

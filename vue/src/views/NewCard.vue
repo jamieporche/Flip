@@ -1,5 +1,10 @@
 <template>
   <div class="view">
+    <!-- experiment below -->
+    <div class="header">
+      <header-component />
+    </div>
+    <!-- experiment above -->
     <nav>
       <router-link :to="{ name: 'home' }" class="nav-button"
         >View Your Cards</router-link
@@ -64,10 +69,16 @@
 </template>
 
 <script>
+// experiment below:
+import HeaderComponent from "../components/HeaderComponent.vue";
+// experiment above
 import FooterComponent from "../components/FooterComponent.vue";
 
 export default {
   components: {
+    // experiment below:
+    HeaderComponent,
+    // experiment above
     FooterComponent,
   },
   name: "new-card",
@@ -117,18 +128,23 @@ export default {
   display: grid;
   grid-template-columns: 1fr 5fr;
   grid-template-areas:
+    "header header"
     "nav body"
     "footer footer";
   column-gap: 10px;
 }
 h2 {
-  margin: 0vh 0vh 4vh 0vh;
+  margin: 4vh 0vh 4vh 0vh;
+  padding: 4vh 4vh 4vh 4vh;
   text-align: center;
   font-size: 4vh;
   color: #464443;
 }
 label {
   padding-left: 1.5vh;
+}
+.header{
+  grid-area: header;
 }
 nav {
   grid-area: nav;
@@ -137,7 +153,7 @@ nav {
   position: fixed;
   left: 0;
   top: 16.2vh; */
-  padding-top: 184.5px;
+  padding-top: 60px;
   padding-bottom: 20px;
   overflow-x: hidden;
   /* background-color: #e4e0dd; */
@@ -151,21 +167,23 @@ nav {
 #form-container {
   grid-area: body;
   /* width: 75.8%; */
-  min-height: 85vh;
+  min-height: 81vh;
   border-radius: 20px;
   /* background-color: #e4e0dd; */
   background-image: url("../assets/lighter-blue-green-background.png");
   border: solid #b4b0ad 1px;
-  margin: -10vh auto -5vh auto;
+  margin: 0vh auto 0vh auto;
+  margin-right: 10px;
+  padding: 2vh 5vh 0vh 5vh;
 }
 #form-background {
-  min-height: 68vh;
-  margin: 20vh 0px 0px 0px;
+  /* min-height: 70vh; */
+  /* margin: 20vh 0px 0px 0px; */
 }
-form {
+.form {
   display: flex;
   flex-direction: column;
-  padding: 15vh 10vh;
+  padding: 10vh;
 }
 button {
   border: none;
@@ -206,7 +224,7 @@ button:hover {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   border: 2px solid #ccc;
-  border-radius: 20px;
+  border-radius: 10px;
   font-size: 16px;
   background-color: white;
   padding: 12px 20px 12px 12px;

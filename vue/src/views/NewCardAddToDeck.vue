@@ -86,14 +86,16 @@ export default {
       const newCard = {
         ...this.newCard,
       };
-      this.$store.dispatch("CREATE_NEW_CARD", newCard);
-      this.$router.push({ name: "home" });
+      newCard.deckId = this.$route.params.id;
+      this.$store.dispatch("CREATE_NEW_CARD_ADD_TO_DECK", newCard);
+      console.log("going to deck details for deck id " + this.$route.params.id);
     },
     createCardAndReset() {
       const newCard = {
         ...this.newCard,
       };
-      this.$store.dispatch("CREATE_NEW_CARD", newCard);
+      newCard.deckId = this.$route.params.id;
+      this.$store.dispatch("CREATE_NEW_CARD_ADD_TO_DECK_SAVE_AND_NEW", newCard);
       this.newCard = {
         frontOfCard: "",
         backOfCard: "",
@@ -109,8 +111,13 @@ export default {
 
 <style scoped>
 .view {
-  display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "nav body"
+    "footer footer";
+  column-gap: 10px;
 }
 h2 {
   margin: 0vh 0vh 4vh 0vh;
@@ -122,43 +129,41 @@ label {
   padding-left: 1.5vh;
 }
 nav {
-  height: 80%;
-  width: 20%;
-  position: fixed;
-  left: 0;
-  top: 16.2vh;
-  padding-top: 20px;
+  grid-area: nav;
+  padding-top: 184.5px;
   padding-bottom: 20px;
   overflow-x: hidden;
-  background-color: #e4e0dd;
-  border-right: solid #b4b0ad 1px;
+  background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 #form-container {
-  width: 75.8%;
+  min-height: 76vh;
   border-radius: 20px;
-  background-color: #e4e0dd;
-  border: solid #b4b0ad 1px;
-  margin: 0vh 3vh 3vh auto;
+  background-image: url("../assets/lighter-blue-green-background.png");
+  margin-right: 10px;
 }
 #form-background {
-  min-height: 68vh;
-  margin: 20vh 0px 0px 0px;
+  grid-area: body;
+  margin-top: 11vh;
+  min-height: 75vh;
 }
 form {
   display: flex;
   flex-direction: column;
-  padding: 5vh 10vh;
+  padding: 11.2vh 10vh;
 }
 button {
   border: none;
   color: white;
-  background-color: rgb(49, 92, 49);
+  background-color: rgba(0, 167, 88, 255);
   padding: 1.5vh 5vh;
-  border-radius: 20px;
+  border-radius: 10px;
+}
+button:hover {
+  background-color: rgb(2, 131, 70);
 }
 #save-buttons {
   display: flex;
@@ -167,7 +172,7 @@ button {
   margin-top: 4vh;
 }
 .nav-button {
-  background-color: #a66f5b;
+  background-color: rgba(0, 148, 255, 255);
   color: #f7fafc;
   text-decoration: none;
   border-radius: 10px;
@@ -181,7 +186,7 @@ button {
   justify-self: flex-end;
 }
 .nav-button:hover {
-  background-color: #8a5d4d;
+  background-color: rgb(6, 102, 171);
 }
 .input {
   width: 100%;
@@ -189,7 +194,7 @@ button {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   border: 2px solid #ccc;
-  border-radius: 20px;
+  border-radius: 10px;
   font-size: 16px;
   background-color: white;
   padding: 12px 20px 12px 12px;
@@ -199,6 +204,7 @@ button {
   color: grey;
 }
 .footer {
+  grid-area: footer;
   z-index: 3;
 }
 </style>
