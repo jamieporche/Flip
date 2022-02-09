@@ -112,10 +112,11 @@
           </div>
         </article>
       </div>
+      </div>
       <div class="footer">
         <footer-component />
       </div>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -225,36 +226,49 @@ h3 {
 }
 .view {
   min-height: 100vh;
+   display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "nav body"
+    "nav body"
+    "footer footer";
+  column-gap: 10px;
 }
 nav {
-  height: 80%;
-  width: 20%;
-  position: fixed;
+  grid-area: nav;
+  /* height: 80%;
+  width: 20%; */
+  /* position: fixed;
   left: 0;
-  top: 16.2vh;
-  padding-top: 20px;
+  top: 16.2vh; */
+  padding-top: 130.5px;    /* this different, making it fit right with nav buttons */
   padding-bottom: 20px;
   overflow-x: hidden;
-  background-color: #e4e0dd;
-  border-right: solid #b4b0ad 1px;
+  /* background-color: #e4e0dd;
+  border-right: solid #b4b0ad 1px; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  background-image: url("../assets/lighter-blue-green-background.png");  /**/ 
 }
 #deck-container {
   min-height: 60vh;
-  width: 76%;
-  min-width: 76vw;
+  /* width: 76%;
+  min-width: 76vw; */
   border-radius: 20px;
-  background-color: #e4e0dd;
-  border: solid #b4b0ad 1px;
-  margin: 0vh 3vh 0vh auto;
-  padding: 4vh 0vh 4vh 0vh;
+  /* background-color: #e4e0dd;
+  border: solid #b4b0ad 1px; */
+  /* margin: 0vh 3vh 0vh auto; */
+  margin-top: -8vh;            /*  this is set to move main component up */
+  margin-right: 10px;
+  padding: 4vh 4vh 4vh 4vh;
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5vh 0vh;
   overflow: auto;
+  background-image: url("../assets/lighter-blue-green-background.png");  /** */
 }
 .flex {
   display: flex;
@@ -288,7 +302,7 @@ nav {
   justify-content: space-between;
 }
 .nav-button {
-  background-color: #a66f5b;
+  background-color: rgba(0, 148, 255, 255);
   color: #f7fafc;
   text-decoration: none;
   border-radius: 10px;
@@ -302,19 +316,20 @@ nav {
   justify-self: flex-end;
 }
 .nav-button:hover {
-  background-color: #8a5d4d;
+  background-color: rgb(6, 102, 171);
 }
 #main {
   margin-top: 19.5vh;
   min-height: 75vh;
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   align-items: flex-end;
-  padding-bottom: 3vh;
+  /* padding-bottom: 3vh; */
 }
 #main-body {
-  display: flex;
-  flex-direction: column;
+  grid-area: "body";
+  /* display: flex;
+  flex-direction: column; */
 }
 .card-list {
   margin: 0vh auto 0vh 3vh;
@@ -349,5 +364,6 @@ nav {
 }
 .footer {
   z-index: 3;
+  grid-area: footer;
 }
 </style>

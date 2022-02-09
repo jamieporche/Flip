@@ -11,6 +11,8 @@
         View Public Decks</router-link
       >
     </nav>
+    <div id="main-body">
+    <div id="main">
     <article>
       <div id="form-background">
         <div id="form-container">
@@ -49,18 +51,18 @@
             />
             <div id="buttons">
               <button
-                id="delete-button"
-                v-on:click.prevent="deleteCard(card.cardId)"
-                class="deck-button"
-              >
+                class="delete-button"
+                v-on:click.prevent="deleteCard(card.cardId)">
                 Delete
               </button>
-              <button id="save" v-on:click.prevent="editCard">Save</button>
+              <button class="save-button" v-on:click.prevent="editCard">Save</button>
             </div>
           </form>
         </div>
       </div>
     </article>
+    </div>
+    </div>
     <div class="footer">
       <footer-component />
     </div>
@@ -105,8 +107,14 @@ export default {
 
 <style scoped>
 .view {
-  display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "nav body"
+    "nav body"
+    "footer footer";
+  column-gap: 10px;
 }
 h2 {
   margin: 0vh 0vh 4vh 0vh;
@@ -118,27 +126,39 @@ label {
   padding-left: 1.5vh;
 }
 nav {
-  height: 80%;
-  width: 20%;
-  position: fixed;
-  left: 0;
-  top: 16.2vh;
-  padding-top: 20px;
+ grid-area: nav;
+  padding-top: 184.5px;
   padding-bottom: 20px;
   overflow-x: hidden;
-  background-color: #e4e0dd;
-  border-right: solid #b4b0ad 1px;
+  background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 #form-container {
-  width: 75.8%;
+  grid-area: card-container;
+  min-height: 60vh;
   border-radius: 20px;
-  background-color: #e4e0dd;
-  border: solid #b4b0ad 1px;
-  margin: 0vh 3vh 3vh auto;
+  background-image: url("../assets/lighter-blue-green-background.png");
+  margin-right: 10px;
+  margin-bottom: 2vh;
+  padding: 4vh 4vh 4vh 4vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: space-between;
+  gap: 7vh 3vh;
+  overflow: auto;
+}
+#frontOfCard {
+  border-radius: 10px;
+}
+#backOfCard {
+  border-radius: 10px;
+}
+#tags {
+  border-radius: 10px;
 }
 #form-background {
   min-height: 68vh;
@@ -152,23 +172,34 @@ form {
 button {
   border: none;
   color: white;
-  background-color: rgb(49, 92, 49);
+  background-color: rgba(0, 167, 88, 255);
   padding: 1.5vh 5vh;
-  border-radius: 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
 }
+.save-button:hover {
+  background-color: rgb(2, 131, 70);
+}
+
 #buttons {
   display: flex;
   justify-content: space-between;
+  
   margin-top: 4vh;
 }
-#delete-button {
+.delete-button {
   display: flex;
   justify-content: flex-start;
   gap: 4vh;
   background-color: red;
+  cursor: pointer;
+}
+.delete-button:hover {
+  background-color: rgb(218, 4, 4);
 }
 .nav-button {
-  background-color: #a66f5b;
+  background-color: rgba(0, 148, 255, 255);
   color: #f7fafc;
   text-decoration: none;
   border-radius: 10px;
@@ -182,7 +213,15 @@ button {
   justify-self: flex-end;
 }
 .nav-button:hover {
-  background-color: #8a5d4d;
+  background-color: rgb(6, 102, 171);
+}
+#main {
+  margin-top: 13vh;
+  min-height: 75vh;
+  align-items: flex-start;
+}
+#main-body {
+  grid-area: "body";
 }
 .input {
   width: 100%;
@@ -200,6 +239,7 @@ button {
   color: grey;
 }
 .footer {
+  grid-area: footer;
   z-index: 3;
 }
 </style>
