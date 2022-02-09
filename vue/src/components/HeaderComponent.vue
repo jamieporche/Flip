@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
     <div id="logo">
-      <router-link v-bind:to="{ name: 'home' }" v-if="$store.state.token != ''"
+      <router-link v-bind:to="{ name: 'home' }"
         ><img src="../assets/flip-logo.png" alt="Flip" />
       </router-link>
     </div>
