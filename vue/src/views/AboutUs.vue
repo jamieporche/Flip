@@ -39,10 +39,7 @@ export default {
 }
 #card-container {
   height: 75vh;
-  /* min-width: 73vw; */
   background-image: url("../assets/lighter-blue-green-background.png");
-  /*background-color: #e4e0dd;*/
-  /*border: solid #b4b0ad 1px;*/
   padding: 4vh 4vh 4vh 4vh;
   display: flex;
   flex-wrap: wrap;
@@ -55,9 +52,6 @@ export default {
   grid-area: body;
   min-height: 75vh;
   margin-top: 11vh;
-  /* display: flex;
-  flex-direction: column;
-  align-items: flex-end; */
 }
 .flashcard-component {
   height: 24vh;
