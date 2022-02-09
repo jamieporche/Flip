@@ -28,6 +28,7 @@ body {
   height: 100%;
   font-family: "Roboto", sans-serif;
 }
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Bungee+Shade&family=Fredoka+One&family=Montserrat&display=swap");
 
 header {
   position: fixed;
