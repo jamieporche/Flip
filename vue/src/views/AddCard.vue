@@ -262,12 +262,11 @@ nav {
 }
 #main {
   grid-area: body;
-  margin-top: 13.5vh;
+  margin-top: 11vh;
   min-height: 75vh;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding-bottom: 3vh;
 }
 #card-container {
   min-height: 60vh;

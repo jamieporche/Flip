@@ -112,10 +112,10 @@
           </div>
         </article>
       </div>
-      </div>
-      <div class="footer">
-        <footer-component />
-      </div>
+    </div>
+    <div class="footer">
+      <footer-component />
+    </div>
     <!-- </div> -->
   </div>
 </template>
@@ -226,7 +226,7 @@ h3 {
 }
 .view {
   min-height: 100vh;
-   display: grid;
+  display: grid;
   grid-template-columns: 1fr 5fr;
   grid-template-areas:
     "nav body"
@@ -241,7 +241,7 @@ nav {
   /* position: fixed;
   left: 0;
   top: 16.2vh; */
-  padding-top: 130.5px;    /* this different, making it fit right with nav buttons */
+  padding-top: 130.5px; /* this different, making it fit right with nav buttons */
   padding-bottom: 20px;
   overflow-x: hidden;
   /* background-color: #e4e0dd;
@@ -250,7 +250,7 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background-image: url("../assets/lighter-blue-green-background.png");  /**/ 
+  background-image: url("../assets/lighter-blue-green-background.png"); /**/
 }
 #deck-container {
   min-height: 60vh;
@@ -260,7 +260,7 @@ nav {
   /* background-color: #e4e0dd;
   border: solid #b4b0ad 1px; */
   /* margin: 0vh 3vh 0vh auto; */
-  margin-top: -8vh;            /*  this is set to move main component up */
+  margin-top: -8vh; /*  this is set to move main component up */
   margin-right: 10px;
   padding: 4vh 4vh 4vh 4vh;
   display: flex;
@@ -268,7 +268,7 @@ nav {
   align-items: center;
   gap: 5vh 0vh;
   overflow: auto;
-  background-image: url("../assets/lighter-blue-green-background.png");  /** */
+  background-image: url("../assets/lighter-blue-green-background.png"); /** */
 }
 .flex {
   display: flex;
@@ -292,10 +292,14 @@ nav {
 #submit {
   border: none;
   color: white;
-  background-color: rgb(49, 92, 49);
-  padding: 1.5vh 5vh;
-  border-radius: 20px;
+  background-color: rgba(0, 167, 88, 255);
+  padding: 1.5vh 3vh;
+  border-radius: 10px;
+  font-size: 2vh;
   text-decoration: none;
+}
+#submit:hover {
+  background-color: rgb(2, 131, 70);
 }
 .deck-buttons {
   display: flex;

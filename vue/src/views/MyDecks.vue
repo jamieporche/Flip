@@ -45,11 +45,10 @@
           </div>
         </article>
       </div>
-      </div>
-      <div class="footer">
-        <footer-component />
-      </div>
-    
+    </div>
+    <div class="footer">
+      <footer-component />
+    </div>
   </div>
 </template>
 
@@ -81,7 +80,7 @@ export default {
 <style scoped>
 .view {
   min-height: 100vh;
-   display: grid;
+  display: grid;
   grid-template-columns: 1fr 5fr;
   grid-template-areas:
     "nav body"
@@ -124,7 +123,7 @@ nav {
   align-content: space-between;
   gap: 7vh 0vh;
   overflow: auto;
-   margin: -8vh 10px 0vh auto;
+  margin: -8vh 10px 0vh auto;
 }
 .deck {
   width: 60vh;
@@ -135,13 +134,13 @@ nav {
 .deck-button {
   border: none;
   color: white;
-  background-color: rgb(49, 92, 49);
-  padding: 1.5vh 5vh;
-  border-radius: 20px;
   text-decoration: none;
+  background-color: rgba(0, 167, 88, 255);
+  padding: 1.5vh 5vh;
+  border-radius: 10px;
 }
 .deck-button:hover {
-  background-color: rgb(36, 66, 36);
+  background-color: rgb(2, 131, 70);
 }
 .disabled {
   cursor: not-allowed;
@@ -169,7 +168,7 @@ nav {
   justify-self: flex-end;
 }
 .nav-button:hover {
-  background-color:  rgb(6, 102, 171);
+  background-color: rgb(6, 102, 171);
 }
 #main {
   margin-top: 19.5vh;
@@ -181,9 +180,9 @@ nav {
 }
 #main-body {
   grid-area: "body";
-   /* display: flex;
+  /* display: flex;
   flex-direction: column; */
-} 
+}
 .footer {
   grid-area: footer;
   z-index: 3;
