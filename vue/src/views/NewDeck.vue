@@ -118,7 +118,7 @@ h2 {
 label {
   padding-left: 1.5vh;
 }
-.header{
+.header {
   grid-area: header;
 }
 nav {
@@ -146,8 +146,6 @@ nav {
   border-radius: 20px;
   /* background-color: #e4e0dd; */
   background-image: url("../assets/lighter-blue-green-background.png");
-  border: solid #b4b0ad 1px;
-  margin: 0vh auto 0vh auto;
   margin-right: 10px;
 }
 #form-background {

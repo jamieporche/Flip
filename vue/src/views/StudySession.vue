@@ -170,7 +170,7 @@ h3 {
   font-weight: bold;
   background-color: rgba(0, 167, 88, 255);
   padding: 1.5vh 5vh;
-  border-radius: 20px;
+  border-radius: 10px;
   text-decoration: none;
 }
 .study-button:hover {
@@ -216,13 +216,13 @@ nav {
 #main {
   grid-area: body;
   margin-top: 11vh;
-  min-height: 75vh;
+  min-height: 73vh;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
 #study-container {
-  min-height: 75vh;
+  min-height: 73vh;
   border-radius: 20px;
   background-image: url("../assets/lighter-blue-green-background.png");
   padding: 4vh 0vh 4vh 0vh;
