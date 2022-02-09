@@ -19,28 +19,26 @@
         View Public Decks</router-link
       >
     </nav>
-    <div id="main-body">
-      <div id="main">
-        <div id="results-container">
-          <div id="number-correct-container">
-            <p class="number-correct">{{ numberCorrect }} Correct</p>
-            <p class="number-correct">{{ numberIncorrect }} Incorrect</p>
+    <div id="main">
+      <div id="results-container">
+        <div id="number-correct-container">
+          <p class="number-correct">{{ numberCorrect }} Correct</p>
+          <p class="number-correct">{{ numberIncorrect }} Incorrect</p>
+        </div>
+        <div id="pie-chart">
+          <div
+            class="pie animate"
+            v-bind:style="{
+              '--percentage': percentCorrect,
+              '--color': '#00a758',
+            }"
+          >
+            {{ percentCorrect }}%
           </div>
-          <div id="pie-chart">
-            <div
-              class="pie animate"
-              v-bind:style="{
-                '--percentage': percentCorrect,
-                '--color': '#00a758',
-              }"
-            >
-              {{ percentCorrect }}%
-            </div>
-          </div>
-          <div id="card-totals">
-            <p id="total-cards">{{ totalCards }} Total</p>
-            <p id="total-unstudied">{{ unstudiedCards }} Unstudied</p>
-          </div>
+        </div>
+        <div id="card-totals">
+          <p id="total-cards">{{ totalCards }} Total</p>
+          <p id="total-unstudied">{{ unstudiedCards }} Unstudied</p>
         </div>
       </div>
     </div>
@@ -143,16 +141,15 @@ nav {
 #main {
   grid-area: body;
   margin-top: 11vh;
-  min-height: 75vh;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
 #results-container {
-  min-height: 75vh;
+  min-height: 72vh;
   border-radius: 20px;
   background-image: url("../assets/lighter-blue-green-background.png");
-  padding: 4vh 0vh 4vh 0vh;
+  padding: 2.5vh 0vh;
   margin-right: 10px;
   display: flex;
   flex-direction: column;
