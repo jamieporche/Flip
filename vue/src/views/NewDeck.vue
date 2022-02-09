@@ -207,7 +207,6 @@ button:hover {
 ::placeholder {
   color: grey;
 }
-
 .footer {
   grid-area: footer;
   z-index: 3;
