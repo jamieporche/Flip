@@ -238,7 +238,7 @@ nav {
   justify-content: flex-start;
 }
 #deck-container {
-  min-height: 60vh;
+  min-height: 80vh;
   padding: 4vh 4vh 4vh 4vh;
   display: flex;
   flex-direction: column;

@@ -142,10 +142,7 @@ nav {
 }
 .disabled {
   cursor: not-allowed;
-  background-color: rgb(49, 92, 49);
-}
-.disabled:hover {
-  background-color: rgb(49, 92, 49);
+  background-color: rgb(2, 131, 70);
 }
 .deck-buttons {
   display: flex;
