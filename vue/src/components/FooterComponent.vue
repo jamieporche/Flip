@@ -2,8 +2,9 @@
   <div class="footer-container">
     <h1>
       Brought to you by <span id="blue">StudyBlue</span
-      ><span id="green">Green</span>
+      ><span id="green">Green</span> 
     </h1>
+    <h1 id="practice">Practice Makes Permanent</h1>
     <div id="nav">
       <router-link id="about-us" v-bind:to="{ name: 'about-us' }" class="link"
         >About Us</router-link
@@ -52,5 +53,8 @@ h1 {
 }
 .router-link-exact-active {
   border-bottom: solid #00a758 3px;
+}
+#practice{
+  color: black;
 }
 </style>
