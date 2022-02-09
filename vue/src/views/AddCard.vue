@@ -8,101 +8,99 @@
         View Public Decks</router-link
       >
     </nav>
-    <div id="main-body">
-      <div id="main">
-        <article>
-          <div id="card-container">
-            <div id="action-buttons">
-              <router-link
-                :to="{
-                  name: 'new-card-to-deck',
-                  params: { id: this.$route.params.id },
-                }"
-                class="action-button"
-              >
-                Create New Card and Add to Deck
-              </router-link>
-              <button class="action-button" v-on:click.stop="addCards">
-                Add Selected to Deck
-                {{
-                  selectedCardIds.length > 0
-                    ? "(" + selectedCardIds.length + ")"
-                    : ""
-                }}
-              </button>
-            </div>
-            <table id="tblCards">
-              <thead>
-                <tr class="tbl-header">
-                  <th class="checkbox">&nbsp;</th>
-                  <th class="question">Question</th>
-                  <th class="answer">Answer</th>
-                  <th class="tags">Tags</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr id="search-bars">
-                  <td>
-                    <input
-                      type="checkbox"
-                      id="selectAll"
-                      v-on:click="selectAll($event)"
-                      v-bind:checked="allCardsSelected"
-                      class="checkbox"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      id="questionFilter"
-                      v-model="filter.question"
-                      class="question"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      id="answerFilter"
-                      v-model="filter.answer"
-                      class="answer"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      id="tagsFilter"
-                      v-model="filter.tags"
-                      class="tags"
-                    />
-                  </td>
-                </tr>
-                <tr
-                  v-for="(card, index) in filteredCards"
-                  v-bind:key="index"
-                  v-bind:class="{
-                    selected: card.isSelected === true,
-                  }"
-                  class="card-details"
-                >
-                  <td>
-                    <input
-                      type="checkbox"
-                      v-bind:id="card.cardId"
-                      v-bind:value="card.cardId"
-                      v-on:change="selectCard($event)"
-                      v-model="card.isSelected"
-                      class="checkbox"
-                    />
-                  </td>
-                  <td class="question">{{ card.frontOfCard }}</td>
-                  <td class="answer">{{ card.backOfCard }}</td>
-                  <td class="tags">{{ card.tags }}</td>
-                </tr>
-              </tbody>
-            </table>
+    <div id="main">
+      <article>
+        <div id="card-container">
+          <div id="action-buttons">
+            <router-link
+              :to="{
+                name: 'new-card-to-deck',
+                params: { id: this.$route.params.id },
+              }"
+              class="action-button"
+            >
+              Create New Card and Add to Deck
+            </router-link>
+            <button class="action-button" v-on:click.stop="addCards">
+              Add Selected to Deck
+              {{
+                selectedCardIds.length > 0
+                  ? "(" + selectedCardIds.length + ")"
+                  : ""
+              }}
+            </button>
           </div>
-        </article>
-      </div>
+          <table id="tblCards">
+            <thead>
+              <tr class="tbl-header">
+                <th class="checkbox">&nbsp;</th>
+                <th class="question">Question</th>
+                <th class="answer">Answer</th>
+                <th class="tags">Tags</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="search-bars">
+                <td>
+                  <input
+                    type="checkbox"
+                    id="selectAll"
+                    v-on:click="selectAll($event)"
+                    v-bind:checked="allCardsSelected"
+                    class="checkbox"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    id="questionFilter"
+                    v-model="filter.question"
+                    class="question"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    id="answerFilter"
+                    v-model="filter.answer"
+                    class="answer"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    id="tagsFilter"
+                    v-model="filter.tags"
+                    class="tags"
+                  />
+                </td>
+              </tr>
+              <tr
+                v-for="(card, index) in filteredCards"
+                v-bind:key="index"
+                v-bind:class="{
+                  selected: card.isSelected === true,
+                }"
+                class="card-details"
+              >
+                <td>
+                  <input
+                    type="checkbox"
+                    v-bind:id="card.cardId"
+                    v-bind:value="card.cardId"
+                    v-on:change="selectCard($event)"
+                    v-model="card.isSelected"
+                    class="checkbox"
+                  />
+                </td>
+                <td class="question">{{ card.frontOfCard }}</td>
+                <td class="answer">{{ card.backOfCard }}</td>
+                <td class="tags">{{ card.tags }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
     </div>
     <div class="footer">
       <footer-component />
@@ -263,15 +261,15 @@ nav {
   justify-content: flex-start;
 }
 #main {
-  margin-top: 18vh;
+  grid-area: body;
+  margin-top: 13.5vh;
   min-height: 75vh;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: stretch;
   padding-bottom: 3vh;
 }
 #card-container {
-  grid-area: card-container;
   min-height: 60vh;
   border-radius: 20px;
   background-image: url("../assets/lighter-blue-green-background.png");
@@ -282,6 +280,41 @@ nav {
   align-content: space-between;
   margin-right: 10px;
   overflow: auto;
+}
+.nav-button {
+  background-color: rgba(0, 148, 255, 255);
+  color: #f7fafc;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+  width: 60%;
+  justify-self: flex-end;
+}
+.nav-button:hover {
+  background-color: rgb(6, 102, 171);
+}
+#action-buttons {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+.action-button {
+  border: none;
+  color: white;
+  font-size: 1.5vh;
+  font-weight: bold;
+  background-color: rgba(0, 167, 88, 255);
+  padding: 1.5vh 5vh;
+  border-radius: 10px;
+  text-decoration: none;
+}
+.action-button:hover {
+  background-color: rgb(2, 131, 70);
 }
 .card-details {
   color: #464443;
@@ -352,41 +385,6 @@ tr th:last-child {
 .tags {
   width: 20%;
 }
-#action-buttons {
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-}
-.action-button {
-  border: none;
-  color: white;
-  font-size: 1.5vh;
-  font-weight: bold;
-  background-color: rgba(0, 167, 88, 255);
-  padding: 1.5vh 5vh;
-  border-radius: 10px;
-  text-decoration: none;
-}
-.action-button:hover {
-  background-color: rgb(2, 131, 70);
-}
-.nav-button {
-  background-color: rgba(0, 148, 255, 255);
-  color: #f7fafc;
-  text-decoration: none;
-  border-radius: 10px;
-  padding: 30px;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px;
-  text-align: center;
-  cursor: pointer;
-  width: 60%;
-  justify-self: flex-end;
-}
-.nav-button:hover {
-  background-color: rgb(6, 102, 171);
-}
 input[type="text"] {
   width: 100%;
   box-sizing: border-box;
@@ -400,10 +398,6 @@ input[type="text"] {
 input[name="search"]:focus {
   border-color: #f2ab6d;
 }
-.footer {
-  z-index: 3;
-  grid-area: footer;
-}
 .no-cards {
   font-size: 10vh;
   text-align: center;
@@ -414,5 +408,9 @@ input[type="checkbox"] {
 }
 .checkbox input[type="checkbox"]:checked + span {
   background-color: rgb(49, 92, 49);
+}
+.footer {
+  z-index: 3;
+  grid-area: footer;
 }
 </style>

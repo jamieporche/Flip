@@ -45,9 +45,9 @@
           </div>
         </article>
       </div>
-      <div class="footer">
-        <footer-component />
-      </div>
+    </div>
+    <div class="footer">
+      <footer-component />
     </div>
   </div>
 </template>
@@ -92,38 +92,54 @@ export default {
 <style scoped>
 .view {
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "nav body"
+    "footer footer";
+  column-gap: 10px;
 }
 nav {
-  height: 80%;
-  width: 20%;
-  position: fixed;
-  left: 0;
-  top: 16.2vh;
-  padding-top: 20px;
+  grid-area: nav;
+  padding-top: 184.5px;
   padding-bottom: 20px;
   overflow-x: hidden;
-  background-color: #e4e0dd;
-  border-right: solid #b4b0ad 1px;
+  background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
+.nav-button {
+  background-color: rgba(0, 148, 255, 255);
+  color: #f7fafc;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+  width: 60%;
+  justify-self: flex-end;
+  box-sizing: border-box;
+  border: none;
+  width: 78%;
+}
+.nav-button:hover {
+  background-color: rgb(6, 102, 171);
+}
 #deck-container {
-  min-height: 60vh;
-  width: 76%;
-  min-width: 76vw;
+  min-height: 75vh;
   border-radius: 20px;
-  background-color: #e4e0dd;
-  border: solid #b4b0ad 1px;
-  margin: 0vh 3vh 0vh auto;
+  background-image: url("../assets/lighter-blue-green-background.png");
   padding: 4vh 0vh 4vh 0vh;
+  margin-right: 10px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-content: space-between;
-  gap: 7vh 0vh;
-  overflow: auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 5vh 0vh;
 }
 .deck {
   width: 60vh;
@@ -134,16 +150,19 @@ nav {
 .deck-button {
   border: none;
   color: white;
-  background-color: rgb(49, 92, 49);
+  background-color: rgba(0, 167, 88, 255);
   padding: 1.5vh 5vh;
-  border-radius: 20px;
+  border-radius: 10px;
   text-decoration: none;
 }
 #reject {
   background-color: red;
 }
+#reject:hover {
+  background-color: rgb(153, 3, 3);
+}
 .deck-button:hover {
-  background-color: rgb(36, 66, 36);
+  background-color: rgb(2, 131, 70);
 }
 .disabled {
   cursor: not-allowed;
@@ -156,30 +175,13 @@ nav {
   display: flex;
   justify-content: space-between;
 }
-.nav-button {
-  background-color: #a66f5b;
-  color: #f7fafc;
-  text-decoration: none;
-  border-radius: 10px;
-  padding: 30px;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px;
-  text-align: center;
-  cursor: pointer;
-  width: 60%;
-  justify-self: flex-end;
-}
-.nav-button:hover {
-  background-color: #8a5d4d;
-}
 #main {
-  margin-top: 19.5vh;
+  grid-area: body;
+  margin-top: 11vh;
   min-height: 75vh;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding-bottom: 3vh;
+  align-items: stretch;
 }
 #main-body {
   display: flex;
@@ -187,5 +189,6 @@ nav {
 }
 .footer {
   z-index: 3;
+  grid-area: footer;
 }
 </style>

@@ -11,56 +11,59 @@
         View Public Decks</router-link
       >
     </nav>
-    <article>
-      <div id="form-background">
-        <div id="form-container">
-          <form>
-            <h2>Edit Card</h2>
-            <label for="frontOfCard">Question</label>
-            <input
-              type="text"
-              id="frontOfCard"
-              name="frontOfCard"
-              placeholder="Question"
-              class="input"
-              v-model="card.frontOfCard"
-              required
-            />
-            <label for="backOfCard">Answer</label>
-            <textarea
-              id="backOfCard"
-              name="backOfCard"
-              rows="5"
-              cols="50"
-              class="input"
-              v-model="card.backOfCard"
-              placeholder="Answer"
-              required
-            ></textarea>
-            <label for="tags">Tags</label>
-            <input
-              type="text"
-              id="tags"
-              name="tags"
-              placeholder="Tags"
-              class="input"
-              v-model="card.tags"
-              required
-            />
-            <div id="buttons">
-              <button
-                id="delete-button"
-                v-on:click.prevent="deleteCard(card.cardId)"
-                class="deck-button"
-              >
-                Delete
-              </button>
-              <button id="save" v-on:click.prevent="editCard">Save</button>
-            </div>
-          </form>
+    <div id="main">
+      <article>
+        <div id="form-background">
+          <div id="form-container">
+            <form>
+              <h2>Edit Card</h2>
+              <label for="frontOfCard">Question</label>
+              <input
+                type="text"
+                id="frontOfCard"
+                name="frontOfCard"
+                placeholder="Question"
+                class="input"
+                v-model="card.frontOfCard"
+                required
+              />
+              <label for="backOfCard">Answer</label>
+              <textarea
+                id="backOfCard"
+                name="backOfCard"
+                rows="5"
+                cols="50"
+                class="input"
+                v-model="card.backOfCard"
+                placeholder="Answer"
+                required
+              ></textarea>
+              <label for="tags">Tags</label>
+              <input
+                type="text"
+                id="tags"
+                name="tags"
+                placeholder="Tags"
+                class="input"
+                v-model="card.tags"
+                required
+              />
+              <div id="buttons">
+                <button
+                  class="delete-button"
+                  v-on:click.prevent="deleteCard(card.cardId)"
+                >
+                  Delete
+                </button>
+                <button class="save-button" v-on:click.prevent="editCard">
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </div>
     <div class="footer">
       <footer-component />
     </div>
@@ -105,8 +108,14 @@ export default {
 
 <style scoped>
 .view {
-  display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "nav body"
+    "nav body"
+    "footer footer";
+  column-gap: 10px;
 }
 h2 {
   margin: 0vh 0vh 4vh 0vh;
@@ -118,31 +127,22 @@ label {
   padding-left: 1.5vh;
 }
 nav {
-  height: 80%;
-  width: 20%;
-  position: fixed;
-  left: 0;
-  top: 16.2vh;
-  padding-top: 20px;
+  grid-area: nav;
+  padding-top: 184.5px;
   padding-bottom: 20px;
   overflow-x: hidden;
-  background-color: #e4e0dd;
-  border-right: solid #b4b0ad 1px;
+  background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 #form-container {
-  width: 75.8%;
+  min-height: 75vh;
   border-radius: 20px;
-  background-color: #e4e0dd;
-  border: solid #b4b0ad 1px;
-  margin: 0vh 3vh 3vh auto;
-}
-#form-background {
-  min-height: 68vh;
-  margin: 20vh 0px 0px 0px;
+  background-image: url("../assets/lighter-blue-green-background.png");
+  margin-right: 10px;
+  padding: 4vh 4vh 4vh 4vh;
 }
 form {
   display: flex;
@@ -152,23 +152,34 @@ form {
 button {
   border: none;
   color: white;
-  background-color: rgb(49, 92, 49);
+  background-color: rgba(0, 167, 88, 255);
   padding: 1.5vh 5vh;
-  border-radius: 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
 }
+.save-button:hover {
+  background-color: rgb(2, 131, 70);
+}
+
 #buttons {
   display: flex;
   justify-content: space-between;
+
   margin-top: 4vh;
 }
-#delete-button {
+.delete-button {
   display: flex;
   justify-content: flex-start;
   gap: 4vh;
   background-color: red;
+  cursor: pointer;
+}
+.delete-button:hover {
+  background-color: rgb(218, 4, 4);
 }
 .nav-button {
-  background-color: #a66f5b;
+  background-color: rgba(0, 148, 255, 255);
   color: #f7fafc;
   text-decoration: none;
   border-radius: 10px;
@@ -182,7 +193,12 @@ button {
   justify-self: flex-end;
 }
 .nav-button:hover {
-  background-color: #8a5d4d;
+  background-color: rgb(6, 102, 171);
+}
+#main {
+  grid-area: body;
+  margin-top: 11vh;
+  min-height: 75vh;
 }
 .input {
   width: 100%;
@@ -200,6 +216,7 @@ button {
   color: grey;
 }
 .footer {
+  grid-area: footer;
   z-index: 3;
 }
 </style>

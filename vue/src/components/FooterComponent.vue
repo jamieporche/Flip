@@ -50,4 +50,7 @@ h1 {
 #about-us:hover {
   color: #00a758;
 }
+.router-link-exact-active {
+  border-bottom: solid #00a758 3px;
+}
 </style>

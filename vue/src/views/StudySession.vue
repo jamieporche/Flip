@@ -8,39 +8,35 @@
         End Study Session</router-link
       >
     </nav>
-    <div id="main-body">
-      <div id="main">
-        <article>
-          <div id="study-container">
-            <div class="cards">
-              <flashcard-component
-                :front="frontOfCard"
-                :back="backOfCard"
-                class="flashcard-component"
-              />
-            </div>
-            <div class="study-buttons" v-on:click.stop="markIsCorrect($event)">
-              <button class="study-button" id="mark-incorrect">
-                Incorrect
-              </button>
-              <span>
-                {{ currentCardIndex + 1 }} /
-                {{ this.$store.state.deck.cards.length }}
-              </span>
-              <button
-                class="study-button"
-                id="mark-correct"
-                v-on:click.stop="markIsCorrect($event)"
-              >
-                Correct
-              </button>
-            </div>
+    <div id="main">
+      <article>
+        <div id="study-container">
+          <div class="cards">
+            <flashcard-component
+              :front="frontOfCard"
+              :back="backOfCard"
+              class="flashcard-component"
+            />
           </div>
-        </article>
-      </div>
-      <div class="footer">
-        <footer-component />
-      </div>
+          <div class="study-buttons" v-on:click.stop="markIsCorrect($event)">
+            <button class="study-button" id="mark-incorrect">Incorrect</button>
+            <span>
+              {{ currentCardIndex + 1 }} /
+              {{ this.$store.state.deck.cards.length }}
+            </span>
+            <button
+              class="study-button"
+              id="mark-correct"
+              v-on:click.stop="markIsCorrect($event)"
+            >
+              Correct
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="footer">
+      <footer-component />
     </div>
   </div>
 </template>
@@ -159,46 +155,78 @@ h3 {
   color: #464443;
   font-size: 3vh;
 }
+.view {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "nav body"
+    "footer footer";
+  column-gap: 10px;
+}
 .study-button {
   border: none;
   color: white;
   font-weight: bold;
-  background-color: rgb(49, 92, 49);
+  background-color: rgba(0, 167, 88, 255);
   padding: 1.5vh 5vh;
   border-radius: 20px;
   text-decoration: none;
 }
+.study-button:hover {
+  background-color: rgb(2, 131, 70);
+}
 #mark-incorrect {
   background-color: red;
 }
-.view {
-  min-height: 100vh;
+#mark-incorrect:hover {
+  background-color: rgb(168, 2, 2);
 }
 nav {
-  height: 80%;
-  width: 20%;
-  position: fixed;
-  left: 0;
-  top: 16.2vh;
-  padding-top: 20px;
+  grid-area: nav;
+  padding-top: 184.5px;
   padding-bottom: 20px;
   overflow-x: hidden;
-  background-color: #e4e0dd;
-  border-right: solid #b4b0ad 1px;
+  background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
+.nav-button {
+  background-color: rgba(0, 148, 255, 255);
+  color: #f7fafc;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+  width: 60%;
+  justify-self: flex-end;
+  box-sizing: border-box;
+  border: none;
+  width: 78%;
+}
+.nav-button:hover {
+  background-color: rgb(6, 102, 171);
+}
+#main {
+  grid-area: body;
+  margin-top: 11vh;
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
 #study-container {
-  min-height: 67vh;
-  width: 76%;
-  min-width: 76vw;
+  min-height: 75vh;
   border-radius: 20px;
-  background-color: #e4e0dd;
-  border: solid #b4b0ad 1px;
-  margin: 0vh 3vh 0vh auto;
+  background-image: url("../assets/lighter-blue-green-background.png");
   padding: 4vh 0vh 4vh 0vh;
+  margin-right: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -219,38 +247,8 @@ nav {
 .deck {
   width: 60vh;
 }
-.nav-button {
-  background-color: #a66f5b;
-  color: #f7fafc;
-  text-decoration: none;
-  border-radius: 10px;
-  padding: 30px;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px;
-  text-align: center;
-  cursor: pointer;
-  justify-self: flex-end;
-  box-sizing: border-box;
-  border: none;
-  width: 78%;
-}
-.nav-button:hover {
-  background-color: #8a5d4d;
-}
-#main {
-  margin-top: 19.5vh;
-  min-height: 75vh;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding-bottom: 3vh;
-}
-#main-body {
-  display: flex;
-  flex-direction: column;
-}
 .footer {
   z-index: 3;
+  grid-area: footer;
 }
 </style>
