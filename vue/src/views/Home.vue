@@ -168,7 +168,7 @@ nav {
   /*background-color: #e4e0dd;*/
   /*border: solid #b4b0ad 1px;*/
   margin-right: 10px;
-  margin-bottom: 2vh;
+  /* margin-bottom: 2vh; */
   padding: 4vh 4vh 4vh 4vh;
   display: flex;
   flex-wrap: wrap;

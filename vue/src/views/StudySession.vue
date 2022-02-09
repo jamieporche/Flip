@@ -155,13 +155,22 @@ h3 {
   color: #464443;
   font-size: 3vh;
 }
+.view {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "nav body"
+    "footer footer";
+  column-gap: 10px;
+}
 .study-button {
   border: none;
   color: white;
   font-weight: bold;
   background-color: rgba(0, 167, 88, 255);
   padding: 1.5vh 5vh;
-  border-radius: 20px;
+  border-radius: 10px;
   text-decoration: none;
 }
 .study-button:hover {
@@ -172,15 +181,6 @@ h3 {
 }
 #mark-incorrect:hover {
   background-color: rgb(168, 2, 2);
-}
-.view {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 5fr;
-  grid-template-areas:
-    "nav body"
-    "footer footer";
-  column-gap: 10px;
 }
 nav {
   grid-area: nav;
@@ -193,17 +193,36 @@ nav {
   align-items: center;
   justify-content: flex-start;
 }
+.nav-button {
+  background-color: rgba(0, 148, 255, 255);
+  color: #f7fafc;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+  width: 60%;
+  justify-self: flex-end;
+  box-sizing: border-box;
+  border: none;
+  width: 78%;
+}
+.nav-button:hover {
+  background-color: rgb(6, 102, 171);
+}
 #main {
   grid-area: body;
-  margin-top: 13.5vh;
-  min-height: 75vh;
+  margin-top: 11vh;
+  min-height: 73vh;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding-bottom: 3vh;
 }
 #study-container {
-  min-height: 60vh;
+  min-height: 73vh;
   border-radius: 20px;
   background-image: url("../assets/lighter-blue-green-background.png");
   padding: 4vh 0vh 4vh 0vh;
@@ -227,26 +246,6 @@ nav {
 }
 .deck {
   width: 60vh;
-}
-.nav-button {
-  background-color: rgba(0, 148, 255, 255);
-  color: #f7fafc;
-  text-decoration: none;
-  border-radius: 10px;
-  padding: 30px;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px;
-  text-align: center;
-  cursor: pointer;
-  width: 60%;
-  justify-self: flex-end;
-  box-sizing: border-box;
-  border: none;
-  width: 78%;
-}
-.nav-button:hover {
-  background-color: rgb(6, 102, 171);
 }
 .footer {
   z-index: 3;

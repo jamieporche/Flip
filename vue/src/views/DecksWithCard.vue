@@ -11,44 +11,38 @@
         View Public Decks</router-link
       >
     </nav>
-    <div id="main-body">
-      <div id="main">
-        <article>
-          <div id="deck-container">
-            <div
-              class="deck"
-              v-for="deck in filteredDecks"
-              v-bind:key="deck.id"
-            >
-              <deck-component
-                class="deck-card"
-                :name="deck.deckName"
-                :size="deck.cards.length"
-                :createdBy="deck.userName"
-                :id="deck.deckId"
-              />
-              <div class="deck-buttons">
-                <router-link
-                  class="deck-button"
-                  :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
-                  >Edit</router-link
-                >
-                <router-link
-                  class="deck-button"
-                  :to="{
-                    name: 'study-session',
-                    params: { deckId: deck.deckId },
-                  }"
-                  >Study</router-link
-                >
-              </div>
+    <div id="main">
+      <article>
+        <div id="deck-container">
+          <div class="deck" v-for="deck in filteredDecks" v-bind:key="deck.id">
+            <deck-component
+              class="deck-card"
+              :name="deck.deckName"
+              :size="deck.cards.length"
+              :createdBy="deck.userName"
+              :id="deck.deckId"
+            />
+            <div class="deck-buttons">
+              <router-link
+                class="deck-button"
+                :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
+                >Edit</router-link
+              >
+              <router-link
+                class="deck-button"
+                :to="{
+                  name: 'study-session',
+                  params: { deckId: deck.deckId },
+                }"
+                >Study</router-link
+              >
             </div>
           </div>
-        </article>
-      </div>
-      <div class="footer">
-        <footer-component />
-      </div>
+        </div>
+      </article>
+    </div>
+    <div class="footer">
+      <footer-component />
     </div>
   </div>
 </template>
@@ -102,38 +96,37 @@ export default {
 <style scoped>
 .view {
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "nav body"
+    "nav body"
+    "footer footer";
+  column-gap: 10px;
 }
 nav {
-  height: 80%;
-  width: 20%;
-  position: fixed;
-  left: 0;
-  top: 16.2vh;
-  padding-top: 20px;
+  grid-area: nav;
+  padding-top: 184.5px;
   padding-bottom: 20px;
   overflow-x: hidden;
-  background-color: #e4e0dd;
-  border-right: solid #b4b0ad 1px;
+  background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 #deck-container {
-  min-height: 60vh;
-  width: 76%;
-  min-width: 76vw;
+  min-height: 67vh;
   border-radius: 20px;
-  background-color: #e4e0dd;
-  border: solid #b4b0ad 1px;
-  margin: 0vh 3vh 0vh auto;
-  padding: 4vh 0vh 4vh 0vh;
+  background-image: url("../assets/lighter-blue-green-background.png");
+  padding: 10vh 4vh 4vh 4vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-between;
   gap: 7vh 0vh;
   overflow: auto;
+  margin-right: 10px;
 }
 .deck {
   width: 60vh;
@@ -144,20 +137,20 @@ nav {
 .deck-button {
   border: none;
   color: white;
-  background-color: rgb(49, 92, 49);
+  background-color: rgba(0, 167, 88, 255);
   padding: 1.5vh 5vh;
-  border-radius: 20px;
+  border-radius: 10px;
   text-decoration: none;
 }
 .deck-button:hover {
-  background-color: rgb(36, 66, 36);
+  background-color: rgb(2, 131, 70);
 }
 .deck-buttons {
   display: flex;
   justify-content: space-between;
 }
 .nav-button {
-  background-color: #a66f5b;
+  background-color: rgba(0, 148, 255, 255);
   color: #f7fafc;
   text-decoration: none;
   border-radius: 10px;
@@ -171,21 +164,15 @@ nav {
   justify-self: flex-end;
 }
 .nav-button:hover {
-  background-color: #8a5d4d;
+  background-color: rgb(6, 102, 171);
 }
 #main {
-  margin-top: 19.5vh;
+  margin-top: 11vh;
   min-height: 75vh;
-  display: flex;
-  flex-direction: column;
   align-items: flex-end;
-  padding-bottom: 3vh;
-}
-#main-body {
-  display: flex;
-  flex-direction: column;
 }
 .footer {
+  grid-area: footer;
   z-index: 3;
 }
 </style>

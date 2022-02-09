@@ -113,9 +113,12 @@ export default {
 h1 {
   text-align: center;
   font-size: 7vh;
+  color: #464443;
 }
 label {
+  padding-left: 1vh;
   font-size: 2.5vh;
+  color: #464443;
 }
 #register-screen {
   display: flex;
@@ -132,7 +135,7 @@ div#register {
   border: none;
   margin: auto;
   width: 60%;
-  background-image: linear-gradient(to bottom, rgb(255, 255, 255), #e4e0dd);
+  background-image: url("../assets/lighter-blue-green-background.png");
 }
 #username-container {
   display: flex;
@@ -145,8 +148,9 @@ div#register {
   gap: 5px;
 }
 input {
-  padding: 1vh;
+  padding: 1.4vh;
   border: none;
+  border-radius: 10px;
 }
 input:focus {
   border-color: #f2ab6d;
@@ -155,7 +159,10 @@ input:focus {
   align-self: end;
   text-decoration: none;
   font-size: 2vh;
-  color: rgb(49, 92, 49);
+  color: rgba(0, 148, 255, 255);
+}
+.login:hover {
+  background-color: rgb(6, 102, 171);
 }
 form {
   display: flex;
@@ -167,8 +174,12 @@ button {
   margin-bottom: 50px;
   padding: 1vh;
   color: white;
-  background-color: rgb(49, 92, 49);
+  background-color: rgba(0, 148, 255, 255);
   font-size: 2.5vh;
   border: none;
+  border-radius: 10px;
+}
+button:hover {
+  background-color: rgb(6, 102, 171);
 }
 </style>

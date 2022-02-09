@@ -19,33 +19,31 @@
         View Public Decks</router-link
       >
     </nav>
-    <div id="main-body">
-      <div id="main">
-        <div id="deck-container">
-          <div id="number-correct-container">
-            <p class="number-correct">{{ numberCorrect }} Correct</p>
-            <p class="number-correct">{{ numberIncorrect }} Incorrect</p>
-          </div>
-          <div id="pie-chart">
-            <div
-              class="pie animate"
-              v-bind:style="{
-                '--percentage': percentCorrect,
-                '--color': '#00a758',
-              }"
-            >
-              {{ percentCorrect }}%
-            </div>
-          </div>
-          <div id="card-totals">
-            <p id="total-cards">{{ totalCards }} Total</p>
-            <p id="total-unstudied">{{ unstudiedCards }} Unstudied</p>
+    <div id="main">
+      <div id="results-container">
+        <div id="number-correct-container">
+          <p class="number-correct">{{ numberCorrect }} Correct</p>
+          <p class="number-correct">{{ numberIncorrect }} Incorrect</p>
+        </div>
+        <div id="pie-chart">
+          <div
+            class="pie animate"
+            v-bind:style="{
+              '--percentage': percentCorrect,
+              '--color': '#00a758',
+            }"
+          >
+            {{ percentCorrect }}%
           </div>
         </div>
+        <div id="card-totals">
+          <p id="total-cards">{{ totalCards }} Total</p>
+          <p id="total-unstudied">{{ unstudiedCards }} Unstudied</p>
+        </div>
       </div>
-      <div class="footer">
-        <footer-component />
-      </div>
+    </div>
+    <div class="footer">
+      <footer-component />
     </div>
   </div>
 </template>
@@ -102,25 +100,26 @@ p {
 }
 .view {
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "nav body"
+    "footer footer";
+  column-gap: 10px;
 }
 nav {
-  height: 80%;
-  width: 20%;
-  position: fixed;
-  left: 0;
-  top: 16.2vh;
-  padding-top: 20px;
+  grid-area: nav;
+  padding-top: 184.5px;
   padding-bottom: 20px;
   overflow-x: hidden;
-  background-color: #e4e0dd;
-  border-right: solid #b4b0ad 1px;
+  background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 .nav-button {
-  background-color: #a66f5b;
+  background-color: rgba(0, 148, 255, 255);
   color: #f7fafc;
   text-decoration: none;
   border-radius: 10px;
@@ -132,35 +131,30 @@ nav {
   cursor: pointer;
   width: 60%;
   justify-self: flex-end;
+  box-sizing: border-box;
+  border: none;
+  width: 78%;
 }
 .nav-button:hover {
-  background-color: #8a5d4d;
+  background-color: rgb(6, 102, 171);
 }
 #main {
-  margin-top: 19.5vh;
-  min-height: 75vh;
+  grid-area: body;
+  margin-top: 11vh;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding-bottom: 3vh;
+  align-items: stretch;
 }
-#main-body {
-  display: flex;
-  flex-direction: column;
-}
-#deck-container {
-  min-height: 67vh;
-  width: 76%;
-  min-width: 76vw;
+#results-container {
+  min-height: 72vh;
   border-radius: 20px;
-  background-color: #e4e0dd;
-  border: solid #b4b0ad 1px;
-  margin: 0vh 3vh 0vh auto;
-  padding: 4vh 0vh;
+  background-image: url("../assets/lighter-blue-green-background.png");
+  padding: 2.5vh 0vh;
+  margin-right: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2vh 0vh;
+  gap: 5vh 0vh;
 }
 #number-correct-container {
   width: 90%;
@@ -182,6 +176,7 @@ nav {
 }
 .footer {
   z-index: 3;
+  grid-area: footer;
 }
 @property --percentage {
   syntax: "<number>";
