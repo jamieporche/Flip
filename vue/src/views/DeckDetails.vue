@@ -4,6 +4,9 @@
       <router-link
         :to="{ name: 'study-session', params: { deckId: deck.deckId } }"
         class="nav-button"
+        :disabled="deck.cards.length === 0"
+        :event="deck.cards.length > 0 ? 'click' : ''"
+        v-bind:class="{ disabled: deck.cards.length === 0 }"
         >Study Deck</router-link
       >
       <router-link
@@ -236,6 +239,23 @@ nav {
   align-items: center;
   justify-content: flex-start;
 }
+.nav-button {
+  background-color: rgba(0, 148, 255, 255);
+  color: #f7fafc;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+  width: 60%;
+  justify-self: flex-end;
+}
+.nav-button:hover {
+  background-color: rgb(6, 102, 171);
+}
 #deck-container {
   min-height: 73vh;
   padding: 4vh 4vh 4vh 4vh;
@@ -281,23 +301,6 @@ nav {
   display: flex;
   justify-content: space-between;
 }
-.nav-button {
-  background-color: rgba(0, 148, 255, 255);
-  color: #f7fafc;
-  text-decoration: none;
-  border-radius: 10px;
-  padding: 30px;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px;
-  text-align: center;
-  cursor: pointer;
-  width: 60%;
-  justify-self: flex-end;
-}
-.nav-button:hover {
-  background-color: rgb(6, 102, 171);
-}
 #main {
   grid-area: body;
   margin-top: 11vh;
@@ -310,6 +313,10 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 2vh;
+}
+.disabled {
+  cursor: not-allowed;
+  background-color: rgb(6, 102, 171);
 }
 .card-list-item {
   border-radius: 20px;
