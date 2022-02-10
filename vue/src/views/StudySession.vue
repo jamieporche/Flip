@@ -222,7 +222,7 @@ nav {
   align-items: stretch;
 }
 #study-container {
-  min-height: 73vh;
+  min-height: 69vh;
   background-image: url("../assets/lighter-blue-green-background.png");
   padding: 4vh 0vh 4vh 0vh;
   display: flex;

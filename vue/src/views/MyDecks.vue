@@ -109,7 +109,7 @@ nav {
 }
 #deck-container {
   grid-area: body;
-  min-height: 61vh;
+  min-height: 57vh;
   background-image: url("../assets/lighter-blue-green-background.png");
   padding: 10vh 0vh;
   display: flex;

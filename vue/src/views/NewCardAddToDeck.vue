@@ -88,7 +88,6 @@ export default {
       };
       newCard.deckId = this.$route.params.id;
       this.$store.dispatch("CREATE_NEW_CARD_ADD_TO_DECK", newCard);
-      console.log("going to deck details for deck id " + this.$route.params.id);
     },
     createCardAndReset() {
       const newCard = {

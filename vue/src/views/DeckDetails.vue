@@ -229,7 +229,6 @@ h3 {
 nav {
   grid-area: nav;
   padding-top: 20vh;
-  padding-bottom: 20px;
   overflow-x: hidden;
   background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
@@ -238,7 +237,7 @@ nav {
   justify-content: flex-start;
 }
 #deck-container {
-  min-height: 80vh;
+  min-height: 73vh;
   padding: 4vh 4vh 4vh 4vh;
   display: flex;
   flex-direction: column;

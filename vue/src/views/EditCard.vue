@@ -138,7 +138,7 @@ nav {
   justify-content: flex-start;
 }
 #form-container {
-  min-height: 75vh;
+  min-height: 69vh;
   background-image: url("../assets/lighter-blue-green-background.png");
   padding: 4vh 4vh 4vh 4vh;
 }

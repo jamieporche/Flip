@@ -126,10 +126,8 @@ export default new Vuex.Store({
         if (response.status == 200) {
           const newCard = response.data;
           const cardToAdd = [{ cardId: newCard.cardId, deckId: card.deckId }];
-          console.log(cardToAdd);
           cardDeckService.addCards(cardToAdd).then(response => {
             if (response.status === 200) {
-              console.log("deck id " + card.deckId);
               router.push({ name: "deck-details", params: { id: card.deckId } });
             }
           });
@@ -141,7 +139,6 @@ export default new Vuex.Store({
         if (response.status == 200) {
           const newCard = response.data;
           const cardToAdd = [{ cardId: newCard.cardId, deckId: card.deckId }];
-          console.log(cardToAdd);
           cardDeckService.addCards(cardToAdd);
         }
       });

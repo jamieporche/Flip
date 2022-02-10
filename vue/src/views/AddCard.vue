@@ -230,8 +230,6 @@ export default {
             name: "deck-details",
             params: { id: this.$route.params.id },
           });
-        } else {
-          console.log("post not successful");
         }
       });
     },
@@ -269,13 +267,13 @@ nav {
   align-items: stretch;
 }
 #card-container {
-  min-height: 60vh;
+  min-height: 69vh;
   background-image: url("../assets/lighter-blue-green-background.png");
   padding: 4vh 0vh 4vh 0vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  align-content: space-between;
+  align-content: flex-start;
   overflow: auto;
 }
 .nav-button {

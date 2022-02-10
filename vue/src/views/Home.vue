@@ -141,6 +141,9 @@ export default {
     "footer footer";
   column-gap: 10px;
 }
+p {
+  color: #464443;
+}
 span {
   font-weight: bold;
 }
@@ -157,7 +160,7 @@ nav {
 }
 #card-container {
   grid-area: card-container;
-  min-height: 60vh;
+  min-height: 73vh;
   background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
