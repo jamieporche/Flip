@@ -14,37 +14,38 @@
     <div id="main-body">
       <div id="main">
         <article>
-      <div id="form-background">
-        <div id="form-container">
-          <form>
-            <h2>Edit Deck</h2>
-            <label for="deck-name">Deck Name</label>
-            <input
-              type="text"
-              id="deck-name"
-              name="deck-name"
-              placeholder="Deck Name"
-              class="input"
-              v-model="deck.deckName"
-              required
-            />
-            <div id="buttons">
-              <button
-                class="delete-button"
-                v-on:click.prevent="deleteDeck(deck.deckId)"
-               
-              >
-                Delete
-              </button>
-              <button class="save" v-on:click.prevent="editDeck">Save</button>
+          <div id="form-background">
+            <div id="form-container">
+              <form>
+                <h2>Edit Deck</h2>
+                <label for="deck-name">Deck Name</label>
+                <input
+                  type="text"
+                  id="deck-name"
+                  name="deck-name"
+                  placeholder="Deck Name"
+                  class="input"
+                  v-model="deck.deckName"
+                  required
+                />
+                <div id="buttons">
+                  <button
+                    class="delete-button"
+                    v-on:click.prevent="deleteDeck(deck.deckId)"
+                  >
+                    Delete
+                  </button>
+                  <button class="save" v-on:click.prevent="editDeck">
+                    Save
+                  </button>
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
+          </div>
+        </article>
       </div>
-      </article>
     </div>
-  </div>
-  <div class="footer">
+    <div class="footer">
       <footer-component />
     </div>
   </div>
@@ -121,7 +122,7 @@ label {
   padding-left: 1.5vh;
 }
 nav {
- grid-area: nav;
+  grid-area: nav;
   padding-top: 184.5px;
   padding-bottom: 20px;
   overflow-x: hidden;
@@ -133,11 +134,10 @@ nav {
 }
 #form-container {
   grid-area: card-container;
-  min-height: 60vh;
+  min-height: 78vh;
   border-radius: 20px;
   background-image: url("../assets/lighter-blue-green-background.png");
-  margin-right: 10px;
-  margin-bottom: 2vh;
+  margin: -8vh 10px 0vh auto;
   padding: 4vh 4vh 4vh 4vh;
   display: flex;
   flex-wrap: wrap;
@@ -154,6 +154,20 @@ form {
   display: flex;
   flex-direction: column;
   padding: 10vh;
+  width: 100%;
+}
+#main {
+  margin-top: 11vh;
+  min-height: 75vh;
+  /* display: flex;
+  flex-direction: column; */
+  align-items: flex-end;
+  /* padding-bottom: 3vh; */
+}
+#main-body {
+  grid-area: body;
+  /* display: flex;
+  flex-direction: column; */
 }
 button {
   border: none;
