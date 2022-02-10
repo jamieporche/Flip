@@ -47,7 +47,7 @@ import FooterComponent from "../components/FooterComponent.vue";
 import danHeadshot from "@/assets/dan-headshot.jpg";
 import annaHeadshot from "@/assets/anna-headshot.jpg";
 import jamieHeadshot from "@/assets/jamie-headshot.jpg";
-import seanHeadshot from "@/assets/flip-logo.png";
+import seanHeadshot from "@/assets/crypto-sean.jpg";
 
 export default {
   components: {
