@@ -210,6 +210,10 @@ button {
   padding: 12px 20px 12px 12px;
   margin: 1vh 3vh 2vh 0vh;
 }
+.input:focus {
+  outline: none;
+  border-color: rgba(0, 148, 255, 255);
+}
 ::placeholder {
   color: grey;
 }
