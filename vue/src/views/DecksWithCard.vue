@@ -65,11 +65,8 @@ export default {
   },
   computed: {
     filteredDecks() {
-      let deckIds = this.cardDecks.map((cardDeck) => {
-        console.log("cardDeck deckId: " + cardDeck.deckId);
-        return cardDeck.deckId;
-      });
-      console.log("deckIds: " + deckIds);
+      let deckIds = this.cardDecks.map((cardDeck) => cardDeck.deckId);
+
       return this.$store.state.decks.filter((deck) => {
         return deckIds.includes(deck.deckId);
       });
@@ -106,7 +103,7 @@ export default {
 }
 nav {
   grid-area: nav;
-  padding-top: 184.5px;
+  padding-top: 20vh;
   padding-bottom: 20px;
   overflow-x: hidden;
   background-image: url("../assets/lighter-blue-green-background.png");
@@ -117,7 +114,6 @@ nav {
 }
 #deck-container {
   min-height: 67vh;
-  border-radius: 20px;
   background-image: url("../assets/lighter-blue-green-background.png");
   padding: 10vh 4vh 4vh 4vh;
   display: flex;
@@ -126,7 +122,6 @@ nav {
   align-content: space-between;
   gap: 7vh 0vh;
   overflow: auto;
-  margin-right: 10px;
 }
 .deck {
   width: 60vh;

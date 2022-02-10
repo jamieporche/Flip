@@ -127,7 +127,7 @@ label {
 div#register-container {
   width: 100%;
   height: 68vh;
-  margin: 22vh 0px 0px 0px;
+  margin: 20vh 0px 0px 0px;
 }
 div#register {
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);
@@ -153,7 +153,8 @@ input {
   border-radius: 10px;
 }
 input:focus {
-  border-color: #f2ab6d;
+  outline: none;
+  border: solid 2px rgba(0, 148, 255, 255);
 }
 #login {
   align-self: end;

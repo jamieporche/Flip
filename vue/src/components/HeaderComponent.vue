@@ -33,6 +33,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Bungee+Shade&family=Fredoka+One&family=Montserrat&display=swap");
 .header-container {
   display: flex;
   justify-content: flex-start;
@@ -55,6 +56,7 @@ img {
   grid-area: logo;
 }
 #links {
+  font-family: "Fredoka One", Times, sans-serif;
   width: 95%;
   grid-area: links;
   display: flex;

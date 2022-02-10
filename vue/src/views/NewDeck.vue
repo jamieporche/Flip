@@ -1,10 +1,5 @@
 <template>
   <div class="view">
-    <!-- experiment below -->
-    <div class="header">
-      <header-component />
-    </div>
-    <!-- experiment above -->
     <nav>
       <router-link :to="{ name: 'home' }" class="nav-button"
         >View Your Cards</router-link
@@ -48,16 +43,10 @@
 </template>
 
 <script>
-// experiment below:
-import HeaderComponent from "../components/HeaderComponent.vue";
-// experiment above
 import FooterComponent from "../components/FooterComponent.vue";
 
 export default {
   components: {
-    // experiment below:
-    HeaderComponent,
-    // experiment above
     FooterComponent,
   },
   name: "new-deck",
@@ -95,16 +84,11 @@ export default {
 </script>
 
 <style scoped>
-/* .view {
-  display: flex;
-  flex-direction: column;
-} */
 .view {
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 5fr;
   grid-template-areas:
-    "header header"
     "nav body"
     "footer footer";
   column-gap: 10px;
@@ -118,21 +102,11 @@ h2 {
 label {
   padding-left: 1.5vh;
 }
-.header {
-  grid-area: header;
-}
 nav {
   grid-area: nav;
-  /* height: 80%;
-  width: 20%;
-  position: fixed;
-  left: 0;
-  top: 16.2vh; */
-  padding-top: 60px;
+  padding-top: 20vh;
   padding-bottom: 20px;
   overflow-x: hidden;
-  /* background-color: #e4e0dd; */
-  /* border-right: solid #b4b0ad 1px; */
   background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
@@ -141,16 +115,12 @@ nav {
 }
 #form-container {
   grid-area: body;
-  /* width: 75.8%; */
-  min-height: 81vh;
-  border-radius: 20px;
-  /* background-color: #e4e0dd; */
+  min-height: 77vh;
   background-image: url("../assets/lighter-blue-green-background.png");
-  margin-right: 10px;
 }
 #form-background {
-  /* min-height: 70vh; */
-  /* margin: 20vh 0px 0px 0px; */
+  min-height: 70vh;
+  margin-top: 11vh;
 }
 .form {
   display: flex;
@@ -162,7 +132,7 @@ button {
   color: white;
   background-color: rgba(0, 167, 88, 255);
   padding: 1.5vh 5vh;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 button:hover {
   background-color: rgb(2, 131, 70);
@@ -201,6 +171,10 @@ button:hover {
   background-color: white;
   padding: 12px 20px 12px 12px;
   margin: 1vh 3vh 2vh 0vh;
+}
+.input:focus {
+  outline: none;
+  border-color: rgba(0, 148, 255, 255);
 }
 ::placeholder {
   color: grey;

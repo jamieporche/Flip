@@ -1,10 +1,5 @@
 <template>
   <div class="view">
-    <!-- experiment below -->
-    <div class="header">
-      <header-component />
-    </div>
-    <!-- experiment above -->
     <nav>
       <router-link :to="{ name: 'home' }" class="nav-button"
         >View Your Cards</router-link
@@ -68,17 +63,11 @@
   </div>
 </template>
 
-<script>
-// experiment below:
-import HeaderComponent from "../components/HeaderComponent.vue";
-// experiment above
+// <script>
 import FooterComponent from "../components/FooterComponent.vue";
 
 export default {
   components: {
-    // experiment below:
-    HeaderComponent,
-    // experiment above
     FooterComponent,
   },
   name: "new-card",
@@ -119,22 +108,17 @@ export default {
 </script>
 
 <style scoped>
-/* .view {
-  display: flex;
-  flex-direction: column;
-} */
 .view {
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 5fr;
   grid-template-areas:
-    "header header"
     "nav body"
     "footer footer";
   column-gap: 10px;
 }
 h2 {
-  margin: 4vh 0vh 4vh 0vh;
+  margin: 0vh 0vh 4vh 0vh;
   padding: 4vh 4vh 4vh 4vh;
   text-align: center;
   font-size: 4vh;
@@ -143,63 +127,16 @@ h2 {
 label {
   padding-left: 1.5vh;
 }
-.header{
-  grid-area: header;
-}
 nav {
   grid-area: nav;
-  /* height: 80%;
-  width: 20%;
-  position: fixed;
-  left: 0;
-  top: 16.2vh; */
-  padding-top: 60px;
+  padding-top: 20vh;
   padding-bottom: 20px;
   overflow-x: hidden;
-  /* background-color: #e4e0dd; */
-  /* border-right: solid #b4b0ad 1px; */
   background-image: url("../assets/lighter-blue-green-background.png");
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-}
-#form-container {
-  grid-area: body;
-  /* width: 75.8%; */
-  min-height: 81vh;
-  border-radius: 20px;
-  /* background-color: #e4e0dd; */
-  background-image: url("../assets/lighter-blue-green-background.png");
-  border: solid #b4b0ad 1px;
-  margin: 0vh auto 0vh auto;
-  margin-right: 10px;
-  padding: 2vh 5vh 0vh 5vh;
-}
-#form-background {
-  /* min-height: 70vh; */
-  /* margin: 20vh 0px 0px 0px; */
-}
-.form {
-  display: flex;
-  flex-direction: column;
-  padding: 10vh;
-}
-button {
-  border: none;
-  color: white;
-  background-color: rgba(0, 167, 88, 255);
-  padding: 1.5vh 5vh;
-  border-radius: 20px;
-}
-button:hover {
-  background-color: rgb(2, 131, 70);
-}
-#save-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 4vh;
-  margin-top: 4vh;
 }
 .nav-button {
   background-color: rgba(0, 148, 255, 255);
@@ -218,6 +155,36 @@ button:hover {
 .nav-button:hover {
   background-color: rgb(6, 102, 171);
 }
+#form-background {
+  margin-top: 11vh;
+}
+#form-container {
+  grid-area: body;
+  min-height: 69vh;
+  background-image: url("../assets/lighter-blue-green-background.png");
+  padding: 4vh 4vh 4vh 4vh;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 5vh 10vh;
+}
+button {
+  border: none;
+  color: white;
+  background-color: rgba(0, 167, 88, 255);
+  padding: 1.5vh 5vh;
+  border-radius: 10px;
+}
+button:hover {
+  background-color: rgb(2, 131, 70);
+}
+#save-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4vh;
+  margin-top: 4vh;
+}
 .input {
   width: 100%;
   right: 0;
@@ -229,6 +196,10 @@ button:hover {
   background-color: white;
   padding: 12px 20px 12px 12px;
   margin: 1vh 3vh 2vh 0vh;
+}
+.input:focus {
+  outline: none;
+  border-color: rgba(0, 148, 255, 255);
 }
 ::placeholder {
   color: grey;

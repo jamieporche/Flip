@@ -35,10 +35,10 @@ export default new Vuex.Store({
       cards: [],
       isCorrect: false,
     },
-    teammates: [ { dan: { profilePhoto: "../assets/dan-headshot.jpg", bio: "", linkedinUrl: "https://www.linkedin.com/in/daniel-schnelzer-398944223/" } },
-    { anna: { profilePhoto: "../assets/anna-headshot.jpg", bio: "", linkedinUrl: "https://www.linkedin.com/in/annaokada1/" } },
-    { sean: { profilePhoto: "", bio: "", linkedinUrl: "https://www.linkedin.com/in/seanoberc/" } },
-    { jamie: { profilePhoto: "../jamie-headshot.png", bio: "", linkedinUrl: "https://www.linkedin.com/in/jamieporche/" } }
+    teammates: [ { name: "dan", fullName: "Dan Schnelzer", bio: "I worked over a decade in the skilled trades. Building and creating things have always been one of my passions. I’ve recently decided to change career paths where I will be using my mind and not my body to bring things to life. As a software developer I plan to create my own applications that I would really like to bring to the world as well as learn all that I can along the way. Try to get a little bit better everyday, and everyday will be a little bit better than the last - Daniel L Schnelzer", linkedinUrl: "https://www.linkedin.com/in/daniel-schnelzer-398944223/" },
+   { name: "anna", fullName: "Anna Okada", bio: "Hi, I'm Anna! I love music and baking and spending time in the sun! I also love animals like our friend, Flip, the elephant. My background is in violin performance and teaching, but I recently switched my focus to attend Tech Elevator and learn about software development. This year, I'm looking forward to starting a career in development, competing in an international violin competition, and becoming a mom!", linkedinUrl: "https://www.linkedin.com/in/annaokada1/" },
+   { name: "sean", fullName: "Sean Oberc", bio: "", linkedinUrl: "https://www.linkedin.com/in/seanoberc/" },
+   { name: "jamie", fullName: "Jamie Porche", bio: "Hi! I'm from Chicago, IL where I live with my fiancé, Tom, and our corgi pup, Billie. I have a background in sales, sales operations, and Salesforce consulting. As a consultant I watched coded solutions come to life, and became fascinated with the endless customizability code provides. This fascination led me to enroll at Tech Elevator to learn the skills to be able to create those solutions myself. Upon graduation, I'll be return to CloudMasonry as a Salesforce Developer.", linkedinUrl: "https://www.linkedin.com/in/jamieporche/" }
   ],
 },
   mutations: {
@@ -126,10 +126,8 @@ export default new Vuex.Store({
         if (response.status == 200) {
           const newCard = response.data;
           const cardToAdd = [{ cardId: newCard.cardId, deckId: card.deckId }];
-          console.log(cardToAdd);
           cardDeckService.addCards(cardToAdd).then(response => {
             if (response.status === 200) {
-              console.log("deck id " + card.deckId);
               router.push({ name: "deck-details", params: { id: card.deckId } });
             }
           });
@@ -141,7 +139,6 @@ export default new Vuex.Store({
         if (response.status == 200) {
           const newCard = response.data;
           const cardToAdd = [{ cardId: newCard.cardId, deckId: card.deckId }];
-          console.log(cardToAdd);
           cardDeckService.addCards(cardToAdd);
         }
       });
@@ -201,7 +198,7 @@ export default new Vuex.Store({
       deckService.edit(deck).then(response => {
         if (response.status === 200) {
           context.commit('EDIT_DECK', deck);
-          router.push({ name: "my-decks" });
+          router.push({ name: "deck-details", params: { id: deck.deckId } });
         }
       })
     },

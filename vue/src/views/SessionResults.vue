@@ -109,7 +109,7 @@ p {
 }
 nav {
   grid-area: nav;
-  padding-top: 184.5px;
+  padding-top: 20vh;
   padding-bottom: 20px;
   overflow-x: hidden;
   background-image: url("../assets/lighter-blue-green-background.png");
@@ -146,11 +146,9 @@ nav {
   align-items: stretch;
 }
 #results-container {
-  min-height: 72vh;
-  border-radius: 20px;
+  min-height: 68vh;
   background-image: url("../assets/lighter-blue-green-background.png");
-  padding: 2.5vh 0vh;
-  margin-right: 10px;
+  padding: 0.55vh 0vh;
   display: flex;
   flex-direction: column;
   align-items: center;

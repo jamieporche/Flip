@@ -18,23 +18,23 @@
         Review Submitted Decks</router-link
       >
     </nav>
-    <div id="main-body">
-      <div id="main">
-        <div id="search">
-          <select v-model="searchBy">
-            <option value="tags">Search Tags</option>
-            <option value="content">Search Card Content</option>
-          </select>
-          <input
-            type="text"
-            name="search"
-            id="search-bar"
-            v-model="filter"
-            placeholder="Search"
-          />
-        </div>
-        <article>
-          <div id="card-container">
+    <div id="main">
+      <article>
+        <div id="card-container">
+          <div id="search">
+            <select v-model="searchBy">
+              <option value="tags">Search Tags</option>
+              <option value="content">Search Card Content</option>
+            </select>
+            <input
+              type="text"
+              name="search"
+              id="search-bar"
+              v-model="filter"
+              placeholder="Search"
+            />
+          </div>
+          <div id="cards">
             <div id="card-list-empty" v-if="filteredCards.length == 0">
               <p class="no-cards">There are no cards to show</p>
             </div>
@@ -63,8 +63,8 @@
               </div>
             </div>
           </div>
-        </article>
-      </div>
+        </div>
+      </article>
     </div>
     <div class="footer">
       <footer-component />
@@ -141,18 +141,18 @@ export default {
     "footer footer";
   column-gap: 10px;
 }
+p {
+  color: #464443;
+}
 span {
   font-weight: bold;
 }
 nav {
   grid-area: nav;
-  /* height: 100%; */
-  /* width: 100%; */
-  padding-top: 184.5px;
+  padding-top: 20vh;
   padding-bottom: 20px;
   overflow-x: hidden;
   background-image: url("../assets/lighter-blue-green-background.png");
-  /* border-right: solid #b4b0ad 1px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -160,15 +160,13 @@ nav {
 }
 #card-container {
   grid-area: card-container;
-  min-height: 60vh;
-  /* width: 77.5%; */
-  /* min-width: 73vw; */
-  border-radius: 20px;
+  min-height: 73vh;
   background-image: url("../assets/lighter-blue-green-background.png");
-  /*background-color: #e4e0dd;*/
-  /*border: solid #b4b0ad 1px;*/
-  margin-right: 10px;
-  /* margin-bottom: 2vh; */
+  display: flex;
+  flex-direction: column;
+  padding-top: 4vh;
+}
+#cards {
   padding: 4vh 4vh 4vh 4vh;
   display: flex;
   flex-wrap: wrap;
@@ -178,13 +176,10 @@ nav {
   overflow: auto;
 }
 #tags {
-  /*margin: 0 3vh 0vh auto;*/
   padding: 2vh 0 2vh 0;
   justify-content: space-evenly;
   align-content: space-between;
   display: flex;
-  /*border: solid black;*/
-  /*background-color: #ffffff;*/
 }
 .card-button {
   border: none;
@@ -215,22 +210,13 @@ nav {
   background-color: rgb(6, 102, 171);
 }
 #main {
-  margin-top: 13vh;
-  min-height: 75vh;
-  /* display: flex;
-  flex-direction: column; */
+  margin-top: 11vh;
+  min-height: 73vh;
   align-items: flex-start;
-  /* padding-bottom: 3vh; */
-}
-#main-body {
-  grid-area: "body";
-  /* display: flex; */
-  /* flex-direction: column; */
 }
 #search {
   grid-area: "search";
   width: 49%;
-  /* margin-left: 3vh; */
   margin: 0vh auto 0vh auto;
   display: flex;
   justify-content: flex-start;
@@ -242,12 +228,13 @@ select {
   margin: 1vh 0vh 2vh 0vh;
   background-color: #f8f7f6;
   border: 2px solid #ccc;
-  border-radius: 20px 0px 0px 20px;
+  border-radius: 10px 0px 0px 10px;
   color: grey;
   font-size: 16px;
 }
 select:focus {
-  border-color: #f2ab6d;
+  outline: none;
+  border-color: rgba(0, 148, 255, 255);
 }
 option {
   color: grey;
@@ -259,13 +246,17 @@ input[type="text"] {
   width: 70%;
   box-sizing: border-box;
   border: 2px solid #ccc;
-  border-radius: 0px 20px 20px 0px;
+  border-radius: 0px 10px 10px 0px;
   font-size: 16px;
   background-color: white;
   background-image: url("../assets/icons8-search-32.png");
   background-repeat: no-repeat;
   padding: 12px 20px 12px 40px;
   margin: 1vh 3vh 2vh 0vh;
+}
+input[name="search"]:focus {
+  outline: none;
+  border: solid 2px rgba(0, 148, 255, 255);
 }
 .flashcard-component {
   height: 24vh;
@@ -282,8 +273,5 @@ input[type="text"] {
 .no-cards {
   font-size: 10vh;
   text-align: center;
-}
-input[name="search"]:focus {
-  border-color: #f2ab6d;
 }
 </style>
