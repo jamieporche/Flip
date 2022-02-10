@@ -13,54 +13,52 @@
     </nav>
     <div id="main">
       <article>
-        <div id="form-background">
-          <div id="form-container">
-            <form>
-              <h2>Edit Card</h2>
-              <label for="frontOfCard">Question</label>
-              <input
-                type="text"
-                id="frontOfCard"
-                name="frontOfCard"
-                placeholder="Question"
-                class="input"
-                v-model="card.frontOfCard"
-                required
-              />
-              <label for="backOfCard">Answer</label>
-              <textarea
-                id="backOfCard"
-                name="backOfCard"
-                rows="5"
-                cols="50"
-                class="input"
-                v-model="card.backOfCard"
-                placeholder="Answer"
-                required
-              ></textarea>
-              <label for="tags">Tags</label>
-              <input
-                type="text"
-                id="tags"
-                name="tags"
-                placeholder="Tags"
-                class="input"
-                v-model="card.tags"
-                required
-              />
-              <div id="buttons">
-                <button
-                  class="delete-button"
-                  v-on:click.prevent="deleteCard(card.cardId)"
-                >
-                  Delete
-                </button>
-                <button class="save-button" v-on:click.prevent="editCard">
-                  Save
-                </button>
-              </div>
-            </form>
-          </div>
+        <div id="form-container">
+          <form>
+            <h2>Edit Card</h2>
+            <label for="frontOfCard">Question</label>
+            <input
+              type="text"
+              id="frontOfCard"
+              name="frontOfCard"
+              placeholder="Question"
+              class="input"
+              v-model="card.frontOfCard"
+              required
+            />
+            <label for="backOfCard">Answer</label>
+            <textarea
+              id="backOfCard"
+              name="backOfCard"
+              rows="5"
+              cols="50"
+              class="input"
+              v-model="card.backOfCard"
+              placeholder="Answer"
+              required
+            ></textarea>
+            <label for="tags">Tags</label>
+            <input
+              type="text"
+              id="tags"
+              name="tags"
+              placeholder="Tags"
+              class="input"
+              v-model="card.tags"
+              required
+            />
+            <div id="buttons">
+              <button
+                class="delete-button"
+                v-on:click.prevent="deleteCard(card.cardId)"
+              >
+                Delete
+              </button>
+              <button class="save-button" v-on:click.prevent="editCard">
+                Save
+              </button>
+            </div>
+          </form>
         </div>
       </article>
     </div>
@@ -113,7 +111,6 @@ export default {
   grid-template-columns: 1fr 5fr;
   grid-template-areas:
     "nav body"
-    "nav body"
     "footer footer";
   column-gap: 10px;
 }
@@ -138,6 +135,7 @@ nav {
   justify-content: flex-start;
 }
 #form-container {
+  grid-area: body;
   min-height: 69vh;
   background-image: url("../assets/lighter-blue-green-background.png");
   padding: 4vh 4vh 4vh 4vh;

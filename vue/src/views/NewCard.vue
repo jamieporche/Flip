@@ -160,15 +160,14 @@ nav {
 }
 #form-container {
   grid-area: body;
-  min-height: 74vh;
+  min-height: 69vh;
   background-image: url("../assets/lighter-blue-green-background.png");
-  margin: 0vh auto 0vh auto;
-  padding: 3vh 5vh 0vh 5vh;
+  padding: 4vh 4vh 4vh 4vh;
 }
-.form {
+form {
   display: flex;
   flex-direction: column;
-  padding: 10vh;
+  padding: 5vh 10vh;
 }
 button {
   border: none;
