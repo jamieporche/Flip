@@ -135,13 +135,15 @@ nav {
   background-color: rgb(6, 102, 171);
 }
 #deck-container {
-  min-height: 73vh;
+  min-height: 57vh;
   background-image: url("../assets/lighter-blue-green-background.png");
-  padding: 4vh 0vh 4vh 0vh;
+  padding: 10vh 0vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5vh 0vh;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: space-between;
+  gap: 7vh 0vh;
+  overflow: auto;
 }
 .deck {
   width: 60vh;

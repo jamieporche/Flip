@@ -119,7 +119,7 @@ export default {
 }
 h2 {
   margin: 0vh 0vh 4vh 0vh;
-  padding: 4vh 4vh 4vh 4vh;
+  padding: 0vh 4vh 4vh 4vh;
   text-align: center;
   font-size: 4vh;
   color: #464443;
@@ -160,14 +160,14 @@ nav {
 }
 #form-container {
   grid-area: body;
-  min-height: 69vh;
+  min-height: 64vh;
   background-image: url("../assets/lighter-blue-green-background.png");
-  padding: 4vh 4vh 4vh 4vh;
+  padding: 2.3vh 4vh 4vh 4vh;
 }
 form {
   display: flex;
   flex-direction: column;
-  padding: 5vh 10vh;
+  padding: 4vh 10vh;
 }
 button {
   border: none;

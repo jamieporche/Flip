@@ -11,39 +11,35 @@
         View Public Decks</router-link
       >
     </nav>
-    <div id="main-body">
-      <div id="main">
-        <article>
-          <div id="form-background">
-            <div id="form-container">
-              <form>
-                <h2>Edit Deck</h2>
-                <label for="deck-name">Deck Name</label>
-                <input
-                  type="text"
-                  id="deck-name"
-                  name="deck-name"
-                  placeholder="Deck Name"
-                  class="input"
-                  v-model="deck.deckName"
-                  required
-                />
-                <div id="buttons">
-                  <button
-                    class="delete-button"
-                    v-on:click.prevent="deleteDeck(deck.deckId)"
-                  >
-                    Delete
-                  </button>
-                  <button class="save" v-on:click.prevent="editDeck">
-                    Save
-                  </button>
-                </div>
-              </form>
-            </div>
+    <div id="main">
+      <article>
+        <div id="form-background">
+          <div id="form-container">
+            <form>
+              <h2>Edit Deck</h2>
+              <label for="deck-name">Deck Name</label>
+              <input
+                type="text"
+                id="deck-name"
+                name="deck-name"
+                placeholder="Deck Name"
+                class="input"
+                v-model="deck.deckName"
+                required
+              />
+              <div id="buttons">
+                <button
+                  class="delete-button"
+                  v-on:click.prevent="deleteDeck(deck.deckId)"
+                >
+                  Delete
+                </button>
+                <button class="save" v-on:click.prevent="editDeck">Save</button>
+              </div>
+            </form>
           </div>
-        </article>
-      </div>
+        </div>
+      </article>
     </div>
     <div class="footer">
       <footer-component />
@@ -108,7 +104,6 @@ export default {
   grid-template-columns: 1fr 5fr;
   grid-template-areas:
     "nav body"
-    "nav body"
     "footer footer";
   column-gap: 10px;
 }
@@ -123,7 +118,7 @@ label {
 }
 nav {
   grid-area: nav;
-  padding-top: 184.5px;
+  padding-top: 20vh;
   padding-bottom: 20px;
   overflow-x: hidden;
   background-image: url("../assets/lighter-blue-green-background.png");
@@ -134,10 +129,8 @@ nav {
 }
 #form-container {
   grid-area: card-container;
-  min-height: 78vh;
-  border-radius: 20px;
+  min-height: 69vh;
   background-image: url("../assets/lighter-blue-green-background.png");
-  margin: -8vh 10px 0vh auto;
   padding: 4vh 4vh 4vh 4vh;
   display: flex;
   flex-wrap: wrap;
@@ -148,7 +141,6 @@ nav {
 }
 #form-background {
   min-height: 70vh;
-  margin: 20vh 0px 0px 0px;
 }
 form {
   display: flex;
@@ -157,17 +149,10 @@ form {
   width: 100%;
 }
 #main {
-  margin-top: 11vh;
-  min-height: 75vh;
-  /* display: flex;
-  flex-direction: column; */
-  align-items: flex-end;
-  /* padding-bottom: 3vh; */
-}
-#main-body {
   grid-area: body;
-  /* display: flex;
-  flex-direction: column; */
+  margin-top: 11vh;
+  min-height: 69vh;
+  align-items: flex-end;
 }
 button {
   border: none;

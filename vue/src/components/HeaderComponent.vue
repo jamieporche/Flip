@@ -69,12 +69,12 @@ img {
   color: #464443;
 }
 .link:hover {
-  color: #00a758;
+  color: purple;
 }
 #logout {
   margin-left: auto;
 }
 .link.router-link-exact-active {
-  border-bottom: solid #00a758 3px;
+  border-bottom: solid purple 3px;
 }
 </style>

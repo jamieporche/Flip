@@ -150,7 +150,7 @@ nav {
 form {
   display: flex;
   flex-direction: column;
-  padding: 11.2vh 10vh;
+  padding: 9.15vh 10vh;
 }
 button {
   border: none;

@@ -54,10 +54,10 @@ h1 {
   color: #464443;
 }
 #about-us:hover {
-  color: #00a758;
+  color: purple;
 }
 .router-link-exact-active {
-  border-bottom: solid #00a758 3px;
+  border-bottom: solid purple 3px;
 }
 #practice {
   color: purple;

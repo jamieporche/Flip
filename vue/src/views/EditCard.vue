@@ -86,7 +86,6 @@ export default {
     editCard() {
       const editedCard = this.card;
       this.$store.dispatch("EDIT_CARD", editedCard);
-      this.$router.push({ name: "home" });
     },
     deleteCard(cardId) {
       if (window.confirm("Are you sure you want to delete?")) {

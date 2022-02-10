@@ -225,7 +225,6 @@ h3 {
   grid-template-columns: 1fr 5fr;
   grid-template-areas:
     "nav body"
-    "nav body"
     "footer footer";
   column-gap: 10px;
 }

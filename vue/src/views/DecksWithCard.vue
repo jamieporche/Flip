@@ -80,13 +80,6 @@ export default {
         this.cardDecks = response.data;
       });
   },
-  methods: {
-    deleteDeck(deckId) {
-      if (window.confirm("Are you sure you want to delete?")) {
-        this.$store.dispatch("DELETE_DECK", deckId);
-      }
-    },
-  },
 };
 </script>
 
@@ -96,7 +89,6 @@ export default {
   display: grid;
   grid-template-columns: 1fr 5fr;
   grid-template-areas:
-    "nav body"
     "nav body"
     "footer footer";
   column-gap: 10px;
@@ -112,8 +104,13 @@ nav {
   align-items: center;
   justify-content: flex-start;
 }
+#main {
+  margin-top: 11vh;
+  min-height: 69vh;
+  align-items: flex-end;
+}
 #deck-container {
-  min-height: 67vh;
+  min-height: 63vh;
   background-image: url("../assets/lighter-blue-green-background.png");
   padding: 10vh 4vh 4vh 4vh;
   display: flex;
@@ -160,11 +157,6 @@ nav {
 }
 .nav-button:hover {
   background-color: rgb(6, 102, 171);
-}
-#main {
-  margin-top: 11vh;
-  min-height: 75vh;
-  align-items: flex-end;
 }
 .footer {
   grid-area: footer;
