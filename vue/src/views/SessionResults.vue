@@ -146,9 +146,8 @@ nav {
   align-items: stretch;
 }
 #results-container {
-  min-height: 68vh;
+  min-height: 77vh;
   background-image: url("../assets/lighter-blue-green-background.png");
-  padding: 0.55vh 0vh;
   display: flex;
   flex-direction: column;
   align-items: center;

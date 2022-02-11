@@ -137,7 +137,7 @@ nav {
   grid-area: body;
   min-height: 69vh;
   background-image: url("../assets/lighter-blue-green-background.png");
-  padding: 4vh 4vh 4vh 4vh;
+  padding: 4vh;
 }
 form {
   display: flex;
