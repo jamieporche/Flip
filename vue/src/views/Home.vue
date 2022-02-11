@@ -52,12 +52,12 @@
               <div id="card-buttons">
                 <router-link
                   class="card-button"
-                  :to="{ name: 'edit-card', params: { id: card.cardId } }"
+                  :to="{ name: 'edit-card', params: { id: card.id } }"
                   >Edit</router-link
                 >
                 <router-link
                   class="card-button"
-                  :to="{ name: 'decks-with-card', params: { id: card.cardId } }"
+                  :to="{ name: 'decks-with-card', params: { id: card.id } }"
                   >Decks with Card</router-link
                 >
               </div>

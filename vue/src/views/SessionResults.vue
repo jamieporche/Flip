@@ -4,7 +4,7 @@
       <router-link
         :to="{
           name: 'study-session',
-          params: { deckId: this.$store.state.deck.deckId },
+          params: { id: this.$store.state.deck.id },
         }"
         class="nav-button"
         >Study Deck Again</router-link

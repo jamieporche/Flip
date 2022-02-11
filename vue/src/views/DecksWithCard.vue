@@ -19,20 +19,20 @@
               class="deck-card"
               :name="deck.deckName"
               :size="deck.cards.length"
-              :createdBy="deck.userName"
-              :id="deck.deckId"
+              :createdBy="deck.username"
+              :id="deck.id"
             />
             <div class="deck-buttons">
               <router-link
                 class="deck-button"
-                :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
+                :to="{ name: 'edit-deck', params: { id: deck.id } }"
                 >Edit</router-link
               >
               <router-link
                 class="deck-button"
                 :to="{
                   name: 'study-session',
-                  params: { deckId: deck.deckId },
+                  params: { id: deck.id },
                 }"
                 >Study</router-link
               >
@@ -68,7 +68,7 @@ export default {
       let deckIds = this.cardDecks.map((cardDeck) => cardDeck.deckId);
 
       return this.$store.state.decks.filter((deck) => {
-        return deckIds.includes(deck.deckId);
+        return deckIds.includes(deck.id);
       });
     },
   },

@@ -2,29 +2,22 @@ import axios from 'axios';
 
 export default {
 
-  getDecksByUser(userId) {
-    return axios.get(`/users/deck/${userId}`);
+  getDecks(isSubmitted, isPublic) {
+    return axios.get(`/decks?submitted=${isSubmitted}&public=${isPublic}`);
   },
-  getDeckById(deckId) {
-    return axios.get(`/deck/${deckId}/`);
+  getDecksByUser(userId) {
+    return axios.get(`/users/${userId}/decks`);
+  },
+  getDeckById(id) {
+    return axios.get(`/decks/${id}`);
   },
   create(deck) {
-    return axios.post("/users/decks/create/", deck);
+    return axios.post("/decks", deck);
   },
-  deleteDeck(deckId){
-    return axios.delete(`/users/decks/${deckId}/`);
+  delete(id){
+    return axios.delete(`/decks/${id}`);
   },
   edit(deck) {
-    return axios.put(`/decks/update/${deck.deckId}/`, deck);
+    return axios.put(`/decks/${deck.id}`, deck);
   },
-  getPublicDecks() {
-    return axios.get('/users/get/public/');
-  },
-  submitDeckToPublish(deck) {
-    return axios.put(`/decks/submit/${deck.deckId}/`, deck);
-  },
-  getSubmittedDecks() {
-    return axios.get('/users/get/submit/');
-  }, 
-
 }

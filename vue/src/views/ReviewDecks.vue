@@ -25,20 +25,20 @@
               class="deck-card"
               :name="deck.deckName"
               :size="deck.cards.length"
-              :createdBy="deck.userName"
-              :id="deck.deckId"
+              :createdBy="deck.username"
+              :id="deck.id"
             />
             <div class="deck-buttons">
               <button
                 class="deck-button"
                 id="reject"
-                v-on:click.stop="review($event, deck.deckId)"
+                v-on:click.stop="review($event, deck.id)"
               >
                 Reject
               </button>
               <button
                 class="deck-button"
-                v-on:click.stop="review($event, deck.deckId)"
+                v-on:click.stop="review($event, deck.id)"
               >
                 Approve
               </button>
@@ -73,18 +73,19 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("LOAD_SUBMITTED_DECKS");
+    let params = { isSubmitted: true, isPublic: false };
+    this.$store.dispatch("LOAD_DECKS", params);
   },
   methods: {
-    review(event, deckId) {
-      let deck = this.decks.find((deck) => deck.deckId === deckId);
+    review(event, id) {
+      let deck = this.decks.find((deck) => deck.id === id);
       deck.submitted = false;
 
       if (event.target.id !== "reject") {
         deck.public = true;
       }
 
-      DeckService.submitDeckToPublish(deck);
+      DeckService.edit(deck);
     },
   },
 };

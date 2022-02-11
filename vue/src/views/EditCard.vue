@@ -50,7 +50,7 @@
             <div id="buttons">
               <button
                 class="delete-button"
-                v-on:click.prevent="deleteCard(card.cardId)"
+                v-on:click.prevent="deleteCard(card.id)"
               >
                 Delete
               </button>
@@ -87,9 +87,9 @@ export default {
       const editedCard = this.card;
       this.$store.dispatch("EDIT_CARD", editedCard);
     },
-    deleteCard(cardId) {
+    deleteCard(id) {
       if (window.confirm("Are you sure you want to delete?")) {
-        this.$store.dispatch("DELETE_CARD", cardId);
+        this.$store.dispatch("DELETE_CARD", id);
         this.$router.push({ name: "home" });
       }
     },

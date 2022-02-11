@@ -16,8 +16,8 @@
               class="deck-card"
               :name="deck.deckName"
               :size="deck.cards.length"
-              :createdBy="deck.userName"
-              :id="deck.deckId"
+              :createdBy="deck.username"
+              :id="deck.id"
             />
             <div class="deck-buttons">
               <router-link
@@ -27,7 +27,7 @@
                 v-bind:class="{ disabled: deck.cards.length === 0 }"
                 :to="{
                   name: 'study-session',
-                  params: { deckId: deck.deckId },
+                  params: { id: deck.id },
                 }"
                 >Study</router-link
               >
@@ -61,7 +61,8 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("LOAD_PUBLIC_DECKS");
+    let params = { isSubmitted: false, isPublic: true };
+    this.$store.dispatch("LOAD_DECKS", params);
   },
   methods: {},
 };

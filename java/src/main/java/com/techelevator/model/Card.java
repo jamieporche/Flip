@@ -2,15 +2,12 @@ package com.techelevator.model;
 
 public class Card {
 
-    private int cardId;
+    private int id;
     private String frontOfCard;
     private String backOfCard;
     private int userId;
     private String username;
     private String tags;
-
-    // private int tagId; ?
-    // private String tagName; ?
 
     public Card() {
     }
@@ -23,12 +20,12 @@ public class Card {
         this.tags = tags;
     }
 
-    public int getCardId() {
-        return cardId;
+    public int getId() {
+        return id;
     }
 
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFrontOfCard() {

@@ -2,7 +2,7 @@
   <div class="view">
     <nav>
       <router-link
-        :to="{ name: 'study-session', params: { deckId: deck.deckId } }"
+        :to="{ name: 'study-session', params: { id: deck.id } }"
         class="nav-button"
         :disabled="deck.cards.length === 0"
         :event="deck.cards.length > 0 ? 'click' : ''"
@@ -10,14 +10,14 @@
         >Study Deck</router-link
       >
       <router-link
-        :to="{ name: 'add-card', params: { id: deck.deckId } }"
+        :to="{ name: 'add-card', params: { id: deck.id } }"
         v-if="this.$store.state.user.id == deck.userId"
         class="nav-button"
       >
         Add Cards</router-link
       >
       <router-link
-        :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
+        :to="{ name: 'edit-deck', params: { id: deck.id } }"
         v-if="this.$store.state.user.id == deck.userId"
         class="nav-button"
       >
@@ -65,7 +65,7 @@
           </div>
           <div id="deck-info">
             <p id="created-by">
-              Created by <span class="bold">{{ deck.userName }}</span>
+              Created by <span class="bold">{{ deck.username }}</span>
             </p>
             <p id="public">{{ deck.public ? "Public" : "Not Public" }}</p>
             <button
@@ -102,7 +102,7 @@
                 class="remove-card"
                 src="../assets/x-icon.png"
                 v-if="currentUserId == deck.userId"
-                v-on:click.stop="removeCard(card.cardId)"
+                v-on:click.stop="removeCard(card.id)"
               />
             </div>
           </div>
@@ -177,18 +177,18 @@ export default {
           }
         });
     },
-    removeCard(cardId) {
+    removeCard(id) {
       if (
         window.confirm(
           "Are you sure you want to remove this card from the deck?"
         )
       ) {
         cardDeckService
-          .removeCard(this.$route.params.id, cardId)
+          .removeCard(this.$route.params.id, id)
           .then((response) => {
             if (response.status === 200) {
               let cardsRemaining = this.cards.filter((card) => {
-                return card.cardId != cardId;
+                return card.id != id;
               });
               this.cards = cardsRemaining;
             }
@@ -198,7 +198,7 @@ export default {
     submitDeckToPublish() {
       let submittedDeck = this.deck;
       submittedDeck.submitted = true;
-      deckService.submitDeckToPublish(submittedDeck);
+      deckService.edit(submittedDeck);
     },
   },
   computed: {},

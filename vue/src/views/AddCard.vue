@@ -86,8 +86,8 @@
                 <td>
                   <input
                     type="checkbox"
-                    v-bind:id="card.cardId"
-                    v-bind:value="card.cardId"
+                    v-bind:id="card.id"
+                    v-bind:value="card.id"
                     v-on:change="selectCard($event)"
                     v-model="card.isSelected"
                     class="checkbox"
@@ -135,7 +135,7 @@ export default {
       let cardsNotInDeck = this.$store.state.cards.filter((card) => {
         let isCardInDeck = false;
         for (let i = 0; i < cardsInDeck.length; i++) {
-          if (card.cardId == cardsInDeck[i].cardId) {
+          if (card.id == cardsInDeck[i].id) {
             isCardInDeck = true;
           }
         }
@@ -202,7 +202,7 @@ export default {
     selectAll(event) {
       let checkboxes = document.querySelectorAll("input[type=checkbox]");
       if (event.target.checked) {
-        this.selectedCardIds = this.filteredCards.map((card) => card.cardId);
+        this.selectedCardIds = this.filteredCards.map((card) => card.id);
         checkboxes.forEach((checkbox) => {
           checkbox.checked = true;
           if (checkbox.parentElement.parentElement.id != "search-bars") {

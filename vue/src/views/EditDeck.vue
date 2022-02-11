@@ -30,7 +30,7 @@
               <div id="buttons">
                 <button
                   class="delete-button"
-                  v-on:click.prevent="deleteDeck(deck.deckId)"
+                  v-on:click.prevent="deleteDeck(deck.id)"
                 >
                   Delete
                 </button>
@@ -66,10 +66,9 @@ export default {
       const editedDeck = this.deck;
       this.$store.dispatch("EDIT_DECK", editedDeck);
     },
-    deleteDeck(deckId) {
+    deleteDeck(id) {
       if (window.confirm("Are you sure you want to delete?")) {
-        this.$store.dispatch("DELETE_DECK", deckId);
-        this.$router.push({ name: "my-decks" });
+        this.$store.dispatch("DELETE_DECK", id);
       }
     },
     retrieveDeck() {

@@ -28,10 +28,10 @@ export default new Vuex.Store({
     card: {},
     decks: [],
     deck: {
-      deckId: '',
+      id: '',
       deckName: '',
       isPublic: false,
-      userName: '',
+      username: '',
       cards: [],
       isCorrect: false,
     },
@@ -78,7 +78,7 @@ export default new Vuex.Store({
     },
     EDIT_CARD(state, editedCard) {
       for (let i = 0; i < state.cards.length; i++) {
-        if (state.cards[i].cardId === editedCard.cardId) {
+        if (state.cards[i].id === editedCard.id) {
           state.cards[i] = editedCard;
         }
       }
@@ -86,20 +86,20 @@ export default new Vuex.Store({
     MARK_CARD_ISCORRECT(state, cardState) {
       state.deck.cards[cardState.index].isCorrect = cardState.isCorrect;
     }, 
-    DELETE_DECK(state, deckId){
+    DELETE_DECK(state, id){
       let filteredDecks = state.decks.filter((deck) =>{
-        return deck.deckId != deckId;
+        return deck.id != id;
       });
       state.decks = filteredDecks;
     },
-    DELETE_CARD(state, cardId){
+    DELETE_CARD(state, id){
       state.cards = state.cards.filter((card) =>{
-        return card.cardId != cardId;
+        return card.id != id;
       })
     },
     EDIT_DECK(state, editedDeck) {
       for (let i = 0; i < state.decks.length; i++) {
-        if (state.decks[i].deckId === editedDeck.deckId) {
+        if (state.decks[i].id === editedDeck.id) {
           state.decks[i] = editedDeck;
         }
       }
@@ -125,7 +125,7 @@ export default new Vuex.Store({
       cardService.create(card).then(response => {
         if (response.status == 200) {
           const newCard = response.data;
-          const cardToAdd = [{ cardId: newCard.cardId, deckId: card.deckId }];
+          const cardToAdd = [{ cardId: newCard.id, deckId: card.deckId }];
           cardDeckService.addCards(cardToAdd).then(response => {
             if (response.status === 200) {
               router.push({ name: "deck-details", params: { id: card.deckId } });
@@ -138,7 +138,7 @@ export default new Vuex.Store({
       cardService.create(card).then(response => {
         if (response.status == 200) {
           const newCard = response.data;
-          const cardToAdd = [{ cardId: newCard.cardId, deckId: card.deckId }];
+          const cardToAdd = [{ cardId: newCard.id, deckId: card.deckId }];
           cardDeckService.addCards(cardToAdd);
         }
       });
@@ -149,14 +149,8 @@ export default new Vuex.Store({
         context.commit('SET_DECKS', decks);
       });
     },
-    LOAD_PUBLIC_DECKS(context) {
-      deckService.getPublicDecks().then(response => {
-        const decks = response.data;
-        context.commit('SET_DECKS', decks);
-      });
-    },
-    LOAD_SUBMITTED_DECKS(context) {
-      deckService.getSubmittedDecks().then(response => {
+    LOAD_DECKS(context, params) {
+      deckService.getDecks(params.isSubmitted, params.isPublic).then(response => {
         const decks = response.data;
         context.commit('SET_DECKS', decks);
       });
@@ -175,23 +169,24 @@ export default new Vuex.Store({
       });
     },
     EDIT_CARD(context, card) {
-      cardService.editCard(card).then(response => {
+      cardService.edit(card).then(response => {
         const editedCard = response.data;
         context.commit('EDIT_CARD', editedCard);
         router.push({ name: "home" });
       });
     },
-    DELETE_DECK(context, deckId){
-      deckService.deleteDeck(deckId).then(response => {
+    DELETE_DECK(context, id){
+      deckService.delete(id).then(response => {
         if(response.status === 200){
-        context.commit('DELETE_DECK', deckId);
+        context.commit('DELETE_DECK', id);
+        router.push({ name: "my-decks" });
         }
       });
     },
-    DELETE_CARD(context, cardId){
-      cardService.deleteCard(cardId).then(response =>{
+    DELETE_CARD(context, id){
+      cardService.delete(id).then(response =>{
         if(response.status === 200){
-          context.commit('DELETE_CARD', cardId);
+          context.commit('DELETE_CARD', id);
         }
       });
     },
@@ -199,7 +194,7 @@ export default new Vuex.Store({
       deckService.edit(deck).then(response => {
         if (response.status === 200) {
           context.commit('EDIT_DECK', deck);
-          router.push({ name: "deck-details", params: { id: deck.deckId } });
+          router.push({ name: "deck-details", params: { id: deck.id } });
         }
       })
     },

@@ -2,7 +2,7 @@ package com.techelevator.model;
 
 import org.springframework.data.relational.core.sql.In;
 
-public class CardDecks {
+public class CardDeck {
     private int cardId;
     private int deckId;
 

@@ -22,13 +22,13 @@
               class="deck-card"
               :name="deck.deckName"
               :size="deck.cards.length"
-              :createdBy="deck.userName"
-              :id="deck.deckId"
+              :createdBy="deck.username"
+              :id="deck.id"
             />
             <div class="deck-buttons">
               <router-link
                 class="deck-button"
-                :to="{ name: 'edit-deck', params: { id: deck.deckId } }"
+                :to="{ name: 'edit-deck', params: { id: deck.id } }"
                 >Edit</router-link
               >
               <router-link
@@ -38,7 +38,7 @@
                 v-bind:class="{ disabled: deck.cards.length === 0 }"
                 :to="{
                   name: 'study-session',
-                  params: { deckId: deck.deckId },
+                  params: { id: deck.id },
                 }"
                 >Study</router-link
               >

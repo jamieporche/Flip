@@ -3,10 +3,10 @@ import axios from 'axios';
 export default {
 
     addCards(cardDecks) {
-        return axios.post("/decks/add/", cardDecks);
+        return axios.post("/card-decks", cardDecks);
     },
     getCardDecksByCardId(cardId) {
-        return axios.get(`/cards/${cardId}/card-decks`);
+        return axios.get(`/card-decks/cards/${cardId}`);
     },
     removeCard(deckId, cardId) {
         return axios.delete(`/decks/${deckId}/cards/${cardId}`);

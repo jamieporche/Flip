@@ -3,20 +3,15 @@ package com.techelevator.model;
 import java.util.List;
 
 public class Deck {
-    private int deckId;
+    private int id;
     private String deckName;
     private int userId;
     private boolean isPublic;
-    private String userName;
+    private String username;
     private List<Card> cards;
     private boolean isSubmitted;
 
     public Deck() {}
-
-    public Deck(int deckId, String deckName) {
-        this.deckId = deckId;
-        this.deckName = deckName;
-    }
 
     public boolean isSubmitted() {
         return isSubmitted;
@@ -26,12 +21,12 @@ public class Deck {
         isSubmitted = submitted;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public List<Card> getCards() {
@@ -42,12 +37,12 @@ public class Deck {
         this.cards = cards;
     }
 
-    public int getDeckId() {
-        return deckId;
+    public int getId() {
+        return id;
     }
 
-    public void setDeckId(int deckId) {
-        this.deckId = deckId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDeckName() {

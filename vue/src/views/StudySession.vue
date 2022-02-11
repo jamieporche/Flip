@@ -93,7 +93,7 @@ export default {
     },
     retrieveDeck() {
       deckService
-        .getDeckById(this.$route.params.deckId)
+        .getDeckById(this.$route.params.id)
         .then((response) => {
           this.$store.commit("SET_DECK", response.data);
           this.deck = response.data;
