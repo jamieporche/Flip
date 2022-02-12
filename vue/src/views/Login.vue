@@ -100,7 +100,6 @@ h1 {
   color: #464443;
 }
 label {
-  padding-left: 1vh;
   font-size: 2.5vh;
   color: #464443;
 }
@@ -111,14 +110,15 @@ label {
 div#login-container {
   width: 100%;
   height: 68vh;
-  margin: 20vh 0px 0px 0px;
+  padding: 20vh 0px 0px 0px;
+  background-color: #00a7592d;
 }
 div#login {
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);
   border-radius: 20px;
   margin: auto;
   width: 60%;
-  background-image: url("../assets/lighter-blue-green-background.png");
+  background-color: white;
 }
 #username-container {
   display: flex;
@@ -131,13 +131,13 @@ div#login {
   gap: 5px;
 }
 input {
-  padding: 1.4vh;
+  padding: 1.4vh 0vh;
   border: none;
-  border-radius: 10px;
+  border-bottom: solid 2px #b4b0ad;
 }
 input:focus {
   outline: none;
-  border: solid 2px rgba(0, 148, 255, 255);
+  border-bottom: solid 2px #0094ff;
 }
 #register {
   align-self: end;
@@ -162,6 +162,7 @@ button {
   font-size: 2.5vh;
   border: none;
   border-radius: 10px;
+  font-weight: bold;
 }
 button:hover {
   background-color: rgb(6, 102, 171);

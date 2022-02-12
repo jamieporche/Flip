@@ -1,13 +1,5 @@
 <template>
   <div class="view">
-    <nav>
-      <router-link :to="{ name: 'my-decks' }" class="nav-button">
-        View Your Decks</router-link
-      >
-      <router-link :to="{ name: 'public-decks' }" class="nav-button">
-        View Public Decks</router-link
-      >
-    </nav>
     <div id="main">
       <article>
         <div id="card-container">
@@ -241,22 +233,9 @@ export default {
 .view {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 5fr;
   grid-template-areas:
-    "nav body"
-    "footer footer";
-  column-gap: 10px;
-}
-nav {
-  grid-area: nav;
-  padding-top: 20vh;
-  padding-bottom: 20px;
-  overflow-x: hidden;
-  background-image: url("../assets/lighter-blue-green-background.png");
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+    "body"
+    "footer";
 }
 #main {
   grid-area: body;
@@ -268,30 +247,13 @@ nav {
 }
 #card-container {
   min-height: 69vh;
-  background-image: url("../assets/lighter-blue-green-background.png");
+  background-color: #00a7592d;
   padding: 4vh 0vh 4vh 0vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: flex-start;
   overflow: auto;
-}
-.nav-button {
-  background-color: rgba(0, 148, 255, 255);
-  color: #f7fafc;
-  text-decoration: none;
-  border-radius: 10px;
-  padding: 30px;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px;
-  text-align: center;
-  cursor: pointer;
-  width: 60%;
-  justify-self: flex-end;
-}
-.nav-button:hover {
-  background-color: rgb(6, 102, 171);
 }
 #action-buttons {
   width: 90%;
@@ -303,13 +265,13 @@ nav {
   color: white;
   font-size: 1.5vh;
   font-weight: bold;
-  background-color: rgba(0, 167, 88, 255);
+  background-color: #0094ff;
   padding: 1.5vh 5vh;
   border-radius: 10px;
   text-decoration: none;
 }
 .action-button:hover {
-  background-color: rgb(2, 131, 70);
+  background-color: #026db9;
 }
 .card-details {
   color: #464443;

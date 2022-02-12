@@ -1,23 +1,5 @@
 <template>
   <div class="view">
-    <nav>
-      <router-link :to="{ name: 'new-card' }" class="nav-button"
-        >Create New Card</router-link
-      >
-      <router-link :to="{ name: 'my-decks' }" class="nav-button">
-        View Your Decks</router-link
-      >
-      <router-link :to="{ name: 'public-decks' }" class="nav-button">
-        View Public Decks</router-link
-      >
-      <router-link
-        :to="{ name: 'review-decks' }"
-        class="nav-button"
-        v-if="this.$store.state.user.authorities[0].name === 'ROLE_ADMIN'"
-      >
-        Review Submitted Decks</router-link
-      >
-    </nav>
     <div id="main">
       <article>
         <div id="card-container">
@@ -134,12 +116,9 @@ export default {
 .view {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 5fr;
   grid-template-areas:
-    "nav body"
-    "nav body"
-    "footer footer";
-  column-gap: 10px;
+    "body"
+    "footer";
 }
 p {
   color: #464443;
@@ -147,24 +126,13 @@ p {
 span {
   font-weight: bold;
 }
-nav {
-  grid-area: nav;
-  padding-top: 20vh;
-  padding-bottom: 20px;
-  overflow-x: hidden;
-  background-image: url("../assets/lighter-blue-green-background.png");
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
 #card-container {
   grid-area: card-container;
   min-height: 73vh;
-  background-image: url("../assets/lighter-blue-green-background.png");
+  background-color: #00a7592d;
   display: flex;
   flex-direction: column;
-  padding-top: 4vh;
+  padding: 4vh 0vh;
 }
 #cards {
   padding: 4vh 4vh 4vh 4vh;
@@ -184,30 +152,13 @@ nav {
 .card-button {
   border: none;
   color: white;
-  background-color: rgba(0, 167, 88, 255);
+  background-color: #0094ff;
   padding: 1.5vh 5vh;
   border-radius: 10px;
   text-decoration: none;
 }
 .card-button:hover {
-  background-color: rgb(2, 131, 70);
-}
-.nav-button {
-  background-color: rgba(0, 148, 255, 255);
-  color: #f7fafc;
-  text-decoration: none;
-  border-radius: 10px;
-  padding: 30px;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px;
-  text-align: center;
-  cursor: pointer;
-  width: 60%;
-  justify-self: flex-end;
-}
-.nav-button:hover {
-  background-color: rgb(6, 102, 171);
+  background-color: #026db9;
 }
 #main {
   margin-top: 11vh;

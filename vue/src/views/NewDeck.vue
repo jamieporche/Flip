@@ -1,20 +1,9 @@
 <template>
   <div class="view">
-    <nav>
-      <router-link :to="{ name: 'home' }" class="nav-button"
-        >View Your Cards</router-link
-      >
-      <router-link :to="{ name: 'my-decks' }" class="nav-button">
-        View Your Decks</router-link
-      >
-      <router-link :to="{ name: 'public-decks' }" class="nav-button">
-        View Public Decks</router-link
-      >
-    </nav>
     <article>
       <div id="form-background">
         <div id="form-container">
-          <div class="form">
+          <form>
             <h2>Create a new Deck</h2>
             <label for="frontOfCard">Deck Name</label>
             <input
@@ -32,7 +21,7 @@
                 Save and New
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </article>
@@ -87,11 +76,9 @@ export default {
 .view {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 5fr;
   grid-template-areas:
-    "nav body"
-    "footer footer";
-  column-gap: 10px;
+    "body"
+    "footer";
 }
 h2 {
   margin: 0vh 0vh 4vh 0vh;
@@ -102,63 +89,38 @@ h2 {
 label {
   padding-left: 1.5vh;
 }
-nav {
-  grid-area: nav;
-  padding-top: 20vh;
-  padding-bottom: 20px;
-  overflow-x: hidden;
-  background-image: url("../assets/lighter-blue-green-background.png");
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+#form-background {
+  margin-top: 11vh;
 }
 #form-container {
   grid-area: body;
+  display: flex;
+  justify-content: center;
   min-height: 77vh;
-  background-image: url("../assets/lighter-blue-green-background.png");
+  background-color: #00a7592d;
 }
-#form-background {
-  min-height: 70vh;
-  margin-top: 11vh;
-}
-.form {
+form {
+  width: 50%;
   display: flex;
   flex-direction: column;
-  padding: 10vh;
+  padding: 10vh 10vh;
 }
 button {
   border: none;
   color: white;
-  background-color: rgba(0, 167, 88, 255);
+  background-color: #0094ff;
   padding: 1.5vh 5vh;
   border-radius: 10px;
+  font-weight: bold;
 }
 button:hover {
-  background-color: rgb(2, 131, 70);
+  background-color: #026db9;
 }
 #save-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 4vh;
   margin-top: 4vh;
-}
-.nav-button {
-  background-color: rgba(0, 148, 255, 255);
-  color: #f7fafc;
-  text-decoration: none;
-  border-radius: 10px;
-  padding: 30px;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px;
-  text-align: center;
-  cursor: pointer;
-  width: 60%;
-  justify-self: flex-end;
-}
-.nav-button:hover {
-  background-color: rgb(6, 102, 171);
 }
 .input {
   width: 100%;

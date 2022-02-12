@@ -4,12 +4,10 @@
       Brought to you by <span id="blue">StudyBlue</span
       ><span id="green">Green</span>
     </h1>
-    <h1 id="practice">Practice Makes Permanent</h1>
     <div id="nav">
       <router-link id="about-us" v-bind:to="{ name: 'about-us' }" class="link"
         >About Us</router-link
       >
-      <!-- empty router link, we can decide later to make a About us page if we would like -->
     </div>
   </div>
 </template>
@@ -29,8 +27,7 @@ export default {
   align-items: center;
   border: none;
   border-top: solid 2px #b4b0ad;
-  background-image: linear-gradient(#c4d2ff, rgb(214, 207, 255));
-  background-image: ("./assets/cool-background(1).png");
+  background-color: white;
   font-size: 1.5vh;
   color: #464443;
 }

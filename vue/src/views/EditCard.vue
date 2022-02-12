@@ -1,16 +1,5 @@
 <template>
   <div class="view">
-    <nav>
-      <router-link :to="{ name: 'home' }" class="nav-button"
-        >View Your Cards</router-link
-      >
-      <router-link :to="{ name: 'my-decks' }" class="nav-button">
-        View Your Decks</router-link
-      >
-      <router-link :to="{ name: 'public-decks' }" class="nav-button">
-        View Public Decks</router-link
-      >
-    </nav>
     <div id="main">
       <article>
         <div id="form-container">
@@ -107,11 +96,9 @@ export default {
 .view {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 5fr;
   grid-template-areas:
-    "nav body"
-    "footer footer";
-  column-gap: 10px;
+    "body"
+    "footer";
 }
 h2 {
   margin: 0vh 0vh 4vh 0vh;
@@ -122,24 +109,17 @@ h2 {
 label {
   padding-left: 1.5vh;
 }
-nav {
-  grid-area: nav;
-  padding-top: 20vh;
-  padding-bottom: 20px;
-  overflow-x: hidden;
-  background-image: url("../assets/lighter-blue-green-background.png");
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
 #form-container {
   grid-area: body;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-height: 69vh;
-  background-image: url("../assets/lighter-blue-green-background.png");
+  background-color: #00a7592d;
   padding: 4vh;
 }
 form {
+  width: 50%;
   display: flex;
   flex-direction: column;
   padding: 5vh 10vh;
@@ -147,14 +127,15 @@ form {
 button {
   border: none;
   color: white;
-  background-color: rgba(0, 167, 88, 255);
+  background-color: #0094ff;
   padding: 1.5vh 5vh;
   border-radius: 10px;
   text-decoration: none;
+  font-weight: bold;
   cursor: pointer;
 }
 .save-button:hover {
-  background-color: rgb(2, 131, 70);
+  background-color: #026db9;
 }
 #buttons {
   display: flex;
@@ -165,28 +146,11 @@ button {
   display: flex;
   justify-content: flex-start;
   gap: 4vh;
-  background-color: red;
+  background-color: #cc0000;
   cursor: pointer;
 }
 .delete-button:hover {
-  background-color: rgb(218, 4, 4);
-}
-.nav-button {
-  background-color: rgba(0, 148, 255, 255);
-  color: #f7fafc;
-  text-decoration: none;
-  border-radius: 10px;
-  padding: 30px;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px;
-  text-align: center;
-  cursor: pointer;
-  width: 60%;
-  justify-self: flex-end;
-}
-.nav-button:hover {
-  background-color: rgb(6, 102, 171);
+  background-color: #9e0404;
 }
 #main {
   grid-area: body;

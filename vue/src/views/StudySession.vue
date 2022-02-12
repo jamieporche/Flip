@@ -1,40 +1,40 @@
 <template>
   <div class="view">
     <nav>
-      <button class="shuffle nav-button" v-on:click.stop="shuffleDeck(cards)">
-        Shuffle Deck
-      </button>
-      <router-link :to="{ name: 'results' }" class="nav-button">
-        End Study Session</router-link
-      >
+      <div id="nav">
+        <router-link :to="{ name: 'results' }" class="nav-button warn">
+          End Study Session</router-link
+        >
+        <button class="nav-button" v-on:click.stop="shuffleDeck(cards)">
+          Shuffle Deck
+        </button>
+      </div>
     </nav>
-    <div id="main">
-      <article>
-        <div id="study-container">
-          <div class="cards">
-            <flashcard-component
-              :front="frontOfCard"
-              :back="backOfCard"
-              class="flashcard-component"
-            />
-          </div>
-          <div class="study-buttons" v-on:click.stop="markIsCorrect($event)">
-            <button class="study-button" id="mark-incorrect">Incorrect</button>
-            <span>
-              {{ currentCardIndex + 1 }} /
-              {{ this.$store.state.deck.cards.length }}
-            </span>
-            <button
-              class="study-button"
-              id="mark-correct"
-              v-on:click.stop="markIsCorrect($event)"
-            >
-              Correct
-            </button>
-          </div>
+    <article>
+      <div id="study-container">
+        <div class="cards">
+          <flashcard-component
+            :front="frontOfCard"
+            :back="backOfCard"
+            class="flashcard-component"
+          />
         </div>
-      </article>
-    </div>
+        <div class="study-buttons" v-on:click.stop="markIsCorrect($event)">
+          <button class="study-button warn">Incorrect</button>
+          <span>
+            {{ currentCardIndex + 1 }} /
+            {{ this.$store.state.deck.cards.length }}
+          </span>
+          <button
+            class="study-button"
+            id="mark-correct"
+            v-on:click.stop="markIsCorrect($event)"
+          >
+            Correct
+          </button>
+        </div>
+      </div>
+    </article>
     <div class="footer">
       <footer-component />
     </div>
@@ -158,77 +158,73 @@ h3 {
 .view {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 5fr;
   grid-template-areas:
-    "nav body"
-    "footer footer";
-  column-gap: 10px;
+    "nav"
+    "body"
+    "footer";
 }
-.study-button {
-  border: none;
-  color: white;
-  font-weight: bold;
-  background-color: rgba(0, 167, 88, 255);
-  padding: 1.5vh 5vh;
-  border-radius: 10px;
-  text-decoration: none;
-}
-.study-button:hover {
-  background-color: rgb(2, 131, 70);
-}
-#mark-incorrect {
-  background-color: red;
-}
-#mark-incorrect:hover {
-  background-color: rgb(168, 2, 2);
-}
-nav {
+#nav {
   grid-area: nav;
-  padding-top: 20vh;
-  padding-bottom: 20px;
-  overflow-x: hidden;
-  background-image: url("../assets/lighter-blue-green-background.png");
+  width: 100vw;
+  margin-top: 11vh;
+  padding: 2vh 0;
+  background-color: #e9e7e7;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
+  border-bottom: solid 2px #b4b0ad;
+  position: fixed;
+  z-index: 2;
 }
 .nav-button {
   background-color: rgba(0, 148, 255, 255);
   color: #f7fafc;
   text-decoration: none;
   border-radius: 10px;
-  padding: 30px;
-  font-size: 18px;
+  padding: 2vh;
+  margin: 0 7vh;
+  font-size: 2vh;
   font-weight: bold;
-  margin: 10px;
   text-align: center;
   cursor: pointer;
-  width: 60%;
-  justify-self: flex-end;
+  width: 15%;
   box-sizing: border-box;
   border: none;
-  width: 78%;
 }
 .nav-button:hover {
   background-color: rgb(6, 102, 171);
 }
-#main {
-  grid-area: body;
-  margin-top: 11vh;
-  min-height: 73vh;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+.study-button {
+  border: none;
+  color: white;
+  font-weight: bold;
+  background-color: #00a758;
+  padding: 1.5vh 5vh;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.study-button:hover {
+  background-color: #007a41;
+}
+.warn {
+  background-color: #cc0000;
+}
+.warn:hover {
+  background-color: rgb(168, 2, 2);
 }
 #study-container {
-  min-height: 69vh;
-  background-image: url("../assets/lighter-blue-green-background.png");
-  padding: 4vh 0vh 4vh 0vh;
+  grid-area: body;
+  min-height: 59vh;
+  margin-top: 21vh;
+  padding: 4vh 4vh 4vh 4vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 5vh 0vh;
+  overflow: auto;
+  background-color: #00a7592d;
 }
 .cards {
   align-self: center;

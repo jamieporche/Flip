@@ -1,45 +1,36 @@
 <template>
   <div class="view">
     <nav>
-      <router-link
-        :to="{
-          name: 'study-session',
-          params: { id: this.$store.state.deck.id },
-        }"
-        class="nav-button"
-        >Study Deck Again</router-link
-      >
-      <router-link :to="{ name: 'home' }" class="nav-button">
-        View Your Cards</router-link
-      >
-      <router-link :to="{ name: 'my-decks' }" class="nav-button">
-        View Your Decks</router-link
-      >
-      <router-link :to="{ name: 'public-decks' }" class="nav-button">
-        View Public Decks</router-link
-      >
+      <div id="nav">
+        <router-link
+          :to="{
+            name: 'study-session',
+            params: { deckId: this.$store.state.deck.deckId },
+          }"
+          class="nav-button"
+          >Study Deck Again</router-link
+        >
+      </div>
     </nav>
-    <div id="main">
-      <div id="results-container">
-        <div id="number-correct-container">
-          <p class="number-correct">{{ numberCorrect }} Correct</p>
-          <p class="number-correct">{{ numberIncorrect }} Incorrect</p>
+    <div id="results-container">
+      <div id="number-correct-container">
+        <p class="number-correct">{{ numberCorrect }} Correct</p>
+        <p class="number-correct">{{ numberIncorrect }} Incorrect</p>
+      </div>
+      <div id="pie-chart">
+        <div
+          class="pie animate"
+          v-bind:style="{
+            '--percentage': percentCorrect,
+            '--color': '#0094ff',
+          }"
+        >
+          {{ percentCorrect }}%
         </div>
-        <div id="pie-chart">
-          <div
-            class="pie animate"
-            v-bind:style="{
-              '--percentage': percentCorrect,
-              '--color': '#00a758',
-            }"
-          >
-            {{ percentCorrect }}%
-          </div>
-        </div>
-        <div id="card-totals">
-          <p id="total-cards">{{ totalCards }} Total</p>
-          <p id="total-unstudied">{{ unstudiedCards }} Unstudied</p>
-        </div>
+      </div>
+      <div id="card-totals">
+        <p id="total-cards">{{ totalCards }} Total</p>
+        <p id="total-unstudied">{{ unstudiedCards }} Unstudied</p>
       </div>
     </div>
     <div class="footer">
@@ -101,57 +92,53 @@ p {
 .view {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 5fr;
   grid-template-areas:
-    "nav body"
-    "footer footer";
-  column-gap: 10px;
+    "nav"
+    "body"
+    "footer";
 }
-nav {
+#nav {
   grid-area: nav;
-  padding-top: 20vh;
-  padding-bottom: 20px;
-  overflow-x: hidden;
-  background-image: url("../assets/lighter-blue-green-background.png");
+  width: 100vw;
+  margin-top: 11vh;
+  padding: 2vh 0;
+  background-color: #e9e7e7;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
+  border-bottom: solid 2px #b4b0ad;
+  position: fixed;
+  z-index: 1;
 }
 .nav-button {
   background-color: rgba(0, 148, 255, 255);
   color: #f7fafc;
   text-decoration: none;
   border-radius: 10px;
-  padding: 30px;
-  font-size: 18px;
+  padding: 2vh;
+  margin: 0 7vh;
+  font-size: 2vh;
   font-weight: bold;
-  margin: 10px;
   text-align: center;
   cursor: pointer;
-  width: 60%;
-  justify-self: flex-end;
+  width: 15%;
   box-sizing: border-box;
   border: none;
-  width: 78%;
 }
 .nav-button:hover {
   background-color: rgb(6, 102, 171);
 }
-#main {
-  grid-area: body;
-  margin-top: 11vh;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
 #results-container {
-  min-height: 77vh;
-  background-image: url("../assets/lighter-blue-green-background.png");
+  grid-area: body;
+  min-height: 73vh;
+  margin-top: 21vh;
+  padding: 4vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5vh 0vh;
+  overflow: auto;
+  background-color: #00a7592d;
 }
 #number-correct-container {
   width: 90%;

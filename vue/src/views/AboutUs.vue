@@ -101,7 +101,7 @@ a {
 }
 #card-container {
   height: 75vh;
-  background-image: url("../assets/lighter-blue-green-background.png");
+  background-color: #00a7592d;
   padding: 4vh;
   display: flex;
   justify-content: center;

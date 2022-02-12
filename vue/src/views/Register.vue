@@ -17,7 +17,7 @@
               type="text"
               id="username"
               class="form-control"
-              placeholder="Username"
+              placeholder="Type your username"
               v-model="user.username"
               required
               autofocus
@@ -29,7 +29,7 @@
               type="password"
               id="password"
               class="form-control"
-              placeholder="Password"
+              placeholder="Type your password"
               v-model="user.password"
               required
             />
@@ -116,7 +116,6 @@ h1 {
   color: #464443;
 }
 label {
-  padding-left: 1vh;
   font-size: 2.5vh;
   color: #464443;
 }
@@ -127,7 +126,8 @@ label {
 div#register-container {
   width: 100%;
   height: 68vh;
-  margin: 20vh 0px 0px 0px;
+  padding: 20vh 0px 0px 0px;
+  background-color: #00a7592d;
 }
 div#register {
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.26);
@@ -135,7 +135,7 @@ div#register {
   border: none;
   margin: auto;
   width: 60%;
-  background-image: url("../assets/lighter-blue-green-background.png");
+  background-color: white;
 }
 #username-container {
   display: flex;
@@ -148,19 +148,19 @@ div#register {
   gap: 5px;
 }
 input {
-  padding: 1.4vh;
+  padding: 1.4vh 0vh;
   border: none;
-  border-radius: 10px;
+  border-bottom: solid 2px #b4b0ad;
 }
 input:focus {
   outline: none;
-  border: solid 2px rgba(0, 148, 255, 255);
+  border-bottom: solid 2px #0094ff;
 }
 #login {
   align-self: end;
   text-decoration: none;
   font-size: 2vh;
-  color: rgba(0, 148, 255, 255);
+  color: #0094ff;
 }
 .login:hover {
   background-color: rgb(6, 102, 171);
@@ -175,10 +175,11 @@ button {
   margin-bottom: 50px;
   padding: 1vh;
   color: white;
-  background-color: rgba(0, 148, 255, 255);
+  background-color: #0094ff;
   font-size: 2.5vh;
   border: none;
   border-radius: 10px;
+  font-weight: bold;
 }
 button:hover {
   background-color: rgb(6, 102, 171);
