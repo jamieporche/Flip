@@ -136,6 +136,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
   gap: 5vh 0vh;
   overflow: auto;
   background-color: #00a7592d;
@@ -147,6 +148,7 @@ p {
 }
 .number-correct {
   font-size: 4.5vh;
+  margin: 1vh 0;
 }
 #card-totals {
   margin: 0vh 5vh 0vh auto;

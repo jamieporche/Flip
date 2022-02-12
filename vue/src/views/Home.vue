@@ -128,7 +128,7 @@ span {
 }
 #card-container {
   grid-area: card-container;
-  min-height: 73vh;
+  min-height: 69vh;
   background-color: #00a7592d;
   display: flex;
   flex-direction: column;

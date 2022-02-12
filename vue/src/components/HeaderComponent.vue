@@ -16,7 +16,7 @@
       </div>
       <div class="dropdown" v-if="$store.state.token != ''">
         <p class="heading">Your Library</p>
-        <div class="dropdown-content">
+        <div class="dropdown-content library">
           <router-link v-bind:to="{ name: 'home' }">Cards</router-link>
           <router-link v-bind:to="{ name: 'my-decks' }">Decks</router-link>
         </div>
@@ -111,6 +111,9 @@ img {
   border-radius: 0 0 10px 10px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 4;
+}
+.library {
+  min-width: 16vh;
 }
 .dropdown-content a {
   color: #464443;

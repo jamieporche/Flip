@@ -212,7 +212,7 @@ h3 {
   min-height: 100vh;
   display: grid;
   grid-template-areas:
-    "body"
+    "nav"
     "body"
     "footer";
 }
@@ -251,7 +251,7 @@ h3 {
   grid-area: body;
   min-height: 73vh;
   margin-top: 21vh;
-  padding: 4vh;
+  padding: 4vh 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -97,6 +97,7 @@ p {
 .no-decks {
   font-size: 7vh;
   text-align: center;
+  color: #464443;
 }
 .deck {
   width: 60vh;

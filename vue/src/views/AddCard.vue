@@ -265,13 +265,13 @@ export default {
   color: white;
   font-size: 1.5vh;
   font-weight: bold;
-  background-color: #0094ff;
+  background-color: #00a758;
   padding: 1.5vh 5vh;
   border-radius: 10px;
   text-decoration: none;
 }
 .action-button:hover {
-  background-color: #026db9;
+  background-color: #00723d;
 }
 .card-details {
   color: #464443;

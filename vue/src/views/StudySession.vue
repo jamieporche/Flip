@@ -223,7 +223,6 @@ h3 {
   align-items: center;
   justify-content: center;
   gap: 5vh 0vh;
-  overflow: auto;
   background-color: #00a7592d;
 }
 .cards {

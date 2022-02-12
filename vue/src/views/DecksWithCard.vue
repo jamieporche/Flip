@@ -3,6 +3,9 @@
     <div id="main">
       <article>
         <div id="deck-container">
+          <div id="card-list-empty" v-if="filteredDecks.length == 0">
+            <p class="no-decks">This card doesn't belong to any decks</p>
+          </div>
           <div class="deck" v-for="deck in filteredDecks" v-bind:key="deck.id">
             <deck-component
               class="deck-card"
@@ -79,7 +82,6 @@ export default {
   grid-template-areas:
     "body"
     "footer";
-  :10px ;
 }
 #main {
   margin-top: 11vh;
@@ -117,6 +119,11 @@ export default {
 .deck-buttons {
   display: flex;
   justify-content: space-between;
+}
+.no-decks {
+  font-size: 7vh;
+  text-align: center;
+  color: #464443;
 }
 .footer {
   grid-area: footer;
