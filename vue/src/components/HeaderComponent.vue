@@ -37,7 +37,7 @@
       <router-link
         :to="{ name: 'review-decks' }"
         class="nav-button link"
-        v-if="this.$store.state.user.authorities[0].name === 'ROLE_ADMIN'"
+        v-if="$store.state.token != '' && this.$store.state.user.authorities[0].name === 'ROLE_ADMIN'"
       >
         Review Submitted Decks</router-link
       >
@@ -109,7 +109,7 @@ img {
   background-color: white;
   min-width: 8vh;
   border-radius: 0 0 10px 10px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.26);
   z-index: 4;
 }
 .library {

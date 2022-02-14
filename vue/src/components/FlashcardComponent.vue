@@ -2,10 +2,10 @@
   <div class="scene">
     <div class="flashcard" v-on:click.stop="flip($event)">
       <div class="card__face card__face--front">
-        <p class="content">Question: {{ this.front }}</p>
+        <p class="content">{{ this.front }}</p>
       </div>
       <div class="card__face card__face--back">
-        <p class="content">Answer: {{ this.back }}</p>
+        <p class="content">{{ this.back }}</p>
       </div>
     </div>
   </div>

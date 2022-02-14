@@ -51,13 +51,9 @@ h1 {
   color: #464443;
 }
 #about-us:hover {
-  color: purple;
+  color: #cc0000;
 }
 .router-link-exact-active {
-  border-bottom: solid purple 3px;
-}
-#practice {
-  color: purple;
-  font-family: "Bungee Shade", Times, sans-serif;
+  border-bottom: solid #fce300 3px;
 }
 </style>
